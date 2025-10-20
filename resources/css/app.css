@@ -143,44 +143,54 @@
 }
 
 :root {
-    --brand-navy: #051a38;
-    --brand-navy-alt: #0c2f59;
-    --brand-sapphire: #0f4c81;
-    --brand-gold: #e1b855;
-    --brand-cream: #f5f1e6;
-    --brand-sand: #f0e4d0;
+    --brand-navy: #001b3b;
+    --brand-teal: #0f4c81;
+    --brand-gold: #f2c46d;
+    --brand-white: #ffffff;
+    --brand-sky: #d1e6ff;
+    --brand-foam: #eef5ff;
 }
 
 @layer utilities {
-    .bg-ocean-night {
+    .bg-deep-navy {
         background-color: var(--brand-navy);
     }
 
-    .bg-ocean-night-alt {
-        background-color: var(--brand-navy-alt);
-    }
-
-    .bg-sand-soft {
-        background-color: var(--brand-cream);
+    .bg-ocean-teal {
+        background-color: var(--brand-teal);
     }
 
     .bg-wave-gradient {
-        background-image: linear-gradient(160deg, var(--brand-navy) 0%, var(--brand-navy-alt) 45%, var(--brand-sapphire) 100%);
+        background-image: linear-gradient(
+            140deg,
+            rgba(0, 27, 59, 0.96) 0%,
+            rgba(0, 27, 59, 0.88) 40%,
+            rgba(15, 76, 129, 0.85) 100%
+        );
     }
 
-    .bg-gold-accent {
-        background-color: var(--brand-gold);
+    .bg-wave-gold {
+        background-image: linear-gradient(160deg, var(--brand-gold) 0%, #f6d487 60%, #ffe4ac 100%);
+    }
+
+    .bg-foam {
+        background-color: var(--brand-foam);
     }
 
     .text-gold-accent {
         color: var(--brand-gold);
     }
 
-    .text-sand-soft {
-        color: var(--brand-cream);
+    .text-sky-light {
+        color: var(--brand-sky);
     }
 
-    .shadow-glow {
-        box-shadow: 0 20px 60px rgba(6, 26, 58, 0.35);
+    .shadow-reef {
+        box-shadow: 0 20px 60px rgba(0, 27, 59, 0.35);
+    }
+
+    .pattern-dots {
+        background-image: radial-gradient(rgba(0, 27, 59, 0.08) 1px, transparent 0);
+        background-size: 18px 18px;
     }
 }
