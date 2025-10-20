@@ -1,7 +1,7 @@
-import { Hero } from '@/components/public/hero';
-import { StoryCard } from '@/components/public/story-card';
+import { PageContainer } from '@/components/public/layout/page-container';
+import { HeroBanner } from '@/components/public/sections/shared/hero-banner';
+import { StoryCard } from '@/components/public/cards/story-card';
 import { Pagination } from '@/components/common/pagination';
-import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PublicLayout } from '@/layouts/public/public-layout';
 import type { StoryResource } from '@/types/public';
@@ -30,53 +30,59 @@ export default function StoriesPage({ stories, filters, types, featured }: Stori
             <Head title="Berita & Cerita" />
             <PublicLayout
                 hero={
-                    <Hero
-                        title="Berita & Cerita"
-                        subtitle="Liputan komunitas, galeri visual, dan update konservasi Waduk Manduk."
-                    />
+                    <PageContainer className="py-24">
+                        <HeroBanner
+                            title="Berita & Cerita"
+                            subtitle="Liputan komunitas, galeri visual, dan update konservasi Waduk Manduk."
+                        />
+                    </PageContainer>
                 }
             >
-                <div className="space-y-12">
-                    {featured.length > 0 && (
-                        <section className="space-y-4">
-                            <h2 className="text-xl font-semibold tracking-tight text-foreground">
-                                Cerita Pilihan
-                            </h2>
-                            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                                {featured.map((story) => (
-                                    <StoryCard key={`featured-${story.id}`} {...story} />
+                <section className="bg-white py-20">
+                    <PageContainer className="space-y-12">
+                        {featured.length > 0 && (
+                            <div className="space-y-6">
+                                <div className="space-y-3 text-deep-navy">
+                                    <p className="text-sm uppercase tracking-[0.4em] text-[#0f4c81]">Cerita Pilihan</p>
+                                    <h2 className="text-3xl font-semibold md:text-4xl">Sorotan narasi yang wajib dibaca</h2>
+                                </div>
+                                <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                                    {featured.map((story) => (
+                                        <StoryCard key={`featured-${story.id}`} {...story} />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="space-y-6">
+                            <div className="flex flex-col gap-4 text-deep-navy md:flex-row md:items-center md:justify-between">
+                                <div>
+                                    <p className="text-sm uppercase tracking-[0.4em] text-[#0f4c81]">Semua Cerita</p>
+                                    <h2 className="text-3xl font-semibold md:text-4xl">Rangkuman aktivitas terbaru Waduk Manduk</h2>
+                                </div>
+                                <Select value={filters.type ?? 'all'} onValueChange={handleTypeChange}>
+                                    <SelectTrigger className="w-48 rounded-full border border-deep-navy/15 text-deep-navy">
+                                        <SelectValue placeholder="Semua jenis" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="all">Semua jenis</SelectItem>
+                                        {types.map((type) => (
+                                            <SelectItem key={type.value} value={type.value}>
+                                                {type.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                                {stories.data.map((story) => (
+                                    <StoryCard key={`story-${story.id}`} {...story} />
                                 ))}
                             </div>
-                        </section>
-                    )}
-
-                    <section className="space-y-4">
-                        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                            <h2 className="text-xl font-semibold tracking-tight text-foreground">
-                                Semua Cerita
-                            </h2>
-                            <Select value={filters.type ?? 'all'} onValueChange={handleTypeChange}>
-                                <SelectTrigger className="w-48">
-                                    <SelectValue placeholder="Semua jenis" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="all">Semua jenis</SelectItem>
-                                    {types.map((type) => (
-                                        <SelectItem key={type.value} value={type.value}>
-                                            {type.label}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                            <Pagination links={links} />
                         </div>
-                        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                            {stories.data.map((story) => (
-                                <StoryCard key={`story-${story.id}`} {...story} />
-                            ))}
-                        </div>
-                        <Pagination links={links} />
-                    </section>
-                </div>
+                    </PageContainer>
+                </section>
             </PublicLayout>
         </>
     );
