@@ -23,129 +23,6 @@ interface HomePageProps {
     recentStories: StoryResource[];
 }
 
-const fallbackSpots: SpotResource[] = [
-    {
-        id: 1,
-        name: 'Laguna Bening',
-        type: 'Snorkeling',
-        headline: 'Terumbu karang mikro & ikan hias',
-        description:
-            'Rasakan eksplorasi bawah air dengan visibilitas 15 meter dan edukasi konservasi karang yang dipandu komunitas.',
-        hero_image: null,
-    },
-    {
-        id: 2,
-        name: 'Dermaga Biru',
-        type: 'Sunset Cruise',
-        headline: 'Pelayaran senja & live akustik',
-        description:
-            'Nikmati perjalanan sore dengan narasi budaya masyarakat pesisir Manduk dan hidangan laut segar.',
-        hero_image: null,
-    },
-    {
-        id: 3,
-        name: 'Hutan Mangrove Mandala',
-        type: 'Interpretasi Alam',
-        headline: 'Trek edukasi biodiversitas',
-        description: 'Belajar langsung tentang konservasi mangrove bersama pemandu komunitas setiap akhir pekan.',
-        hero_image: null,
-    },
-];
-
-const fallbackUmkm: UmkmResource[] = [
-    {
-        id: 1,
-        name: 'Rumah Ikan Asap Manduk',
-        tagline: 'Olah hasil laut berkelanjutan',
-        category: 'Kuliner',
-        hero_image: null,
-        whatsapp_number: '6281234567890',
-        maps_url: 'https://maps.google.com',
-        is_featured: true,
-    },
-    {
-        id: 2,
-        name: 'Manduk Craft Studio',
-        tagline: 'Kriya ecoprint limbah laut',
-        category: 'Kriya',
-        hero_image: null,
-        whatsapp_number: '6281234567890',
-        maps_url: 'https://maps.google.com',
-        is_featured: false,
-    },
-    {
-        id: 3,
-        name: 'Kopi Ombak Pagi',
-        tagline: 'Signature beans dari petani Waduk',
-        category: 'Kedai',
-        hero_image: null,
-        whatsapp_number: '6281234567890',
-        maps_url: 'https://maps.google.com',
-        is_featured: false,
-    },
-];
-
-const fallbackEvents: EventResource[] = [
-    {
-        id: 1,
-        title: 'Tur Konservasi & Penanaman Mangrove',
-        tagline: 'Bersama komunitas reresik waduk',
-        event_type: 'Konservasi',
-        start_at: new Date().toISOString(),
-        location: 'Hutan Mangrove Mandala',
-        cover_image: null,
-    },
-    {
-        id: 2,
-        title: 'Festival Cahaya Bahari',
-        tagline: 'Pentas seni dan instalasi cahaya',
-        event_type: 'Budaya',
-        start_at: new Date().toISOString(),
-        location: 'Dermaga Biru',
-        cover_image: null,
-    },
-    {
-        id: 3,
-        title: 'Manduk Paddle Race',
-        tagline: 'Lomba dayung lintas komunitas',
-        event_type: 'Olahraga',
-        start_at: new Date().toISOString(),
-        location: 'Zona Laguna Bening',
-        cover_image: null,
-    },
-];
-
-const fallbackStories: StoryResource[] = [
-    {
-        id: 1,
-        title: 'Menjaga kejernihan waduk lewat sensor bawah air',
-        slug: 'sensor-bawah-air',
-        type: 'Konservasi',
-        excerpt:
-            'Tim konservasi memantau kualitas air real-time dan mengedukasi pengunjung untuk menjaga ekosistem.',
-        hero_image: null,
-        published_at: new Date().toISOString(),
-    },
-    {
-        id: 2,
-        title: 'UMKM olahan laut mengangkat potensi pesisir',
-        slug: 'umkm-pesisir',
-        type: 'UMKM',
-        excerpt: 'Dukungan kurasi dan kemitraan menjadikan produk warga Manduk hadir di meja wisatawan.',
-        hero_image: null,
-        published_at: new Date().toISOString(),
-    },
-    {
-        id: 3,
-        title: 'Cerita relawan reresik waduk setiap akhir pekan',
-        slug: 'relawan-waduk',
-        type: 'Komunitas',
-        excerpt: 'Puluhan relawan bersinergi menjaga kebersihan ekosistem air serta edukasi pengunjung.',
-        hero_image: null,
-        published_at: new Date().toISOString(),
-    },
-];
-
 export default function HomePage({
     status,
     featuredSpots = [],
@@ -153,10 +30,10 @@ export default function HomePage({
     upcomingEvents = [],
     recentStories = [],
 }: HomePageProps) {
-    const spots = featuredSpots.length ? featuredSpots : fallbackSpots;
-    const umkm = featuredUmkm.length ? featuredUmkm : fallbackUmkm;
-    const events = upcomingEvents.length ? upcomingEvents : fallbackEvents;
-    const stories = recentStories.length ? recentStories : fallbackStories;
+    const spots = featuredSpots;
+    const umkm = featuredUmkm;
+    const events = upcomingEvents;
+    const stories = recentStories;
 
     const quickHelpItems = [
         {
@@ -257,20 +134,26 @@ export default function HomePage({
                                     </div>
                                 </div>
 
-                                <div className="rounded-3xl border border-surface-3/70 bg-surface-0 p-8 shadow-soft">
-                                    <h2 className="text-h2 text-text-primary">Sorotan destinasi & UMKM</h2>
-                                    <p className="mt-3 text-text-secondary">
-                                        Jelajahi spot populer dan dukung pelaku usaha lokal yang mengedepankan praktik ramah lingkungan.
-                                    </p>
-                                    <div className="mt-6 grid gap-6 lg:grid-cols-2">
-                                        {spots.slice(0, 2).map((spot) => (
-                                            <SpotCard key={`spot-${spot.id}`} {...spot} />
-                                        ))}
-                                        {umkm.slice(0, 2).map((item) => (
-                                            <UmkmCard key={`umkm-${item.id}`} {...item} />
-                                        ))}
+                                {spots.length || umkm.length ? (
+                                    <div className="rounded-3xl border border-surface-3/70 bg-surface-0 p-8 shadow-soft">
+                                        <h2 className="text-h2 text-text-primary">Sorotan destinasi & UMKM</h2>
+                                        <p className="mt-3 text-text-secondary">
+                                            Jelajahi spot populer dan dukung pelaku usaha lokal yang mengedepankan praktik ramah lingkungan.
+                                        </p>
+                                        <div className="mt-6 grid gap-6 lg:grid-cols-2">
+                                            {spots.slice(0, 2).map((spot) => (
+                                                <SpotCard key={`spot-${spot.id}`} {...spot} />
+                                            ))}
+                                            {umkm.slice(0, 2).map((item) => (
+                                                <UmkmCard key={`umkm-${item.id}`} {...item} />
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
+                                ) : (
+                                    <div className="rounded-3xl border border-dashed border-surface-3/70 bg-surface-0 p-8 text-sm text-text-secondary">
+                                        Konten sorotan destinasi dan UMKM akan muncul setelah data ditambahkan melalui panel admin.
+                                    </div>
+                                )}
                             </div>
                             <QuickHelp
                                 items={quickHelpItems}
@@ -299,11 +182,17 @@ export default function HomePage({
                                 Semua agenda dan reservasi →
                             </Link>
                         </div>
-                        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                            {events.map((event) => (
-                                <EventCard key={`event-${event.id}`} {...event} />
-                            ))}
-                        </div>
+                        {events.length ? (
+                            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                                {events.map((event) => (
+                                    <EventCard key={`event-${event.id}`} {...event} />
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="text-sm text-text-secondary">
+                                Belum ada agenda terjadwal. Tambahkan event melalui admin untuk menampilkannya di sini.
+                            </p>
+                        )}
                     </div>
                 </section>
 
@@ -320,11 +209,17 @@ export default function HomePage({
                                 Arsip cerita lengkap →
                             </Link>
                         </div>
-                        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                            {stories.map((story) => (
-                                <StoryCard key={`story-${story.id}`} {...story} />
-                            ))}
-                        </div>
+                        {stories.length ? (
+                            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                                {stories.map((story) => (
+                                    <StoryCard key={`story-${story.id}`} {...story} />
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="text-sm text-text-secondary">
+                                Cerita terbaru akan tampil setelah admin menambahkan publikasi baru.
+                            </p>
+                        )}
                     </div>
                 </section>
 
