@@ -1,9 +1,8 @@
+import { Hero } from '@/components/public/Hero';
+import { QuickHelp } from '@/components/public/QuickHelp';
 import { EventCard } from '@/components/public/cards/event-card';
 import { SpotCard } from '@/components/public/cards/spot-card';
-import { PageContainer } from '@/components/public/layout/page-container';
-import { HeroBanner } from '@/components/public/sections/shared/hero-banner';
 import { StatusBanner } from '@/components/public/sections/shared/status-banner';
-import { Button } from '@/components/ui/button';
 import { PublicLayout } from '@/layouts/public/public-layout';
 import type { EventResource, SpotResource, StatusResource } from '@/types/public';
 import { Head, Link } from '@inertiajs/react';
@@ -16,6 +15,8 @@ interface VisitPageProps {
     visitTips: string[];
 }
 
+const heroImage = 'https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=1600&q=80';
+
 const typeLabels: Record<string, string> = {
     entrance: 'Pintu Masuk',
     trail: 'Jalur Interpretasi',
@@ -24,140 +25,146 @@ const typeLabels: Record<string, string> = {
     education: 'Edukasi',
 };
 
-export default function VisitPage({
-    status,
-    spots,
-    groupedSpots,
-    upcomingEvents,
-    visitTips,
-}: VisitPageProps) {
+export default function VisitPage({ status, spots, groupedSpots, upcomingEvents, visitTips }: VisitPageProps) {
+    const quickHelpItems = [
+        {
+            href: route('visit.plan'),
+            title: 'Peta & jalur',
+            description: 'Unduh peta terbaru dan rute rekomendasi sesuai minat Anda.',
+        },
+        {
+            href: route('support.index'),
+            title: 'Sewa pemandu',
+            description: 'Ajukan pemandu wisata, dokumentasi, dan paket edukasi sekolah.',
+        },
+        {
+            href: route('stories.index', { type: 'gallery' }),
+            title: 'Galeri lapangan',
+            description: 'Lihat suasana terkini sebelum berangkat ke Waduk Manduk.',
+        },
+    ];
+
     return (
         <>
             <Head title="Rencanakan Kunjungan" />
             <PublicLayout
                 hero={
-                    <PageContainer className="py-24">
-                        <HeroBanner
-                            title="Rencanakan Kunjungan Anda ke Waduk Manduk"
-                            subtitle="Cek status lokasi, temukan jalur terbaik, dan persiapkan kebutuhan sebelum berangkat."
-                            actions={
-                                <div className="flex flex-wrap gap-3">
-                                    <Button asChild size="lg" className="rounded-full bg-gold-accent px-8 text-deep-navy hover:bg-gold-accent/90">
-                                        <Link href={route('explore.index')}>Lihat peta spot</Link>
-                                    </Button>
-                                    <Button
-                                        asChild
-                                        size="lg"
-                                        variant="outline"
-                                        className="rounded-full border-white/20 px-8 text-white hover:bg-white/10"
-                                    >
-                                        <Link href={route('support.index')}>Dukung konservasi</Link>
-                                    </Button>
-                                </div>
-                            }
-                        />
-                    </PageContainer>
+                    <Hero
+                        image={heroImage}
+                        alt="Pengunjung menikmati dermaga Waduk Manduk"
+                        eyebrow="Rencanakan kunjungan"
+                        title="Siapkan perjalanan terbaik Anda"
+                        subtitle="Cek status lokasi, pilih jalur interpretasi, dan ketahui perlengkapan wajib sebelum berangkat."
+                        actions={[
+                            { label: 'Lihat peta spot', href: route('explore.index') },
+                            { label: 'Dukung konservasi', href: route('support.index'), variant: 'ghost' },
+                        ]}
+                    >
+                        {status && (
+                            <div className="max-w-xl">
+                                <StatusBanner
+                                    crowd_level={status.crowd_level}
+                                    weather_summary={status.weather_summary}
+                                    temperature={status.temperature}
+                                    advisory={status.advisory}
+                                    startLabel="Status terbaru"
+                                    tone="dark"
+                                />
+                            </div>
+                        )}
+                    </Hero>
                 }
             >
-                <section className="bg-[#00152d] py-16 text-white">
-                    <PageContainer className="space-y-10">
-                        {status && (
-                            <StatusBanner
-                                crowd_level={status.crowd_level}
-                                weather_summary={status.weather_summary}
-                                temperature={status.temperature}
-                                advisory={status.advisory}
-                                startLabel="Status terbaru"
-                                tone="dark"
-                            />
-                        )}
-
-                        <div className="space-y-6">
-                            <div className="space-y-3">
-                                <p className="text-sm uppercase tracking-[0.4em] text-sky-light">Denah Spot & Jalur</p>
-                                <h2 className="text-3xl font-semibold text-on-media md:text-4xl">Rancang pengalaman jelajah Anda</h2>
-                                <p className="max-w-2xl text-sm leading-relaxed text-on-media-muted">
-                                    Spot dikelompokkan berdasarkan kategori agar memudahkan perencanaan rute dan aktivitas konservasi.
-                                </p>
-                            </div>
-                            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                                {spots.map((spot) => (
-                                    <SpotCard key={spot.id} {...spot} />
-                                ))}
-                            </div>
-                        </div>
-                    </PageContainer>
-                </section>
-
-                <section className="bg-white py-20">
-                    <PageContainer className="space-y-6">
-                        <div className="space-y-3 text-deep-navy">
-                            <p className="text-sm uppercase tracking-[0.4em] text-[#0f4c81]">
-                                Rekomendasi Jalur
-                            </p>
-                            <h3 className="text-3xl font-semibold md:text-4xl">Kategori aktivitas & jalur interpretasi</h3>
-                        </div>
-                        <div className="space-y-4">
-                            {Object.entries(groupedSpots).map(([type, items]) => (
-                                <details
-                                    key={type}
-                                    className="overflow-hidden rounded-2xl border border-deep-navy/10 bg-foam"
-                                >
-                                    <summary className="cursor-pointer list-none px-6 py-4 text-sm font-semibold uppercase tracking-[0.25em] text-deep-navy">
-                                        {typeLabels[type] ?? type}
-                                    </summary>
-                                    <div className="space-y-2 px-6 pb-6">
-                                        <ul className="grid gap-3 text-sm text-deep-navy/80 md:grid-cols-2">
-                                            {items.map((item) => (
-                                                <li key={item.id} className="rounded-xl border border-deep-navy/10 bg-white p-4 shadow-reef/10">
-                                                    <p className="font-semibold text-deep-navy">{item.name}</p>
-                                                    {item.headline && (
-                                                        <p className="text-xs text-deep-navy/70">{item.headline}</p>
-                                                    )}
-                                                </li>
-                                            ))}
-                                        </ul>
+                <section className="py-12 lg:py-16">
+                    <div className="container">
+                        <div className="grid gap-8 lg:grid-cols-[1fr_20rem]">
+                            <div className="space-y-8">
+                                <div className="rounded-3xl border border-surface-3/80 bg-surface-0 p-8 shadow-soft">
+                                    <h2 className="text-h2 text-text-primary">Spot utama & jalur populer</h2>
+                                    <p className="mt-3 text-text-secondary">
+                                        Gunakan daftar berikut sebagai referensi awal sebelum memilih paket wisata atau menyewa pemandu.
+                                    </p>
+                                    <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                                        {spots.map((spot) => (
+                                            <SpotCard key={spot.id} {...spot} />
+                                        ))}
                                     </div>
-                                </details>
-                            ))}
+                                </div>
+
+                                <div className="rounded-3xl border border-surface-3/80 bg-surface-1 p-8 shadow-soft">
+                                    <h3 className="text-h3 text-text-primary">Kategori jalur & fasilitas</h3>
+                                    <div className="mt-4 space-y-4">
+                                        {Object.entries(groupedSpots).map(([type, items]) => (
+                                            <details key={type} className="overflow-hidden rounded-2xl border border-surface-3/70 bg-surface-0">
+                                                <summary className="cursor-pointer list-none px-6 py-4 text-sm font-semibold uppercase tracking-[0.25em] text-text-primary">
+                                                    {typeLabels[type] ?? type}
+                                                </summary>
+                                                <div className="space-y-2 px-6 pb-6 text-sm text-text-secondary">
+                                                    <ul className="grid gap-3 md:grid-cols-2">
+                                                        {items.map((item) => (
+                                                            <li key={item.id} className="rounded-xl border border-surface-3/80 bg-surface-1 p-4">
+                                                                <p className="font-semibold text-text-primary">{item.name}</p>
+                                                                {item.headline && <p className="text-xs text-text-secondary">{item.headline}</p>}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </details>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            <QuickHelp
+                                items={quickHelpItems}
+                                heading="Bantuan perjalanan"
+                                description="Informasi penting sebelum berangkat."
+                                className="hidden lg:block"
+                            />
                         </div>
-                    </PageContainer>
+                        <QuickHelp
+                            items={quickHelpItems}
+                            heading="Bantuan perjalanan"
+                            description="Informasi penting sebelum berangkat."
+                            className="mt-8 lg:hidden"
+                        />
+                    </div>
                 </section>
 
-                <section className="bg-foam py-20">
-                    <PageContainer className="space-y-10">
-                        <div className="space-y-3 text-deep-navy">
-                            <p className="text-sm uppercase tracking-[0.4em] text-[#0f4c81]">Agenda Terdekat</p>
-                            <h3 className="text-3xl font-semibold md:text-4xl">Ikuti event pendukung perjalanan Anda</h3>
+                <section className="bg-surface-1 py-12 lg:py-16">
+                    <div className="container space-y-6">
+                        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+                            <div>
+                                <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-600">Agenda terdekat</p>
+                                <h2 className="text-h2 text-text-primary">Event yang mendukung perjalanan Anda</h2>
+                            </div>
+                            <Link href={route('explore.index')} className="link focus-ring">
+                                Semua agenda wisata →
+                            </Link>
                         </div>
                         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                             {upcomingEvents.map((event) => (
                                 <EventCard key={event.id} {...event} />
                             ))}
                         </div>
-                    </PageContainer>
+                    </div>
                 </section>
 
-                <section className="bg-white py-20">
-                    <PageContainer className="space-y-6">
-                        <div className="space-y-3 text-deep-navy">
-                            <p className="text-sm uppercase tracking-[0.4em] text-[#0f4c81]">Tips Persiapan</p>
-                            <h3 className="text-3xl font-semibold md:text-4xl">Hal-hal penting sebelum berangkat</h3>
+                <section className="py-12 lg:py-16">
+                    <div className="container space-y-6">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-600">Tips persiapan</p>
+                            <h2 className="text-h2 text-text-primary">Hal penting sebelum berangkat</h2>
                         </div>
-                        <ul className="grid gap-4 text-sm text-deep-navy/80 md:grid-cols-2">
+                        <ul className="grid gap-4 text-sm text-text-secondary md:grid-cols-2">
                             {visitTips.map((tip, index) => (
-                                <li
-                                    key={`${tip}-${index}`}
-                                    className="rounded-2xl border border-deep-navy/10 bg-foam p-5 shadow-reef/10"
-                                >
+                                <li key={`${tip}-${index}`} className="rounded-2xl border border-surface-3/80 bg-surface-0 p-5 shadow-soft">
                                     {tip}
                                 </li>
                             ))}
                         </ul>
-                    </PageContainer>
+                    </div>
                 </section>
             </PublicLayout>
         </>
     );
 }
-

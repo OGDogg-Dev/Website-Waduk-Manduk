@@ -1,6 +1,6 @@
-import type { ComponentType } from 'react';
 import { cn } from '@/lib/utils';
-import { AlertCircle, CheckCircle2, CircleDashed, CircleSlash } from 'lucide-react';
+import { StatusBadge } from '@/components/public/StatusBadge';
+import { AlertTriangle } from 'lucide-react';
 
 interface StatusBannerProps {
     crowd_level?: string | null;
@@ -11,13 +11,14 @@ interface StatusBannerProps {
     tone?: 'light' | 'dark';
 }
 
-type LevelStyle = { chip: string; icon: ComponentType<{ className?: string }>; label: string };
+type LevelStyle = { badge: 'normal' | 'tutup' | 'hati2'; label: string };
 
 const levelStyles: Record<string, LevelStyle> = {
-    sepi: { chip: 'bg-emerald-600 text-white', icon: CheckCircle2, label: 'Sepi' },
-    normal: { chip: 'bg-sky-600 text-white', icon: CheckCircle2, label: 'Normal' },
-    ramai: { chip: 'bg-amber-600 text-white', icon: AlertCircle, label: 'Ramai' },
-    ditutup: { chip: 'bg-red-600 text-white', icon: CircleSlash, label: 'Ditutup' },
+    sepi: { badge: 'normal', label: 'Sepi' },
+    normal: { badge: 'normal', label: 'Normal' },
+    ramai: { badge: 'hati2', label: 'Ramai' },
+    padat: { badge: 'hati2', label: 'Padat' },
+    ditutup: { badge: 'tutup', label: 'Ditutup' },
 };
 
 export function StatusBanner({
@@ -34,28 +35,23 @@ export function StatusBanner({
 
     const normalizedLevel = crowd_level?.toLowerCase() ?? '';
     const level: LevelStyle = levelStyles[normalizedLevel] ?? {
-        chip: tone === 'dark' ? 'bg-white/20 text-on-media' : 'bg-[color:var(--surface/2)] text-[color:var(--text/primary)]',
-        icon: CircleDashed,
+        badge: 'hati2',
         label: crowd_level ?? 'Tidak tersedia',
     };
 
     const containerClass =
         tone === 'dark'
-            ? 'rounded-[32px] border border-white/18 bg-white/12 p-6 text-on-media shadow-reef'
-            : 'rounded-[28px] border border-[color:rgba(15,76,129,0.16)] bg-[color:var(--surface/0)] p-6 text-[color:var(--text/primary)] shadow-reef/10';
+            ? 'rounded-3xl border border-white/20 bg-white/10 p-6 text-on-media shadow-soft backdrop-blur'
+            : 'rounded-3xl border border-surface-3/80 bg-surface-0 p-6 text-text-primary shadow-soft';
 
-    const metaText = tone === 'dark' ? 'text-on-media-muted' : 'text-muted-strong';
-    const advisoryText = tone === 'dark' ? 'text-gold-accent' : 'text-[color:var(--accent/600)]';
+    const metaText = tone === 'dark' ? 'text-on-media-muted' : 'text-text-secondary';
+    const advisoryText = tone === 'dark' ? 'text-accent-300' : 'text-accent-600';
 
     return (
         <div className={containerClass}>
             {crowd_level && (
                 <div className="flex flex-wrap items-center gap-3">
-                    <span className={cn('inline-flex items-center gap-2 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em]', level.chip)}>
-                        <level.icon className="h-3.5 w-3.5" aria-hidden />
-                        <span className="sr-only">{startLabel}:</span>
-                        <span>{startLabel}</span>
-                    </span>
+                    <StatusBadge variant={level.badge} label={startLabel} />
                     <span className="text-sm font-semibold">{level.label}</span>
                 </div>
             )}
@@ -66,7 +62,10 @@ export function StatusBanner({
                 </p>
             )}
             {advisory && (
-                <p className={cn('mt-3 text-sm font-semibold', advisoryText)}>{advisory}</p>
+                <p className={cn('mt-3 flex items-center gap-2 text-sm font-semibold', advisoryText)}>
+                    <AlertTriangle className="h-4 w-4" aria-hidden />
+                    <span>{advisory}</span>
+                </p>
             )}
         </div>
     );

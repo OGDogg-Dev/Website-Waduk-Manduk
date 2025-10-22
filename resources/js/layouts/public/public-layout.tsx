@@ -12,10 +12,10 @@ export function PublicLayout({ hero, children, headerVariant }: PublicLayoutProp
     const variant = headerVariant ?? (hero ? 'transparent' : 'solid');
 
     return (
-        <div className="flex min-h-screen flex-col bg-deep-navy text-white">
+        <div className="flex min-h-screen flex-col bg-surface-0 text-text-primary">
             <PublicHeader variant={variant} />
-            {hero && <div className="relative isolate">{hero}</div>}
-            <main className="flex-1 bg-white text-deep-navy">{children}</main>
+            {hero}
+            <main className="flex-1">{children}</main>
             <PublicFooter />
             <FloatingVisitorToolbar />
         </div>

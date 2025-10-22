@@ -5,90 +5,73 @@ export function PublicFooter() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="relative overflow-hidden bg-deep-navy text-white">
-            <div className="absolute inset-0 opacity-40">
-                <svg className="h-full w-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                    <path
-                        fill="url(#footerWave)"
-                        d="M0,288L60,256C120,224,240,160,360,133.3C480,107,600,117,720,144C840,171,960,213,1080,208C1200,203,1320,149,1380,122.7L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-                    />
-                    <defs>
-                        <linearGradient id="footerWave" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="rgba(242, 196, 109, 0.12)" />
-                            <stop offset="50%" stopColor="rgba(209, 230, 255, 0.1)" />
-                            <stop offset="100%" stopColor="rgba(255, 255, 255, 0.05)" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </div>
-            <div className="relative mx-auto flex w-full max-w-[1200px] flex-col gap-12 px-6 py-16 sm:px-10">
-                <div className="grid gap-10 text-sm md:grid-cols-[1.2fr,1fr,1fr]">
-                    <div className="space-y-6">
-                        <div>
-                            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-light">
-                                Ekowisata Waduk Manduk
-                            </p>
-                            <h3 className="mt-3 max-w-sm text-2xl font-semibold leading-tight text-on-media">
-                                Menjaga harmoni alam & budaya lewat pariwisata bahari.
-                            </h3>
-                        </div>
-                        <p className="max-w-md text-on-media-muted">
-                            Jelajahi keindahan bawah air, dukung UMKM lokal, dan menjadi bagian dari gerakan konservasi air di Waduk Manduk.
+        <footer className="bg-surface-3 text-on-dark">
+            <div className="container flex flex-col gap-12 py-12 lg:py-16">
+                <div className="grid gap-10 text-sm lg:grid-cols-[1.2fr,repeat(2,minmax(0,1fr))]">
+                    <div className="space-y-5">
+                        <p className="text-xs font-semibold uppercase tracking-[0.32em] text-on-dark/70">
+                            Ekowisata Waduk Manduk
+                        </p>
+                        <h3 className="max-w-md text-h3 text-on-dark">
+                            Menjaga harmoni alam & budaya lewat pariwisata bahari.
+                        </h3>
+                        <p className="max-w-lg text-sm text-on-dark/80">
+                            Jelajahi keindahan bawah air, dukung UMKM lokal, dan jadi bagian dari gerakan konservasi air di Waduk Manduk.
                         </p>
                     </div>
-                    <div className="grid gap-4 text-on-media-muted">
-                        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-light">Kontak</p>
-                        <div className="space-y-2">
-                            <p className="text-on-media">Jl. Danau Biru No. 88, Desa Manduk, Jawa Timur</p>
-                            <p className="text-on-media">Telp. (+62) 812-3456-7890</p>
-                            <p className="text-on-media">Email: halo@wadukmanduk.id</p>
+                    <div className="space-y-4">
+                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-on-dark/70">Kontak</p>
+                        <div className="space-y-2 text-sm text-on-dark/85">
+                            <p>Jl. Danau Biru No. 88, Desa Manduk, Jawa Timur</p>
+                            <p>Telp. (+62) 812-3456-7890</p>
+                            <p>Email: halo@wadukmanduk.id</p>
                         </div>
-                        <div className="flex gap-4 text-sm text-on-media">
-                            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="transition hover:text-gold-accent focus-visible-outline">
+                        <div className="flex flex-wrap gap-3 text-sm">
+                            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="link focus-ring">
                                 Instagram
                             </a>
-                            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="transition hover:text-gold-accent focus-visible-outline">
+                            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="link focus-ring">
                                 YouTube
                             </a>
-                            <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="transition hover:text-gold-accent focus-visible-outline">
+                            <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="link focus-ring">
                                 Google Maps
                             </a>
                         </div>
                     </div>
-                    <div className="grid gap-4 text-on-media-muted">
-                        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-light">Navigasi</p>
-                        <div className="grid gap-2 text-sm">
-                            <Link href={route('visit.plan')} className="transition hover:text-gold-accent focus-visible-outline">
+                    <div className="space-y-4">
+                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-on-dark/70">Navigasi</p>
+                        <nav className="grid gap-2 text-sm">
+                            <Link href={route('visit.plan')} className="link focus-ring">
                                 Rencanakan kunjungan
                             </Link>
-                            <Link href={route('explore.index')} className="transition hover:text-gold-accent focus-visible-outline">
+                            <Link href={route('explore.index')} className="link focus-ring">
                                 Jelajah & aktivitas
                             </Link>
-                            <Link href={route('umkm.directory')} className="transition hover:text-gold-accent focus-visible-outline">
+                            <Link href={route('umkm.directory')} className="link focus-ring">
                                 UMKM & kuliner
                             </Link>
-                            <Link href={route('stories.index')} className="transition hover:text-gold-accent focus-visible-outline">
+                            <Link href={route('stories.index')} className="link focus-ring">
                                 Cerita & dokumentasi
                             </Link>
-                            <Link href={route('qris.index')} className="transition hover:text-gold-accent focus-visible-outline">
+                            <Link href={route('qris.index')} className="link focus-ring">
                                 Informasi QRIS
                             </Link>
-                            <Link href={route('support.index')} className="transition hover:text-gold-accent focus-visible-outline">
+                            <Link href={route('support.index')} className="link focus-ring">
                                 Dukung konservasi
                             </Link>
-                        </div>
+                        </nav>
                     </div>
                 </div>
-                <div className="flex flex-col gap-3 border-t border-white/15 pt-6 text-xs text-on-media-muted sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-on-media">© {currentYear} Waduk Manduk. Hak cipta dilindungi.</p>
-                    <div className="flex gap-4">
-                        <Link href={route('about.index')} className="transition hover:text-gold-accent focus-visible-outline">
+                <div className="flex flex-col gap-3 border-t border-brand-900/15 pt-6 text-xs text-on-dark/70 lg:flex-row lg:items-center lg:justify-between">
+                    <p>© {currentYear} Waduk Manduk. Hak cipta dilindungi.</p>
+                    <div className="flex flex-wrap gap-4">
+                        <Link href={route('about.index')} className="link focus-ring">
                             Tentang Kami
                         </Link>
-                        <Link href={route('support.index')} className="transition hover:text-gold-accent focus-visible-outline">
+                        <Link href={route('support.index')} className="link focus-ring">
                             Dukungan
                         </Link>
-                        <Link href={route('community.index')} className="transition hover:text-gold-accent focus-visible-outline">
+                        <Link href={route('community.index')} className="link focus-ring">
                             Komunitas
                         </Link>
                     </div>
