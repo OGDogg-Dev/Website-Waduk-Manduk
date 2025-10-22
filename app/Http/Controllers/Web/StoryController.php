@@ -25,7 +25,7 @@ class StoryController extends Controller
 
         $stories = $query->paginate(9)->withQueryString();
 
-        return Inertia::render('Public/Stories/Index', [
+        return Inertia::render('Public/Berita/Index', [
             'stories' => $stories,
             'filters' => [
                 'type' => $type,
