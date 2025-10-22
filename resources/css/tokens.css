@@ -25,11 +25,21 @@
     --ocean-400: #42c6c1;
     --sand-400: #f7e0b8;
 
+    /* Core surfaces */
+    --background: #f4f7fb;
+    --foreground: #061838;
+
     /* Surface scale */
     --surface-0: #ffffff;
     --surface-1: #f4f7fb;
     --surface-2: #e0e8f5;
     --surface-3: #c3d3ea;
+
+    /* Component surfaces */
+    --card: #ffffff;
+    --card-foreground: #061838;
+    --popover: #ffffff;
+    --popover-foreground: #061838;
 
     /* Text tokens */
     --text-primary: #061838;
@@ -44,8 +54,23 @@
     --overlay-scrim-48: rgba(2, 18, 41, 0.52);
     --overlay-scrim-32: rgba(2, 18, 41, 0.32);
 
-    /* Focus */
+    /* Interaction tokens */
+    --primary: #0f519a;
+    --primary-foreground: #f5f7fb;
+    --secondary: #e0e8f5;
+    --secondary-foreground: #061838;
+    --accent-base: #f2a936;
+    --accent-foreground: #331c00;
+    --muted: #e0e8f5;
+    --muted-foreground: rgba(6, 24, 56, 0.65);
+    --destructive: #b91c1c;
+    --destructive-foreground: #fef2f2;
+
+    /* Border + focus */
+    --border-color: rgba(2, 18, 41, 0.12);
+    --input-border: rgba(2, 18, 41, 0.18);
     --focus-ring-color: rgba(242, 169, 54, 0.7);
+    --ring-color: rgba(15, 81, 154, 0.55);
 
     /* Typography scale */
     --font-h1: clamp(2.75rem, 5vw, 3.5rem);

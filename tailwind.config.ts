@@ -22,6 +22,31 @@ const config = {
         },
         extend: {
             colors: {
+                background: 'var(--background)',
+                foreground: 'var(--foreground)',
+                border: 'var(--border-color)',
+                input: 'var(--input-border)',
+                ring: 'var(--ring-color)',
+                card: {
+                    DEFAULT: 'var(--card)',
+                    foreground: 'var(--card-foreground)',
+                },
+                popover: {
+                    DEFAULT: 'var(--popover)',
+                    foreground: 'var(--popover-foreground)',
+                },
+                primary: {
+                    DEFAULT: 'var(--primary)',
+                    foreground: 'var(--primary-foreground)',
+                },
+                secondary: {
+                    DEFAULT: 'var(--secondary)',
+                    foreground: 'var(--secondary-foreground)',
+                },
+                muted: {
+                    DEFAULT: 'var(--muted)',
+                    foreground: 'var(--muted-foreground)',
+                },
                 brand: {
                     950: 'var(--brand-950)',
                     900: 'var(--brand-900)',
@@ -35,6 +60,8 @@ const config = {
                     100: 'var(--brand-100)',
                 },
                 accent: {
+                    DEFAULT: 'var(--accent-base)',
+                    foreground: 'var(--accent-foreground)',
                     900: 'var(--accent-900)',
                     800: 'var(--accent-800)',
                     700: 'var(--accent-700)',
@@ -42,6 +69,10 @@ const config = {
                     500: 'var(--accent-500)',
                     400: 'var(--accent-400)',
                     300: 'var(--accent-300)',
+                },
+                destructive: {
+                    DEFAULT: 'var(--destructive)',
+                    foreground: 'var(--destructive-foreground)',
                 },
                 ocean: {
                     500: 'var(--ocean-500)',
