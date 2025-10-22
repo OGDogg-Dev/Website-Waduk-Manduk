@@ -7,6 +7,8 @@ interface StatusBannerProps {
     weather_summary?: string | null;
     temperature?: string | null;
     advisory?: string | null;
+    reported_at?: string | null;
+    valid_until?: string | null;
     startLabel?: string;
     tone?: 'light' | 'dark';
 }
@@ -26,6 +28,8 @@ export function StatusBanner({
     weather_summary,
     temperature,
     advisory,
+    reported_at,
+    valid_until,
     startLabel = 'Status lokasi',
     tone = 'light',
 }: StatusBannerProps) {
@@ -46,6 +50,16 @@ export function StatusBanner({
 
     const metaText = tone === 'dark' ? 'text-on-media-muted' : 'text-text-secondary';
     const advisoryText = tone === 'dark' ? 'text-accent-300' : 'text-accent-600';
+    const timestampFormatter = new Intl.DateTimeFormat('id-ID', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+
+    const lastUpdated = reported_at ? timestampFormatter.format(new Date(reported_at)) : null;
+    const validUntil = valid_until ? timestampFormatter.format(new Date(valid_until)) : null;
 
     return (
         <div className={containerClass}>
@@ -54,6 +68,12 @@ export function StatusBanner({
                     <StatusBadge variant={level.badge} label={startLabel} />
                     <span className="text-sm font-semibold">{level.label}</span>
                 </div>
+            )}
+            {(lastUpdated || validUntil) && (
+                <p className={cn('mt-3 text-xs font-medium uppercase tracking-[0.28em]', metaText)}>
+                    {lastUpdated ? `Terakhir diperbarui ${lastUpdated}` : 'Waktu pembaruan tidak tersedia'}
+                    {validUntil ? ` · Berlaku hingga ${validUntil}` : ''}
+                </p>
             )}
             {weather_summary && (
                 <p className={cn('mt-4 text-sm leading-relaxed', metaText)}>

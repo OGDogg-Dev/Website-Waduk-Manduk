@@ -1,74 +1,76 @@
 import { Link } from '@inertiajs/react';
 
+const navigation = [
+    {
+        heading: 'Destinasi',
+        items: [
+            { label: 'Tentang', href: route('about.index') },
+            { label: 'Jelajah & Aktivitas', href: route('explore.index') },
+            { label: 'Rencanakan Kunjungan', href: route('visit.plan') },
+        ],
+    },
+    {
+        heading: 'Program',
+        items: [
+            { label: 'Komunitas', href: route('community.index') },
+            { label: 'Konservasi & Edukasi', href: route('conservation.index') },
+            { label: 'UMKM & Kuliner', href: route('umkm.directory') },
+        ],
+    },
+    {
+        heading: 'Informasi',
+        items: [
+            { label: 'Berita & Cerita', href: route('stories.index') },
+            { label: 'Panduan Dukungan', href: route('support.index') },
+            { label: 'Pembayaran QRIS', href: route('qris.index') },
+        ],
+    },
+];
+
 export function Footer() {
+    const currentYear = new Date().getFullYear();
+
     return (
-        <footer className="bg-surface-3 text-on-dark">
-            <div className="container flex flex-col gap-6 py-8 md:flex-row md:items-start md:justify-between">
-                <div className="space-y-2 max-w-sm">
-                    <p className="eyebrow text-xs text-on-media-muted">Waduk Manduk</p>
-                    <p className="text-lg font-semibold text-on-dark">Ekowisata Bahari Manduk</p>
-                    <p className="text-sm text-on-media-muted">
-                        Pengelolaan destinasi ramah lingkungan, pemberdayaan UMKM pesisir, dan edukasi konservasi perairan.
-                    </p>
-                </div>
-                <div className="grid gap-4 text-sm md:grid-cols-3">
-                    <div>
-                        <p className="font-semibold text-on-dark">Navigasi</p>
-                        <ul className="mt-2 space-y-2 text-on-media-muted">
-                            <li>
-                                <Link href={route('home')} className="link focus-ring">
-                                    Beranda
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('qris.index')} className="link focus-ring">
-                                    QRIS
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('visit.plan')} className="link focus-ring">
-                                    Fasilitas & Harga
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p className="font-semibold text-on-dark">Informasi</p>
-                        <ul className="mt-2 space-y-2 text-on-media-muted">
-                            <li>
-                                <Link href={route('explore.index')} className="link focus-ring">
-                                    Peta Interaktif
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('stories.index')} className="link focus-ring">
-                                    Berita
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('about.index')} className="link focus-ring">
-                                    Kontak
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="space-y-2 text-on-media-muted">
-                        <p className="font-semibold text-on-dark">Kontak</p>
-                        <p>
-                            Desa Manduk, Kec. Bahari, Kab. Lestari
-                            <br />
-                            Jawa Timur 65123
+        <footer className="bg-[linear-gradient(170deg,#040d1f_0%,#041a37_45%,#032547_100%)] text-white">
+            <div className="container grid gap-12 py-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+                <div className="space-y-6">
+                    <div className="space-y-2">
+                        <p className="text-xs font-semibold uppercase tracking-[0.4em] text-accent-200/80">Waduk Manduk</p>
+                        <p className="text-2xl font-semibold">Ekowisata Bahari Manduk</p>
+                        <p className="max-w-lg text-sm text-brand-100/80">
+                            Menjaga harmoni alam dan budaya melalui konservasi, pemberdayaan UMKM pesisir, serta pengalaman wisata berkelanjutan.
                         </p>
+                    </div>
+                    <div className="space-y-3 text-sm text-brand-100/75">
+                        <p>Jl. Danau Biru No. 88, Desa Manduk, Kabupaten Bahari, Jawa Timur 65123</p>
                         <p>
-                            <a href="mailto:info@wadukmanduk.id" className="link focus-ring">
+                            <a href="mailto:info@wadukmanduk.id" className="focus-ring inline-flex items-center gap-2 text-sm font-semibold text-accent-200">
                                 info@wadukmanduk.id
+                                <span aria-hidden>→</span>
                             </a>
                         </p>
                     </div>
                 </div>
+                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    {navigation.map((group) => (
+                        <div key={group.heading} className="space-y-3">
+                            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-100/70">{group.heading}</p>
+                            <ul className="space-y-2 text-sm text-brand-100/80">
+                                {group.items.map((item) => (
+                                    <li key={item.href}>
+                                        <Link href={item.href} className="focus-ring inline-flex items-center gap-2 hover:text-accent-200">
+                                            {item.label}
+                                            <span aria-hidden className="text-xs">→</span>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
             </div>
-            <div className="border-t border-white/20 bg-brand-900/50 py-4 text-center text-sm text-on-media-muted">
-                © {new Date().getFullYear()} Pengelola Waduk Manduk. Seluruh hak cipta dilindungi.
+            <div className="border-t border-white/10 bg-black/20 py-6 text-center text-xs text-brand-100/70">
+                © {currentYear} Pengelola Waduk Manduk. Seluruh hak cipta dilindungi.
             </div>
         </footer>
     );

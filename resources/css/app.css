@@ -5,6 +5,22 @@
 @custom-variant dark (&:is(.dark *));
 
 @layer base {
+    @font-face {
+        font-family: 'Instrument Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('Instrument Sans');
+    }
+
+    @font-face {
+        font-family: 'Instrument Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: local('Instrument Sans');
+    }
+
     * {
         @apply border-border;
     }
@@ -50,6 +66,7 @@
     }
 
     p {
+        max-width: 65ch;
         @apply text-body text-text-secondary;
     }
 
@@ -168,6 +185,21 @@
 
     .focus-ring:focus-visible {
         box-shadow: 0 0 0 3px var(--surface-0), 0 0 0 5px var(--focus-ring-color);
+    }
+
+    .back-to-top {
+        position: fixed;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        z-index: 40;
+        transform: translateY(150%);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    .back-to-top.visible {
+        transform: translateY(0);
+        opacity: 1;
     }
 
     .on-media {

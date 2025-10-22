@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Head } from '@inertiajs/react';
 import { Header } from '@/components/public/Header';
 import { Footer } from '@/components/public/Footer';
+import { BackToTopButton } from '@/components/public/back-to-top-button';
 
 interface PublicLayoutProps {
     children: ReactNode;
@@ -24,6 +25,7 @@ export function PublicLayout({ hero, children }: PublicLayoutProps) {
                 {children}
             </main>
             <Footer />
+            <BackToTopButton />
         </div>
     );
 }

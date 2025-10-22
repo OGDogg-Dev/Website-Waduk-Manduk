@@ -51,7 +51,7 @@ export function Hero({
                     alt={alt}
                     decoding="async"
                     loading="eager"
-                    fetchpriority="high"
+                    fetchPriority="high"
                     className="h-full w-full object-cover"
                 />
             </picture>

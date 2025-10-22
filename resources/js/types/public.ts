@@ -34,6 +34,8 @@ export interface UmkmResource {
     is_featured?: boolean;
     description?: string | null;
     products?: Array<{ name: string; price?: string }>;
+    rating?: number | null;
+    reviews_count?: number | null;
 }
 
 export interface EventResource {
