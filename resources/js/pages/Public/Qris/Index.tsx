@@ -1,7 +1,8 @@
 import { Head } from '@inertiajs/react';
-import { Hero } from '@/components/public/Hero';
-import { QuickHelp } from '@/components/public/QuickHelp';
+import { PageHero } from '@/components/public/sections/shared/page-hero';
 import { PublicLayout } from '@/layouts/public/public-layout';
+import { Step } from '@/components/public/Step';
+import { FAQ } from '@/components/public/FAQ';
 import type {
     QrisContactResource,
     QrisDownloadResource,
@@ -9,8 +10,6 @@ import type {
     QrisHeroResource,
     QrisStepResource,
 } from '@/types/public';
-import { Step } from '@/components/public/Step';
-import { FAQ } from '@/components/public/FAQ';
 
 interface QrisPageProps {
     hero: QrisHeroResource;
@@ -20,16 +19,6 @@ interface QrisPageProps {
     contacts: QrisContactResource[];
     disclaimer?: string | null;
 }
-
-const heroImageBase = 'https://images.unsplash.com/photo-1526498460520-4c246339dccb';
-const heroImageParams = '?auto=format&fit=crop';
-const heroImageSrcSet = [
-    `${heroImageBase}${heroImageParams}&w=640&q=80 640w`,
-    `${heroImageBase}${heroImageParams}&w=960&q=80 960w`,
-    `${heroImageBase}${heroImageParams}&w=1280&q=80 1280w`,
-    `${heroImageBase}${heroImageParams}&w=1600&q=80 1600w`,
-    `${heroImageBase}${heroImageParams}&w=2000&q=80 2000w`,
-].join(', ');
 
 const fallbackDownloads: QrisDownloadResource[] = [
     {
@@ -50,33 +39,34 @@ const fallbackDownloads: QrisDownloadResource[] = [
 
 const fallbackSteps: QrisStepResource[] = [
     { title: 'Pindai kode QR resmi Waduk Manduk', description: 'Temukan stiker QRIS di loket tiket, dermaga, atau kios UMKM resmi.' },
-    { title: 'Masukkan nominal sesuai transaksi', description: 'Pastikan jumlah sesuai tiket atau donasi, lalu konfirmasi di aplikasi keuangan Anda.' },
+    { title: 'Masukkan nominal transaksi', description: 'Pastikan jumlah sesuai tiket atau donasi, lalu konfirmasi di aplikasi pembayaran Anda.' },
     { title: 'Tunjukkan bukti bayar ke petugas', description: 'Petugas akan memverifikasi nama merchant “Waduk Manduk Konservasi”.' },
-    { title: 'Simpan struk digital Anda', description: 'Struk akan diminta bila terjadi koreksi transaksi di kemudian hari.' },
+    { title: 'Simpan struk digital', description: 'Struk dibutuhkan bila terjadi koreksi transaksi di kemudian hari.' },
 ];
 
 const fallbackFaq: QrisFaqResource[] = [
-    { question: 'Apakah sinyal internet tersedia di area waduk?', description: 'Area dermaga dan pusat informasi dilengkapi penguat sinyal sehingga transaksi non-tunai dapat dilakukan.' },
-    { question: 'Bisakah saya menggunakan dompet digital apa pun?', description: 'Semua aplikasi pembayaran yang mendukung QRIS nasional dapat digunakan tanpa biaya tambahan.' },
+    { question: 'Apakah sinyal internet tersedia di area waduk?', description: 'Area dermaga dan pusat informasi dilengkapi penguat sinyal untuk transaksi nontunai.' },
+    { question: 'Bisakah menggunakan dompet digital apa pun?', description: 'Semua aplikasi pembayaran yang mendukung QRIS nasional dapat digunakan.' },
 ];
 
 export default function QrisPage({ hero, downloads, steps, faq, contacts, disclaimer }: QrisPageProps) {
     const effectiveDownloads = downloads.length ? downloads : fallbackDownloads;
     const effectiveSteps = steps.length ? steps : fallbackSteps;
     const effectiveFaq = faq.length ? faq : fallbackFaq;
-    const effectiveDisclaimer =
-        disclaimer ?? 'Transaksi QRIS hanya dilayani melalui petugas resmi di area Waduk Manduk.';
+    const effectiveDisclaimer = disclaimer ?? 'Transaksi QRIS hanya dilayani melalui petugas resmi Waduk Manduk.';
+
+    const primaryContact = contacts[0];
 
     const quickHelpItems = [
         {
             href: effectiveDownloads[0]?.url ?? '#',
             title: 'Unduh poster QRIS',
-            description: 'Cetak dan tempelkan poster resmi di loket atau kios UMKM.',
+            description: 'Cetak poster resmi untuk loket tiket atau kios UMKM mitra.',
         },
         {
-            href: contacts[0]?.href ?? `mailto:${contacts[0]?.value ?? 'halo@wadukmanduk.id'}`,
-            title: 'Hubungi petugas',
-            description: 'Validasi transaksi atau minta bantuan kendala pembayaran.',
+            href: primaryContact?.href ?? `mailto:${primaryContact?.value ?? 'halo@wadukmanduk.id'}`,
+            title: 'Hubungi petugas QRIS',
+            description: 'Validasi transaksi, minta reset, atau laporan kendala teknis.',
         },
         {
             href: route('support.index'),
@@ -86,43 +76,11 @@ export default function QrisPage({ hero, downloads, steps, faq, contacts, discla
     ];
 
     return (
-        <PublicLayout
-            hero={
-                <Hero
-                    image={`${heroImageBase}${heroImageParams}&w=1600&q=80`}
-                    imageSrcSet={heroImageSrcSet}
-                    imageSizes="(min-width: 1280px) 1100px, (min-width: 768px) 90vw, 100vw"
-                    alt="Pengunjung memindai kode QR Waduk Manduk di loket dermaga"
-                    eyebrow="Pembayaran nontunai"
-                    title={hero.title}
-                    subtitle={
-                        hero.subtitle ??
-                        'Gunakan QRIS resmi Waduk Manduk untuk transaksi tiket, penyewaan, dan dukungan konservasi.'
-                    }
-                    actions={[
-                        {
-                            label: 'Unduh poster QRIS',
-                            href: effectiveDownloads[0]?.url ?? '#',
-                            target: '_blank',
-                            rel: 'noreferrer',
-                        },
-                        {
-                            label: 'Unduh panduan',
-                            href: effectiveDownloads[1]?.url ?? '#',
-                            target: '_blank',
-                            rel: 'noreferrer',
-                            variant: 'ghost',
-                        },
-                    ]}
-                >
-                    <span className="chip">Pembayaran Nontunai</span>
-                </Hero>
-            }
-        >
-            <Head title="Informasi QRIS">
+        <PublicLayout>
+            <Head title="Informasi QRIS Waduk Manduk">
                 <meta
                     name="description"
-                    content="Panduan resmi pembayaran QRIS Waduk Manduk lengkap dengan langkah, kontak, dan materi unduhan."
+                    content="Panduan lengkap pembayaran QRIS Waduk Manduk: langkah, unduhan materi, dan kontak resmi."
                 />
                 <meta property="og:title" content="Pembayaran QRIS Waduk Manduk" />
                 <meta
@@ -133,112 +91,110 @@ export default function QrisPage({ hero, downloads, steps, faq, contacts, discla
                 <link rel="canonical" href={route('qris.index')} />
             </Head>
 
-            <section className="py-12 lg:py-16">
-                <div className="container">
-                    <div className="grid gap-8 lg:grid-cols-[1fr_20rem]">
-                        <div className="space-y-8">
-                            <div className="rounded-3xl border border-surface-3/80 bg-surface-0 p-8 shadow-soft">
-                                <h2 className="text-h2 text-text-primary">Langkah pembayaran QRIS</h2>
-                                <p className="mt-3 text-text-secondary">
-                                    Ikuti panduan berikut agar transaksi berlangsung cepat dan aman di seluruh titik layanan Waduk Manduk.
-                                </p>
-                                <div className="mt-6 space-y-4">
-                                    {effectiveSteps.slice(0, 4).map((step, index) => (
-                                        <Step key={`${step.title}-${index}`} number={index + 1} title={step.title} description={step.description ?? ''} />
-                                    ))}
-                                </div>
-                                {effectiveDisclaimer && (
-                                    <p className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-xs font-semibold text-amber-700">
-                                        {effectiveDisclaimer}
-                                    </p>
-                                )}
-                            </div>
+            <PageHero
+                eyebrow="Pembayaran nontunai"
+                title={hero.title}
+                description={hero.subtitle ?? 'Gunakan QRIS resmi Waduk Manduk untuk transaksi tiket, penyewaan, dan donasi konservasi.'}
+                quickHelpItems={quickHelpItems}
+                quickHelpHeading="Bantuan QRIS"
+                quickHelpDescription="Unduhan materi, kontak petugas, dan saluran donasi."
+                quickHelpCta={{
+                    label: 'Unduh panduan lengkap',
+                    href: effectiveDownloads[1]?.url ?? '#',
+                    description: effectiveDownloads[1]?.size ?? 'PDF',
+                }}
+            />
 
-                            <div className="rounded-3xl border border-surface-3/80 bg-surface-1 p-8 shadow-soft">
-                                <h3 className="text-h3 text-text-primary">Unduh materi QRIS</h3>
-                                <p className="mt-3 text-text-secondary">
-                                    File di bawah siap cetak dan dapat dibagikan kepada UMKM mitra agar kode pembayaran seragam.
-                                </p>
-                                <div className="mt-6 grid gap-4 md:grid-cols-2">
-                                    {effectiveDownloads.slice(0, 2).map((download) => (
-                                        <a
-                                            key={download.label}
-                                            href={download.url ?? '#'}
-                                            download={download.download_name ?? undefined}
-                                            className="focus-ring flex items-center justify-between rounded-2xl border border-surface-3/70 bg-surface-0 px-5 py-4 text-sm font-semibold text-text-primary transition hover:border-brand-400 hover:text-brand-600"
-                                        >
-                                            <span>{download.label}</span>
-                                            <span className="text-xs font-medium uppercase text-text-secondary">
-                                                {download.format?.toUpperCase()} {download.size ? `· ${download.size}` : ''}
-                                            </span>
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                        <QuickHelp
-                            items={quickHelpItems}
-                            heading="Bantuan QRIS"
-                            description="Sumber daya utama untuk transaksi nontunai."
-                            className="hidden lg:block"
-                        />
+            <section className="relative overflow-hidden bg-[#041939] py-20 text-white lg:py-24">
+                <div className="absolute inset-x-[-25%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(60,138,233,0.24),_rgba(4,25,57,0))] blur-3xl" aria-hidden />
+                <div className="container relative space-y-10">
+                    <div className="space-y-3">
+                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Langkah pembayaran</p>
+                        <h2 className="text-3xl font-semibold sm:text-4xl">Transaksi QRIS dalam empat langkah</h2>
+                        <p className="max-w-3xl text-brand-100/80">
+                            Ikuti panduan berikut agar pembayaran berlangsung cepat, aman, dan tercatat pada sistem Waduk Manduk.
+                        </p>
                     </div>
-                    <div className="mt-8 lg:hidden">
-                        <QuickHelp
-                            items={quickHelpItems}
-                            heading="Bantuan QRIS"
-                            description="Sumber daya utama untuk transaksi nontunai."
-                        />
+                    <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
+                        {effectiveSteps.slice(0, 4).map((step, index) => (
+                            <Step key={`${step.title}-${index}`} number={index + 1} title={step.title} description={step.description ?? ''} tone="dark" />
+                        ))}
+                    </div>
+                    {effectiveDisclaimer && (
+                        <p className="rounded-[1.8rem] border border-amber-300/50 bg-amber-500/15 p-5 text-xs font-semibold text-amber-100">
+                            {effectiveDisclaimer}
+                        </p>
+                    )}
+                </div>
+            </section>
+
+            <section className="relative overflow-hidden bg-[#04132d] py-20 text-white lg:py-24">
+                <div className="absolute inset-x-[-20%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(236,172,72,0.2),_rgba(4,19,45,0))] blur-3xl" aria-hidden />
+                <div className="container relative grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+                    <div className="space-y-6 rounded-[2rem] border border-white/15 bg-white/8 p-8 shadow-soft backdrop-blur">
+                        <h2 className="text-3xl font-semibold sm:text-4xl">Unduh materi QRIS</h2>
+                        <p className="text-sm text-brand-100/80">
+                            File siap cetak untuk loket tiket, kios UMKM mitra, dan papan informasi di seluruh zona waduk.
+                        </p>
+                        <div className="grid gap-4 md:grid-cols-2">
+                            {effectiveDownloads.slice(0, 2).map((download) => (
+                                <a
+                                    key={download.label}
+                                    href={download.url ?? '#'}
+                                    download={download.download_name ?? undefined}
+                                    className="focus-ring flex items-center justify-between rounded-[1.6rem] border border-white/15 bg-white/6 px-5 py-4 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/12"
+                                >
+                                    <span>{download.label}</span>
+                                    <span className="text-xs font-medium uppercase text-brand-100/70">
+                                        {download.format?.toUpperCase()} {download.size ? `· ${download.size}` : ''}
+                                    </span>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="space-y-6 rounded-[2rem] border border-white/15 bg-white/5 p-8 shadow-soft backdrop-blur">
+                        <h3 className="text-2xl font-semibold text-white">Kontak resmi QRIS</h3>
+                        <ul className="space-y-3 text-sm text-brand-100/80">
+                            {contacts.map((contact) => {
+                                const linkHref = contact.href
+                                    ? contact.href
+                                    : contact.value?.includes('@')
+                                        ? `mailto:${contact.value}`
+                                        : contact.value
+                                            ? `tel:${contact.value}`
+                                            : '#';
+                                return (
+                                    <li key={`${contact.label}-${contact.value}`} className="rounded-[1.5rem] border border-white/12 bg-white/6 p-4">
+                                        <p className="text-xs font-semibold uppercase tracking-[0.38em] text-brand-100/70">{contact.label}</p>
+                                        <a href={linkHref} className="focus-ring mt-2 inline-flex items-center gap-2 text-sm font-semibold text-white">
+                                            {contact.value ?? 'Hubungi petugas'}
+                                            <span aria-hidden>→</span>
+                                        </a>
+                                    </li>
+                                );
+                            })}
+                        </ul>
                     </div>
                 </div>
             </section>
 
-            <section className="bg-surface-1 py-12 lg:py-16">
-                <div className="container grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
-                    <div>
-                        <h2 className="text-h2 text-text-primary">FAQ Pembayaran QRIS</h2>
-                        <p className="mt-3 text-text-secondary">
-                            Jika pertanyaan Anda belum terjawab, hubungi kontak resmi kami di samping.
+            <section className="relative overflow-hidden bg-[#040f24] py-20 text-white lg:py-24">
+                <div className="absolute inset-x-[-25%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(72,150,255,0.2),_rgba(4,15,36,0))] blur-3xl" aria-hidden />
+                <div className="container relative space-y-10">
+                    <div className="space-y-3">
+                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Pertanyaan umum</p>
+                        <h2 className="text-3xl font-semibold sm:text-4xl">FAQ pembayaran QRIS</h2>
+                        <p className="max-w-3xl text-brand-100/80">
+                            Jawaban ringkas seputar koneksi internet, metode pembayaran, hingga bukti transaksi.
                         </p>
-                        <FAQ
-                            items={effectiveFaq.map((item) => ({
-                                question: item.question,
-                                answer: item.description ?? '',
-                            }))}
-                            className="mt-6"
-                        />
                     </div>
-                    <div className="space-y-5 rounded-3xl border border-surface-3/80 bg-surface-0 p-6 shadow-soft">
-                        <h3 className="text-h3 text-text-primary">Kontak resmi</h3>
-                        <p className="text-sm text-text-secondary">
-                            Tim loket siap membantu verifikasi transaksi setiap hari pukul 07.00–17.00 WIB.
-                        </p>
-                        <div className="space-y-4 text-sm text-text-secondary">
-                            {contacts.length ? (
-                                contacts.map((contact, index) => (
-                                    <div key={`${contact.label}-${index}`} className="rounded-2xl border border-surface-3/70 bg-surface-1 p-4">
-                                        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-600">{contact.label}</p>
-                                        {contact.href ? (
-                                            <a
-                                                href={contact.href}
-                                                target={contact.href.startsWith('http') ? '_blank' : undefined}
-                                                rel={contact.href.startsWith('http') ? 'noreferrer' : undefined}
-                                                className="link focus-ring mt-2 inline-flex items-center gap-2 text-sm"
-                                            >
-                                                {contact.value}
-                                            </a>
-                                        ) : (
-                                            <p className="mt-2 text-sm font-semibold text-text-primary">{contact.value}</p>
-                                        )}
-                                    </div>
-                                ))
-                            ) : (
-                                <p className="text-sm text-text-secondary">
-                                    Kontak akan tampil setelah ditambahkan melalui admin.
-                                </p>
-                            )}
-                        </div>
-                    </div>
+                    <FAQ
+                        items={effectiveFaq.map((item) => ({
+                            question: item.question ?? 'Pertanyaan',
+                            answer: item.description ?? '-',
+                        }))}
+                        tone="dark"
+                    />
                 </div>
             </section>
         </PublicLayout>
