@@ -3,6 +3,7 @@ import { Head, router } from '@inertiajs/react';
 import { PageHero } from '@/components/public/sections/shared/page-hero';
 import { PublicLayout } from '@/layouts/public/public-layout';
 import { StoryCard } from '@/components/public/cards/story-card';
+import { Breadcrumbs } from '@/components/public/breadcrumbs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import type { PaginatedResponse } from '@/types/pagination';
 import type { StoryResource } from '@/types/public';
@@ -77,6 +78,12 @@ export default function BeritaPage({ stories, filters, types, featured }: Berita
                 eyebrow="Berita & cerita"
                 title="Berita & Cerita"
                 description="Luaskan wawasan, gali inspirasi, dan update konservasi Waduk Manduk langsung dari tim lapangan."
+                actions={[
+                    {
+                        label: 'Kirim rilis media',
+                        href: 'mailto:media@wadukmanduk.id',
+                    },
+                ]}
                 quickHelpItems={quickHelpItems}
                 quickHelpHeading="Filter cepat"
                 quickHelpDescription="Temukan artikel berdasarkan fokus tema yang Anda perlukan."
@@ -85,15 +92,17 @@ export default function BeritaPage({ stories, filters, types, featured }: Berita
                     href: route('support.index'),
                     description: 'Pusat layanan media & kolaborasi',
                 }}
-            />
+            >
+                <Breadcrumbs items={[{ label: 'Berita & Cerita' }]} className="mt-8" />
+            </PageHero>
 
             <section className="relative overflow-hidden bg-[#041939] py-20 text-white lg:py-24">
                 <div className="absolute inset-x-[-25%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(60,138,233,0.28),_rgba(4,25,57,0))] blur-3xl" aria-hidden />
                 <div className="container relative space-y-10">
                     <div className="space-y-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Cerita pilihan</p>
-                        <h2 className="text-3xl font-semibold sm:text-4xl">Sorotan pekan ini</h2>
-                        <p className="max-w-3xl text-brand-100/80">
+                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Cerita pilihan</p>
+                        <h2 className="text-3xl font-semibold text-white sm:text-4xl">Sorotan pekan ini</h2>
+                        <p className="max-w-3xl text-white/85">
                             Tiga cerita pilihan editor menampilkan dampak kolaborasi konservasi, inovasi UMKM, dan aksi komunitas.
                         </p>
                     </div>
@@ -101,7 +110,7 @@ export default function BeritaPage({ stories, filters, types, featured }: Berita
                         {featured.length > 0 ? (
                             featured.map((story) => <StoryCard key={`featured-${story.id}`} {...story} />)
                         ) : (
-                            <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-brand-100/80 lg:col-span-3">
+                            <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/80 lg:col-span-3">
                                 Sorotan akan muncul setelah admin memilih artikel unggulan minggu ini.
                             </p>
                         )}
@@ -114,9 +123,9 @@ export default function BeritaPage({ stories, filters, types, featured }: Berita
                 <div className="container relative space-y-10">
                     <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                         <div className="space-y-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Semua cerita</p>
-                            <h2 className="text-3xl font-semibold sm:text-4xl">Kabar terbaru dari waduk</h2>
-                            <p className="max-w-3xl text-brand-100/75">
+                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Semua cerita</p>
+                            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Kabar terbaru dari waduk</h2>
+                            <p className="max-w-3xl text-white/85">
                                 Telusuri seluruh arsip cerita dari tim konservasi, warga relawan, hingga pelaku UMKM pesisir.
                             </p>
                         </div>

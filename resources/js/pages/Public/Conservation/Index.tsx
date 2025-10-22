@@ -4,6 +4,7 @@ import { SpotCard } from '@/components/public/cards/spot-card';
 import { StoryCard } from '@/components/public/cards/story-card';
 import { PageHero } from '@/components/public/sections/shared/page-hero';
 import { PublicLayout } from '@/layouts/public/public-layout';
+import { Breadcrumbs } from '@/components/public/breadcrumbs';
 import type { EventResource, SpotResource, StoryResource } from '@/types/public';
 
 interface ConservationPageProps {
@@ -51,6 +52,12 @@ export default function ConservationPage({ educationSpots, conservationStories, 
                 eyebrow="Konservasi & edukasi"
                 title="Konservasi & Edukasi"
                 description="Belajar langsung dari ekosistem Waduk Manduk bersama tim konservasi, peneliti, dan warga pesisir."
+                actions={[
+                    {
+                        label: 'Daftar relawan',
+                        href: route('support.index', { type: 'volunteer' }),
+                    },
+                ]}
                 quickHelpItems={quickHelpItems}
                 quickHelpHeading="Pusat konservasi"
                 quickHelpDescription="Mulai dari pendaftaran relawan hingga bahan ajar kelas konservasi."
@@ -59,16 +66,18 @@ export default function ConservationPage({ educationSpots, conservationStories, 
                     href: route('stories.index', { type: 'conservation' }),
                     description: 'Modul konservasi & laporan lapangan',
                 }}
-            />
+            >
+                <Breadcrumbs items={[{ label: 'Konservasi & Edukasi' }]} className="mt-8" />
+            </PageHero>
 
             <section className="relative overflow-hidden bg-[#041939] py-20 text-white lg:py-24">
                 <div className="absolute inset-x-[-25%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(48,138,228,0.25),_rgba(4,25,57,0))] blur-3xl" aria-hidden />
                 <div className="container relative space-y-10">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                         <div className="space-y-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Spot edukasi</p>
-                            <h2 className="text-3xl font-semibold sm:text-4xl">Laboratorium alam Waduk Manduk</h2>
-                            <p className="max-w-3xl text-brand-100/80">
+                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Spot edukasi</p>
+                            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Laboratorium alam Waduk Manduk</h2>
+                            <p className="max-w-3xl text-white/90">
                                 Jelajahi titik interpretasi flora-fauna, stasiun sensor kualitas air, dan jalur riset lapangan.
                             </p>
                         </div>
@@ -86,7 +95,7 @@ export default function ConservationPage({ educationSpots, conservationStories, 
                             ))}
                         </div>
                     ) : (
-                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-brand-100/80">
+                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/85">
                             Data spot edukasi akan tampil setelah admin menambahkannya melalui panel pengelola.
                         </p>
                     )}
@@ -98,9 +107,9 @@ export default function ConservationPage({ educationSpots, conservationStories, 
                 <div className="container relative space-y-10">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                         <div className="space-y-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Program konservasi</p>
-                            <h2 className="text-3xl font-semibold sm:text-4xl">Ikut terjun menjaga ekosistem</h2>
-                            <p className="max-w-3xl text-brand-100/80">
+                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Program konservasi</p>
+                            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Ikut terjun menjaga ekosistem</h2>
+                            <p className="max-w-3xl text-white/90">
                                 Daftar pada sesi konservasi berkala untuk mendukung keberlanjutan Waduk Manduk.
                             </p>
                         </div>
@@ -118,7 +127,7 @@ export default function ConservationPage({ educationSpots, conservationStories, 
                             ))}
                         </div>
                     ) : (
-                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-brand-100/80">
+                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/85">
                             Program akan muncul setelah tim konservasi menambahkan jadwal terbaru.
                         </p>
                     )}
@@ -129,9 +138,9 @@ export default function ConservationPage({ educationSpots, conservationStories, 
                 <div className="absolute inset-x-[-25%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(72,150,255,0.2),_rgba(4,15,36,0))] blur-3xl" aria-hidden />
                 <div className="container relative space-y-10">
                     <div className="space-y-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Catatan lapangan</p>
-                        <h2 className="text-3xl font-semibold sm:text-4xl">Cerita konservasi terbaru</h2>
-                        <p className="max-w-3xl text-brand-100/80">
+                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Catatan lapangan</p>
+                        <h2 className="text-3xl font-semibold text-white sm:text-4xl">Cerita konservasi terbaru</h2>
+                        <p className="max-w-3xl text-white/90">
                             Pelajari hasil monitoring dan cerita dampak dari relawan serta peneliti yang menjaga Waduk Manduk.
                         </p>
                     </div>
@@ -142,7 +151,7 @@ export default function ConservationPage({ educationSpots, conservationStories, 
                             ))}
                         </div>
                     ) : (
-                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-brand-100/80">
+                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/85">
                             Cerita lapangan akan tersedia begitu admin mempublikasikan konten baru.
                         </p>
                     )}

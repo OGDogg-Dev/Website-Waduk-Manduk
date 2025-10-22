@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 import { PageHero } from '@/components/public/sections/shared/page-hero';
 import { UmkmCard } from '@/components/public/cards/umkm-card';
 import { Input } from '@/components/ui/input';
+import { Breadcrumbs } from '@/components/public/breadcrumbs';
 import { PublicLayout } from '@/layouts/public/public-layout';
 import type { UmkmResource } from '@/types/public';
 
@@ -15,13 +16,19 @@ export default function UmkmPage({ umkm, categories }: UmkmPageProps) {
     const [query, setQuery] = useState('');
     const [category, setCategory] = useState('all');
 
+    const normalizedQuery = query.trim().toLowerCase();
+
     const filtered = useMemo(() => {
         return umkm.filter((item) => {
-            const matchesQuery = item.name.toLowerCase().includes(query.toLowerCase());
+            const baseMatches = [item.name, item.tagline ?? '', item.description ?? ''];
+            const productNames = item.products?.map((product) => product.name) ?? [];
+            const matchesQuery =
+                normalizedQuery.length === 0 ||
+                [...baseMatches, ...productNames].some((value) => value?.toLowerCase().includes(normalizedQuery));
             const matchesCategory = category === 'all' || item.category === category;
             return matchesQuery && matchesCategory;
         });
-    }, [umkm, query, category]);
+    }, [umkm, normalizedQuery, category]);
 
     const quickHelpItems = [
         {
@@ -61,6 +68,12 @@ export default function UmkmPage({ umkm, categories }: UmkmPageProps) {
                 eyebrow="UMKM & kuliner"
                 title="UMKM & Kuliner Waduk Manduk"
                 description="Nikmati kuliner laut berkelanjutan, produk kriya warga, dan dukung ekonomi lokal lewat program pendampingan UMKM."
+                actions={[
+                    {
+                        label: 'Hubungi pusat UMKM',
+                        href: 'mailto:umkm@wadukmanduk.id',
+                    },
+                ]}
                 quickHelpItems={quickHelpItems}
                 quickHelpHeading="Bantuan UMKM"
                 quickHelpDescription="Pendampingan usaha, akses pasar, dan paket kuliner tematik."
@@ -69,15 +82,17 @@ export default function UmkmPage({ umkm, categories }: UmkmPageProps) {
                     href: 'mailto:umkm@wadukmanduk.id',
                     description: 'umkm@wadukmanduk.id',
                 }}
-            />
+            >
+                <Breadcrumbs items={[{ label: 'UMKM & Kuliner' }]} className="mt-8" />
+            </PageHero>
 
             <section className="relative overflow-hidden bg-[#041939] py-20 text-white lg:py-24">
                 <div className="absolute inset-x-[-25%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(60,138,233,0.25),_rgba(4,25,57,0))] blur-3xl" aria-hidden />
                 <div className="container relative space-y-8">
                     <div className="space-y-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Direktori UMKM</p>
-                        <h2 className="text-3xl font-semibold sm:text-4xl">Temukan produk unggulan pesisir</h2>
-                        <p className="max-w-3xl text-brand-100/80">
+                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Direktori UMKM</p>
+                        <h2 className="text-3xl font-semibold text-white sm:text-4xl">Temukan produk unggulan pesisir</h2>
+                        <p className="max-w-3xl text-white/90">
                             Filter berdasarkan kategori atau cari langsung UMKM favorit Anda. Semua pelaku usaha telah melalui kurasi kelayakan.
                         </p>
                     </div>
@@ -86,7 +101,7 @@ export default function UmkmPage({ umkm, categories }: UmkmPageProps) {
                             value={query}
                             onChange={(event) => setQuery(event.target.value)}
                             placeholder="Cari nama UMKM atau produk..."
-                            className="rounded-full border border-white/20 bg-white/10 text-sm text-white placeholder:text-brand-100/60 focus:border-white focus:ring-0 lg:w-72"
+                            className="rounded-full border border-white/20 bg-white/10 text-sm text-white placeholder:text-white/60 focus:border-white focus:ring-0 lg:w-72"
                         />
                         <select
                             value={category}
@@ -107,7 +122,7 @@ export default function UmkmPage({ umkm, categories }: UmkmPageProps) {
                         ))}
                     </div>
                     {filtered.length === 0 && (
-                        <div className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-10 text-center text-sm text-brand-100/80">
+                        <div className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-10 text-center text-sm text-white/85">
                             UMKM belum ditemukan untuk filter tersebut. Coba kategori lain atau reset pencarian.
                         </div>
                     )}
@@ -118,7 +133,7 @@ export default function UmkmPage({ umkm, categories }: UmkmPageProps) {
                 <div className="absolute inset-x-[-20%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(236,172,72,0.2),_rgba(4,19,45,0))] blur-3xl" aria-hidden />
                 <div className="container relative grid gap-8 lg:grid-cols-3">
                     {["Kurasi rasa pesisir", "Program peningkatan kapasitas", "Kemasan ramah lingkungan"].map((title, index) => (
-                        <div key={title} className="space-y-3 rounded-[2rem] border border-white/12 bg-white/6 p-6 text-sm text-brand-100/80">
+                        <div key={title} className="space-y-3 rounded-[2rem] border border-white/12 bg-white/6 p-6 text-sm text-white/85">
                             <p className="text-base font-semibold text-white">{title}</p>
                             <p>
                                 {index === 0 && 'Koleksi kuliner laut yang diolah langsung oleh warga dengan bahan segar dan teknik ramah lingkungan.'}

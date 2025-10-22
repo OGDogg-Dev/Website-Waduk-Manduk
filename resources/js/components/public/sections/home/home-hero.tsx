@@ -54,7 +54,7 @@ export function HomeHero({ status, quickHelpItems }: HomeHeroProps) {
                         <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-[3.75rem] lg:leading-[1.05]">
                             Destinasi kiriman alam dengan cerita konservasi terbaik
                         </h1>
-                        <p className="max-w-2xl text-base text-on-media-muted sm:text-lg">
+                        <p className="max-w-[65ch] text-base text-accent-100/90 sm:text-lg">
                             Rasakan petualangan bawah air Waduk Manduk, jelajahi konservasi terumbu dan mangrove, serta dukung UMKM pesisir yang menjaga ekosistem tetap lestari.
                         </p>
                     </div>
@@ -138,6 +138,8 @@ export function HomeHero({ status, quickHelpItems }: HomeHeroProps) {
                                     weather_summary={status.weather_summary}
                                     temperature={status.temperature}
                                     advisory={status.advisory}
+                                    reported_at={status.reported_at}
+                                    valid_until={status.valid_until}
                                 />
                             </div>
                             <p className="mt-4 text-sm text-on-media-muted">
@@ -160,7 +162,7 @@ export function HomeHero({ status, quickHelpItems }: HomeHeroProps) {
                                 <span className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-accent-300 via-accent-400 to-brand-200" aria-hidden />
                                 <div className="pl-4">
                                     <p className="text-sm font-semibold text-white line-2">{item.title}</p>
-                                    <p className="mt-2 text-sm text-on-media-muted line-3">{item.description}</p>
+                                    <p className="mt-2 text-sm text-accent-100/85 line-3">{item.description}</p>
                                     <span className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-accent-200">
                                         Selengkapnya
                                         <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>

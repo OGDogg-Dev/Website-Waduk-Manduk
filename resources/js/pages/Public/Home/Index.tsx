@@ -287,6 +287,8 @@ export default function HomePage({
                                         weather_summary={status?.weather_summary}
                                         temperature={status?.temperature}
                                         advisory={status?.advisory}
+                                        reported_at={status?.reported_at ?? undefined}
+                                        valid_until={status?.valid_until ?? undefined}
                                     />
                                 </div>
                                 <p className="mt-6 text-sm text-text-secondary">

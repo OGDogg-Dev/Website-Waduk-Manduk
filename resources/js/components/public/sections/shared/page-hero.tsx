@@ -88,10 +88,10 @@ export function PageHero({
                             {eyebrow}
                         </span>
                         <div className="space-y-4">
-                            <h1 className="text-4xl font-semibold leading-tight sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
+                            <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
                                 {title}
                             </h1>
-                            <p className="max-w-2xl text-base text-brand-100/85 sm:text-lg">{description}</p>
+                            <p className="max-w-[65ch] text-base text-accent-100/90 sm:text-lg">{description}</p>
                         </div>
                         {actions.length > 0 && (
                             <div className="flex flex-wrap gap-3">
@@ -102,11 +102,12 @@ export function PageHero({
                                         target={external ? '_blank' : undefined}
                                         rel={external ? 'noreferrer' : undefined}
                                         className={cn(
-                                            'focus-ring inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition',
+                                            'focus-ring inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition focus-visible:-translate-y-0.5',
                                             variant === 'primary'
                                                 ? 'bg-accent-300 text-brand-980 shadow-soft hover:-translate-y-0.5 hover:bg-accent-200'
-                                                : 'border border-white/25 bg-white/10 text-white hover:border-white/35 hover:bg-white/15',
+                                                : 'border border-white/30 bg-white/10 text-white hover:border-white/45 hover:bg-white/20',
                                         )}
+                                        aria-label={external ? `${label} (tautan eksternal)` : label}
                                     >
                                         {label}
                                     </Link>
@@ -138,21 +139,22 @@ export function PageHero({
                     {children}
                 </div>
 
-                <aside className="space-y-6 rounded-[2.5rem] border border-white/18 bg-white/8 p-8 shadow-soft backdrop-blur">
+                <aside className="space-y-6 rounded-[2.5rem] border border-white/20 bg-white/12 p-8 shadow-soft backdrop-blur">
                     <div className="space-y-3">
                         <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">{quickHelpHeading}</p>
-                        {quickHelpDescription && <p className="text-sm text-brand-100/75">{quickHelpDescription}</p>}
+                        {quickHelpDescription && <p className="text-sm text-accent-100/85">{quickHelpDescription}</p>}
                     </div>
                     <ul className="space-y-4">
                         {quickHelpItems.map((item) => (
                             <li key={`${item.href}-${item.title}`}>
                                 <Link
                                     href={item.href}
-                                    className="focus-ring group block rounded-[1.8rem] border border-white/15 bg-white/6 px-5 py-5 transition hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/12"
+                                    className="focus-ring group block h-full rounded-[1.8rem] border border-white/18 bg-white/10 px-5 py-5 transition hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/20"
+                                    aria-label={`${item.title} - bantuan cepat`}
                                 >
                                     <p className="text-sm font-semibold text-white line-2">{item.title}</p>
-                                    <p className="mt-2 text-sm text-brand-100/75 line-3">{item.description}</p>
-                                    <span className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-accent-100">
+                                    <p className="mt-2 text-sm text-accent-100/85 line-3">{item.description}</p>
+                                    <span className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-accent-100 transition group-hover:gap-3">
                                         Lanjutkan
                                         <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
                                     </span>
@@ -163,7 +165,7 @@ export function PageHero({
                     {quickHelpCta && (
                         <Link
                             href={quickHelpCta.href}
-                            className="focus-ring block rounded-[1.8rem] border border-accent-300/40 bg-accent-300/15 px-5 py-5 text-sm font-semibold text-accent-100 transition hover:border-accent-200 hover:bg-accent-200/20"
+                            className="focus-ring block rounded-[1.8rem] border border-accent-300/50 bg-accent-300/20 px-5 py-5 text-sm font-semibold text-accent-50 transition hover:border-accent-200 hover:bg-accent-200/30"
                         >
                             <span className="block text-white">{quickHelpCta.label}</span>
                             {quickHelpCta.description && <span className="mt-2 block text-xs text-brand-100/70">{quickHelpCta.description}</span>}

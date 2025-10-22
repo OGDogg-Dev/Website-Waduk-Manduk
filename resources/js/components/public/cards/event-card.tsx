@@ -33,6 +33,43 @@ export function EventCard({
 }: EventCardProps) {
     const cover = storageUrl(cover_image);
     const startDate = start_at ? formatter.format(new Date(start_at)) : null;
+    const hasSchedule = Boolean(start_at);
+
+    const handleAddToCalendar = () => {
+        if (!start_at) {
+            return;
+        }
+
+        const start = new Date(start_at);
+        const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+        const formatIcsDate = (date: Date) => date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+        const icsLines = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Waduk Manduk//Agenda//ID',
+            'BEGIN:VEVENT',
+            `UID:${(slug ?? `${title}-${start.getTime()}`).replace(/\s+/g, '-')}`,
+            `DTSTAMP:${formatIcsDate(new Date())}`,
+            `DTSTART:${formatIcsDate(start)}`,
+            `DTEND:${formatIcsDate(end)}`,
+            `SUMMARY:${title}`,
+            `DESCRIPTION:${(tagline ?? '').replace(/\n/g, ' ')}`,
+            `LOCATION:${(location ?? 'Waduk Manduk').replace(/\n/g, ' ')}`,
+            'END:VEVENT',
+            'END:VCALENDAR',
+        ];
+        const icsContent = icsLines.join('\n');
+
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = `${(slug ?? title).toString().replace(/\s+/g, '-').toLowerCase()}.ics`;
+        document.body.appendChild(anchor);
+        anchor.click();
+        document.body.removeChild(anchor);
+        URL.revokeObjectURL(url);
+    };
 
     return (
         <Card
@@ -58,6 +95,14 @@ export function EventCard({
                             <span>{location}</span>
                         </p>
                     )}
+                    <button
+                        type="button"
+                        onClick={handleAddToCalendar}
+                        disabled={!hasSchedule}
+                        className="focus-ring mt-3 inline-flex items-center gap-2 rounded-full border border-brand-200 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] text-brand-700 transition hover:border-brand-400 hover:text-brand-900 disabled:cursor-not-allowed disabled:border-muted disabled:text-muted"
+                    >
+                        Tambah ke Kalender (ICS)
+                    </button>
                 </>
             }
         />

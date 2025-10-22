@@ -2,6 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import { PageHero } from '@/components/public/sections/shared/page-hero';
 import { StatusBanner } from '@/components/public/sections/shared/status-banner';
 import { EventCard } from '@/components/public/cards/event-card';
+import { Breadcrumbs } from '@/components/public/breadcrumbs';
 import { PublicLayout } from '@/layouts/public/public-layout';
 import type { EventResource, SpotResource, StatusResource } from '@/types/public';
 
@@ -67,6 +68,12 @@ export default function FasilitasPage({ status, groupedSpots, visitTips = [], up
                 eyebrow="Perencanaan kunjungan"
                 title="Rencanakan Kunjungan Anda"
                 description="Siapkan pengalaman jelajah Waduk Manduk dengan memantau status terbaru, memilih paket fasilitas, dan mengatur agenda konservasi."
+                actions={[
+                    {
+                        label: 'Hubungi tim reservasi',
+                        href: 'mailto:reservasi@wadukmanduk.id',
+                    },
+                ]}
                 quickHelpItems={quickHelpItems}
                 quickHelpHeading="Langkah penting"
                 quickHelpDescription="Mulai dari reservasi, cek rute, hingga panduan pembayaran nontunai."
@@ -75,14 +82,16 @@ export default function FasilitasPage({ status, groupedSpots, visitTips = [], up
                     href: 'mailto:reservasi@wadukmanduk.id',
                     description: 'reservasi@wadukmanduk.id',
                 }}
-            />
+            >
+                <Breadcrumbs items={[{ label: 'Rencanakan Kunjungan' }]} className="mt-8" />
+            </PageHero>
 
             <section className="relative overflow-hidden bg-[#041939] py-20 text-white lg:py-24">
                 <div className="absolute inset-x-[-25%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(60,138,233,0.24),_rgba(4,25,57,0))] blur-3xl" aria-hidden />
                 <div className="container relative grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
                     <div className="space-y-6 rounded-[2rem] border border-white/15 bg-white/8 p-8 shadow-soft backdrop-blur">
-                        <h2 className="text-3xl font-semibold sm:text-4xl">Status kunjungan terkini</h2>
-                        <p className="text-brand-100/80">
+                        <h2 className="text-3xl font-semibold text-white sm:text-4xl">Status kunjungan terkini</h2>
+                        <p className="text-white/85">
                             Pantau kepadatan pengunjung, cuaca, dan imbauan keselamatan sebelum melakukan perjalanan.
                         </p>
                         {status ? (
@@ -93,16 +102,18 @@ export default function FasilitasPage({ status, groupedSpots, visitTips = [], up
                                 weather_summary={status.weather_summary}
                                 temperature={status.temperature}
                                 advisory={status.advisory}
+                                reported_at={status.reported_at}
+                                valid_until={status.valid_until}
                             />
                         ) : (
-                            <p className="rounded-[1.6rem] border border-dashed border-white/20 bg-white/5 p-5 text-sm text-brand-100/80">
+                            <p className="rounded-[1.6rem] border border-dashed border-white/20 bg-white/5 p-5 text-sm text-white/85">
                                 Status lapangan belum tersedia. Data akan diperbarui secara berkala oleh petugas.
                             </p>
                         )}
                     </div>
                     <div className="space-y-6 rounded-[2rem] border border-white/15 bg-white/5 p-8 shadow-soft backdrop-blur">
                         <h3 className="text-2xl font-semibold text-white">Tips sebelum berkunjung</h3>
-                        <ul className="space-y-3 text-sm text-brand-100/80">
+                        <ul className="space-y-3 text-sm text-white/85">
                             {visitTips.map((tip) => (
                                 <li key={tip} className="rounded-[1.5rem] border border-white/15 bg-white/6 p-4">
                                     {tip}
@@ -123,9 +134,9 @@ export default function FasilitasPage({ status, groupedSpots, visitTips = [], up
                 <div className="absolute inset-x-[-20%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(236,172,72,0.2),_rgba(4,19,45,0))] blur-3xl" aria-hidden />
                 <div className="container relative space-y-10">
                     <div className="space-y-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Direktori fasilitas</p>
-                        <h2 className="text-3xl font-semibold sm:text-4xl">Paket pengalaman & fasilitas</h2>
-                        <p className="max-w-3xl text-brand-100/80">
+                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Direktori fasilitas</p>
+                        <h2 className="text-3xl font-semibold text-white sm:text-4xl">Paket pengalaman & fasilitas</h2>
+                        <p className="max-w-3xl text-white/90">
                             Pilih paket sesuai kebutuhan rombongan. Semua fasilitas mendukung edukasi dan konservasi berkelanjutan.
                         </p>
                     </div>
@@ -136,7 +147,7 @@ export default function FasilitasPage({ status, groupedSpots, visitTips = [], up
                                     <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                                         <div>
                                             <h3 className="text-2xl font-semibold text-white">{category}</h3>
-                                            <p className="text-sm text-brand-100/75">
+                                            <p className="text-sm text-white/80">
                                                 Rincian paket dan fasilitas dalam kategori {category.toLowerCase()}.
                                             </p>
                                         </div>
@@ -151,8 +162,8 @@ export default function FasilitasPage({ status, groupedSpots, visitTips = [], up
                                         {items.map((spot) => (
                                             <article key={spot.id ?? `${spot.name}-${spot.type}`} className="rounded-[1.8rem] border border-white/12 bg-white/4 p-5">
                                                 <p className="text-sm font-semibold text-white">{spot.name}</p>
-                                                {spot.description && <p className="mt-2 text-sm text-brand-100/80">{spot.description}</p>}
-                                                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.32em] text-brand-100/70">
+                                                {spot.description && <p className="mt-2 text-sm text-white/80">{spot.description}</p>}
+                                                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.32em] text-white/70">
                                                     {spot.category ?? 'Hubungi petugas'}
                                                 </p>
                                             </article>
@@ -161,14 +172,14 @@ export default function FasilitasPage({ status, groupedSpots, visitTips = [], up
                                 </div>
                             ))
                         ) : (
-                            <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-brand-100/80">
+                            <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/85">
                                 Data fasilitas belum tersedia. Tambahkan paket melalui panel admin untuk menampilkannya di halaman ini.
                             </p>
                         )}
                     </div>
                     <div className="grid gap-6 lg:grid-cols-3">
                         {defaultHighlights.map((highlight) => (
-                            <div key={highlight.title} className="rounded-[1.8rem] border border-white/12 bg-white/6 p-6 text-sm text-brand-100/80">
+                            <div key={highlight.title} className="rounded-[1.8rem] border border-white/12 bg-white/6 p-6 text-sm text-white/85">
                                 <p className="text-base font-semibold text-white">{highlight.title}</p>
                                 <p className="mt-3">{highlight.description}</p>
                             </div>
@@ -182,9 +193,9 @@ export default function FasilitasPage({ status, groupedSpots, visitTips = [], up
                 <div className="container relative space-y-10">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                         <div className="space-y-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Agenda konservasi</p>
-                            <h2 className="text-3xl font-semibold sm:text-4xl">Sesuaikan jadwal dengan program edukasi</h2>
-                            <p className="max-w-3xl text-brand-100/80">
+                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Agenda konservasi</p>
+                            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Sesuaikan jadwal dengan program edukasi</h2>
+                            <p className="max-w-3xl text-white/90">
                                 Ikuti kegiatan yang mendukung rencana perjalanan Anda agar pengalaman lebih bermakna.
                             </p>
                         </div>
@@ -202,7 +213,7 @@ export default function FasilitasPage({ status, groupedSpots, visitTips = [], up
                             ))}
                         </div>
                     ) : (
-                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-brand-100/80">
+                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/85">
                             Agenda akan tampil otomatis setelah ditambahkan oleh admin.
                         </p>
                     )}

@@ -3,6 +3,7 @@ import { EventCard } from '@/components/public/cards/event-card';
 import { StoryCard } from '@/components/public/cards/story-card';
 import { PageHero } from '@/components/public/sections/shared/page-hero';
 import { PublicLayout } from '@/layouts/public/public-layout';
+import { Breadcrumbs } from '@/components/public/breadcrumbs';
 import type { EventResource, StoryResource } from '@/types/public';
 
 interface KomunitasPageProps {
@@ -49,6 +50,12 @@ export default function KomunitasPage({ events = [], stories = [] }: KomunitasPa
                 eyebrow="Gerakan warga"
                 title="Komunitas Waduk Manduk"
                 description="Gabungkan langkah Anda bersama warga pesisir, relawan, dan mitra untuk memastikan Waduk Manduk terus lestari."
+                actions={[
+                    {
+                        label: 'Gabung forum komunitas',
+                        href: 'mailto:komunitas@wadukmanduk.id',
+                    },
+                ]}
                 quickHelpItems={quickHelpItems}
                 quickHelpHeading="Langkah cepat"
                 quickHelpDescription="Mulai dari pendaftaran relawan, dukungan logistik, hingga dokumentasi kegiatan."
@@ -57,16 +64,18 @@ export default function KomunitasPage({ events = [], stories = [] }: KomunitasPa
                     href: 'mailto:komunitas@wadukmanduk.id',
                     description: 'komunitas@wadukmanduk.id',
                 }}
-            />
+            >
+                <Breadcrumbs items={[{ label: 'Komunitas' }]} className="mt-8" />
+            </PageHero>
 
             <section className="relative overflow-hidden bg-[#041939] py-20 text-white lg:py-24">
                 <div className="absolute inset-x-[-30%] top-[-20rem] h-[26rem] rounded-full bg-[radial-gradient(circle,_rgba(49,132,230,0.24),_rgba(4,25,57,0))] blur-3xl" aria-hidden />
                 <div className="container relative space-y-10">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                         <div className="space-y-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Agenda komunitas</p>
-                            <h2 className="text-3xl font-semibold sm:text-4xl">Jadwal kegiatan terdekat</h2>
-                            <p className="max-w-3xl text-brand-100/80">
+                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Agenda komunitas</p>
+                            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Jadwal kegiatan terdekat</h2>
+                            <p className="max-w-3xl text-white/90">
                                 Temukan aksi konservasi, pelatihan UMKM, hingga festival budaya yang digelar oleh warga Manduk.
                             </p>
                         </div>
@@ -84,7 +93,7 @@ export default function KomunitasPage({ events = [], stories = [] }: KomunitasPa
                             ))}
                         </div>
                     ) : (
-                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-brand-100/80">
+                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/85">
                             Agenda komunitas akan muncul otomatis setelah ditambahkan melalui panel admin.
                         </p>
                     )}
@@ -96,9 +105,9 @@ export default function KomunitasPage({ events = [], stories = [] }: KomunitasPa
                 <div className="container relative space-y-10">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                         <div className="space-y-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Cerita relawan & warga</p>
-                            <h2 className="text-3xl font-semibold sm:text-4xl">Kisah menjaga waduk bersama</h2>
-                            <p className="max-w-3xl text-brand-100/80">
+                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Cerita relawan & warga</p>
+                            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Kisah menjaga waduk bersama</h2>
+                            <p className="max-w-3xl text-white/90">
                                 Dokumentasikan aksi Anda atau baca pengalaman relawan lain yang berbagi inspirasi dan pembelajaran.
                             </p>
                         </div>
@@ -116,7 +125,7 @@ export default function KomunitasPage({ events = [], stories = [] }: KomunitasPa
                             ))}
                         </div>
                     ) : (
-                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-brand-100/80">
+                        <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/85">
                             Cerita komunitas akan tampil otomatis setelah admin mempublikasikan konten terbaru.
                         </p>
                     )}

@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { PageHero } from '@/components/public/sections/shared/page-hero';
 import { StatusBanner } from '@/components/public/sections/shared/status-banner';
+import { Breadcrumbs } from '@/components/public/breadcrumbs';
 import { PublicLayout } from '@/layouts/public/public-layout';
 import type { StatusResource } from '@/types/public';
 
@@ -16,6 +17,7 @@ interface KontakPageProps {
 
 const contactChannels = [
     { label: 'Whatsapp Center', value: '0813-1122-3344', href: 'https://wa.me/6281311223344' },
+    { label: 'Telepon darurat', value: '(0341) 889-990', href: 'tel:+62341889990' },
     { label: 'Email layanan', value: 'halo@wadukmanduk.id', href: 'mailto:halo@wadukmanduk.id' },
     { label: 'Jam operasional', value: 'Setiap hari · 07.00 – 17.00 WIB' },
 ];
@@ -91,6 +93,13 @@ export default function KontakPage({ metrics, latestStatus = [] }: KontakPagePro
                 eyebrow="Profil destinasi"
                 title="Tentang Ekowisata Waduk Manduk"
                 description="Inisiatif kolaboratif antara desa, nelayan, dan pemerhati ekosistem untuk menjaga waduk sebagai ruang wisata berkelanjutan yang lestari."
+                actions={[
+                    {
+                        label: 'Hubungi WA pusat',
+                        href: 'https://wa.me/6281311223344',
+                        external: true,
+                    },
+                ]}
                 stats={stats}
                 quickHelpItems={quickHelpItems}
                 quickHelpHeading="Bantuan cepat"
@@ -100,15 +109,17 @@ export default function KontakPage({ metrics, latestStatus = [] }: KontakPagePro
                     href: 'https://wa.me/6281311223344',
                     description: 'Whatsapp +62813-1122-3344',
                 }}
-            />
+            >
+                <Breadcrumbs items={[{ label: 'Tentang' }]} className="mt-8" />
+            </PageHero>
 
             <section className="relative overflow-hidden bg-[#041939] py-20 text-white lg:py-24">
                 <div className="absolute inset-x-[-20%] top-[-12rem] h-[18rem] rounded-full bg-[radial-gradient(circle,_rgba(47,107,202,0.24),_rgba(4,25,57,0))] blur-3xl" aria-hidden />
                 <div className="container relative space-y-12">
                     <div className="space-y-3">
-                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Status terkini</p>
-                        <h2 className="text-3xl font-semibold sm:text-4xl">Pembaruan lapangan langsung dari petugas</h2>
-                        <p className="max-w-3xl text-brand-100/80">
+                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Status terkini</p>
+                        <h2 className="text-3xl font-semibold text-white sm:text-4xl">Pembaruan lapangan langsung dari petugas</h2>
+                        <p className="max-w-3xl text-white/90">
                             Pantau kepadatan pengunjung, cuaca, dan imbauan keselamatan terakhir. Data dikirim setiap 30 menit oleh pusat kontrol Waduk Manduk.
                         </p>
                     </div>
@@ -120,7 +131,7 @@ export default function KontakPage({ metrics, latestStatus = [] }: KontakPagePro
                                     className="flex h-full flex-col gap-4 rounded-[2rem] border border-white/12 bg-white/6 p-6 shadow-soft backdrop-blur"
                                 >
                                     <div>
-                                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.42em] text-brand-100/70">
+                                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.42em] text-white/70">
                                             Dilaporkan pada
                                         </p>
                                         <p className="mt-2 text-base font-semibold text-white">
@@ -135,11 +146,12 @@ export default function KontakPage({ metrics, latestStatus = [] }: KontakPagePro
                                         crowd_level={statusItem.crowd_level}
                                         weather_summary={statusItem.weather_summary}
                                         advisory={statusItem.advisory}
+                                        reported_at={statusItem.reported_at}
                                     />
                                 </article>
                             ))
                         ) : (
-                            <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-brand-100/80 lg:col-span-3">
+                            <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-white/85 lg:col-span-3">
                                 Status lapangan belum tersedia. Tim kami akan memperbarui informasi dalam waktu dekat.
                             </p>
                         )}
@@ -152,9 +164,9 @@ export default function KontakPage({ metrics, latestStatus = [] }: KontakPagePro
                 <div className="container relative grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
                     <div className="space-y-6">
                         <div className="space-y-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Kontak & media sosial</p>
-                            <h2 className="text-3xl font-semibold sm:text-4xl">Saluran resmi pengelola Waduk Manduk</h2>
-                            <p className="max-w-2xl text-brand-100/80">
+                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Kontak & media sosial</p>
+                            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Saluran resmi pengelola Waduk Manduk</h2>
+                            <p className="max-w-2xl text-white/90">
                                 Tim Sahabat Manduk siap membantu reservasi, kolaborasi komunitas, permintaan media, hingga pengelolaan kegiatan konservasi warga.
                             </p>
                         </div>
@@ -164,7 +176,7 @@ export default function KontakPage({ metrics, latestStatus = [] }: KontakPagePro
                                     key={channel.label}
                                     className="rounded-[1.9rem] border border-white/12 bg-white/6 p-6 shadow-soft backdrop-blur"
                                 >
-                                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.38em] text-brand-100/70">
+                                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.38em] text-white/70">
                                         {channel.label}
                                     </p>
                                     {channel.href ? (
@@ -182,7 +194,7 @@ export default function KontakPage({ metrics, latestStatus = [] }: KontakPagePro
                             ))}
                         </div>
                         <div className="rounded-[1.9rem] border border-white/12 bg-white/5 p-6 shadow-soft backdrop-blur">
-                            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.38em] text-brand-100/70">Alamat kantor</p>
+                            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.38em] text-white/70">Alamat kantor</p>
                             <p className="mt-3 text-lg font-semibold text-white">Jl. Danau Biru No. 88, Desa Manduk, Kabupaten Bahari, Jawa Timur 65123</p>
                             <Link
                                 href="https://maps.google.com/?q=Waduk+Manduk"
@@ -197,7 +209,7 @@ export default function KontakPage({ metrics, latestStatus = [] }: KontakPagePro
                     </div>
                     <div className="space-y-6 rounded-[2.2rem] border border-white/15 bg-white/8 p-8 shadow-soft backdrop-blur">
                         <h3 className="text-2xl font-semibold text-white">Kolaborasi & kemitraan</h3>
-                        <p className="text-brand-100/80">
+                        <p className="text-white/85">
                             Kami membuka peluang kerjasama riset, pengembangan produk UMKM, hingga program tanggung jawab sosial perusahaan. Hubungi kami untuk sesi presentasi daring.
                         </p>
                         <Link
@@ -207,8 +219,8 @@ export default function KontakPage({ metrics, latestStatus = [] }: KontakPagePro
                             Jadwalkan diskusi →
                         </Link>
                         <div className="rounded-[1.8rem] border border-white/12 bg-white/6 p-6">
-                            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.38em] text-brand-100/70">Ikuti kabar terbaru</p>
-                            <p className="mt-3 text-sm text-brand-100/80">
+                            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.38em] text-white/70">Ikuti kabar terbaru</p>
+                            <p className="mt-3 text-sm text-white/85">
                                 Instagram · Youtube · Facebook · @wadukmanduk
                             </p>
                             <Link

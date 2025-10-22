@@ -30,7 +30,7 @@ export function Step({ number, title, description, className, tone = 'light' }: 
             </span>
             <div className="space-y-2">
                 <h3 className={cn('text-sm font-semibold', isDark ? 'text-white' : 'text-text-primary')}>{title}</h3>
-                <p className={cn('text-sm', isDark ? 'text-brand-100/80' : 'text-text-secondary')}>{description}</p>
+                <p className={cn('text-sm', isDark ? 'text-white/85' : 'text-text-secondary')}>{description}</p>
             </div>
         </div>
     );

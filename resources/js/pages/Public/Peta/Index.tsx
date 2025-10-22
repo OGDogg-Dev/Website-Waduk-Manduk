@@ -4,6 +4,7 @@ import { Card } from '@/components/public/Card';
 import { StatusBanner } from '@/components/public/sections/shared/status-banner';
 import { PageHero } from '@/components/public/sections/shared/page-hero';
 import { PublicLayout } from '@/layouts/public/public-layout';
+import { Breadcrumbs } from '@/components/public/breadcrumbs';
 import type { SpotResource, StoryResource, StatusResource } from '@/types/public';
 
 interface PetaPageProps {
@@ -64,6 +65,13 @@ export default function PetaPage({ status, spots = [], highlights = {}, stories 
                 eyebrow="Jelajah & aktivitas"
                 title="Jelajah & Aktivitas"
                 description="Susuri waduk melalui jalur interpretasi, dermaga, hingga spot konservasi yang terhubung dalam peta interaktif."
+                actions={[
+                    {
+                        label: 'Buka rute Google Maps',
+                        href: 'https://maps.google.com/?q=Waduk+Manduk',
+                        external: true,
+                    },
+                ]}
                 quickHelpItems={quickHelpItems}
                 quickHelpHeading="Bantuan rute"
                 quickHelpDescription="Siapkan perjalanan dengan panduan jalur dan rekomendasi pendamping."
@@ -72,16 +80,18 @@ export default function PetaPage({ status, spots = [], highlights = {}, stories 
                     href: '/files/peta-waduk-manduk.pdf',
                     description: 'PDF 2.4 MB',
                 }}
-            />
+            >
+                <Breadcrumbs items={[{ label: 'Jelajah & Aktivitas' }]} className="mt-8" />
+            </PageHero>
 
             <section className="relative overflow-hidden bg-[#041939] py-20 text-white lg:py-24">
                 <div className="absolute inset-x-[-25%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(60,138,233,0.24),_rgba(4,25,57,0))] blur-3xl" aria-hidden />
                 <div className="container relative grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-                    <div className="space-y-6">
-                        <h2 className="text-3xl font-semibold sm:text-4xl">Status jalur & cuaca</h2>
-                        <p className="text-brand-100/80">
-                            Pastikan kondisi jalur aman sebelum berangkat. Status diperbarui langsung oleh pusat kontrol Waduk Manduk.
-                        </p>
+                        <div className="space-y-6">
+                            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Status jalur & cuaca</h2>
+                            <p className="text-white/85">
+                                Pastikan kondisi jalur aman sebelum berangkat. Status diperbarui langsung oleh pusat kontrol Waduk Manduk.
+                            </p>
                         {status ? (
                             <StatusBanner
                                 tone="dark"
@@ -90,16 +100,18 @@ export default function PetaPage({ status, spots = [], highlights = {}, stories 
                                 weather_summary={status.weather_summary}
                                 temperature={status.temperature}
                                 advisory={status.advisory}
+                                reported_at={status.reported_at}
+                                valid_until={status.valid_until}
                             />
                         ) : (
-                            <p className="rounded-[1.6rem] border border-dashed border-white/20 bg-white/5 p-5 text-sm text-brand-100/80">
+                            <p className="rounded-[1.6rem] border border-dashed border-white/20 bg-white/5 p-5 text-sm text-white/85">
                                 Status lapangan akan tersedia setelah petugas memperbarui laporan terbaru.
                             </p>
                         )}
                     </div>
                     <div className="space-y-6 rounded-[2rem] border border-white/15 bg-white/5 p-8 shadow-soft backdrop-blur">
                         <h3 className="text-2xl font-semibold text-white">Akses & transportasi</h3>
-                        <p className="text-sm text-brand-100/80">
+                        <p className="text-sm text-white/85">
                             Waduk Manduk dapat dijangkau melalui Pelabuhan Bahari (20 menit) atau Terminal Mandala (35 menit). Lanjutkan perjalanan dengan angkutan desa menuju pusat informasi.
                         </p>
                         <Link
@@ -118,7 +130,7 @@ export default function PetaPage({ status, spots = [], highlights = {}, stories 
                 <div className="absolute inset-x-[-20%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(236,172,72,0.2),_rgba(4,19,45,0))] blur-3xl" aria-hidden />
                 <div className="container relative space-y-6">
                     <Map center={center} markers={markers} className="shadow-soft" />
-                    <p className="text-xs text-brand-100/70">Perbesar peta untuk melihat detail jalur. Marker diperbarui otomatis dari panel admin.</p>
+                    <p className="text-xs text-white/75">Perbesar peta untuk melihat detail jalur. Marker diperbarui otomatis dari panel admin.</p>
                 </div>
             </section>
 
@@ -127,9 +139,9 @@ export default function PetaPage({ status, spots = [], highlights = {}, stories 
                 <div className="container relative space-y-10">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                         <div className="space-y-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Sorotan area</p>
-                            <h2 className="text-3xl font-semibold sm:text-4xl">Kategori destinasi utama</h2>
-                            <p className="max-w-3xl text-brand-100/80">
+                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/80">Sorotan area</p>
+                            <h2 className="text-3xl font-semibold text-white sm:text-4xl">Kategori destinasi utama</h2>
+                            <p className="max-w-3xl text-white/90">
                                 Telusuri jalur konservasi, spot snorkeling, hingga titik edukasi berdasarkan kategori khusus.
                             </p>
                         </div>
@@ -143,12 +155,12 @@ export default function PetaPage({ status, spots = [], highlights = {}, stories 
                     <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                         {Object.entries(highlights).map(([key, items]) => (
                             <article key={key} className="rounded-[2rem] border border-white/12 bg-white/6 p-6 shadow-soft backdrop-blur">
-                                <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/70">{key}</p>
-                                <ul className="mt-4 space-y-3 text-sm text-brand-100/80">
+                                <p className="text-xs font-semibold uppercase tracking-[0.42em] text-white/75">{key}</p>
+                                <ul className="mt-4 space-y-3 text-sm text-white/85">
                                     {items.map((item) => (
                                         <li key={item.id ?? item.slug} className="rounded-[1.5rem] border border-white/12 bg-white/6 p-4">
                                             <p className="font-semibold text-white">{item.name}</p>
-                                            <p className="text-xs text-brand-100/70">{item.headline ?? item.description}</p>
+                                            <p className="text-xs text-white/75">{item.headline ?? item.description}</p>
                                         </li>
                                     ))}
                                 </ul>
