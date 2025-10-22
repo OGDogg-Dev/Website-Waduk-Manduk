@@ -21,7 +21,7 @@ export function Card({
     href,
     excerpt,
     meta,
-    actionLabel = 'Baca selengkapnya',
+    actionLabel = 'Pelajari lebih lanjut',
     className,
 }: CardProps) {
     return (
@@ -35,6 +35,8 @@ export function Card({
                 <div className="relative mb-4 aspect-video overflow-hidden rounded-2xl">
                     <img
                         src={image}
+                        loading="lazy"
+                        decoding="async"
                         alt={alt ?? title}
                         className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />

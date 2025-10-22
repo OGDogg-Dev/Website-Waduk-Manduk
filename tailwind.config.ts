@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import containerQueries from '@tailwindcss/container-queries';
 
 const config = {
     darkMode: ['class'],
@@ -6,19 +7,23 @@ const config = {
         './resources/**/*.{js,ts,jsx,tsx,vue,blade.php}',
         './src/**/*.{js,ts,jsx,tsx}',
     ],
+    safelist: ['focus-visible:outline-none'],
     theme: {
         container: {
             center: true,
             padding: '1rem',
             screens: {
+                sm: '640px',
+                md: '768px',
                 lg: '1024px',
                 xl: '1280px',
-                '2xl': '1400px',
+                '2xl': '1440px',
             },
         },
         extend: {
             colors: {
                 brand: {
+                    950: 'var(--brand-950)',
                     900: 'var(--brand-900)',
                     800: 'var(--brand-800)',
                     700: 'var(--brand-700)',
@@ -30,6 +35,7 @@ const config = {
                     100: 'var(--brand-100)',
                 },
                 accent: {
+                    900: 'var(--accent-900)',
                     800: 'var(--accent-800)',
                     700: 'var(--accent-700)',
                     600: 'var(--accent-600)',
@@ -63,17 +69,33 @@ const config = {
                 },
             },
             fontSize: {
-                h1: ['clamp(2.5rem, 5vw, 3.5rem)', { lineHeight: '1.1', fontWeight: '700' }],
-                h2: ['clamp(2rem, 4vw, 2.75rem)', { lineHeight: '1.15', fontWeight: '700' }],
-                h3: ['clamp(1.5rem, 3vw, 2rem)', { lineHeight: '1.2', fontWeight: '600' }],
-                body: ['1rem', { lineHeight: '1.6' }],
+                h1: ['var(--font-h1)', { lineHeight: '1.08', fontWeight: '700' }],
+                h2: ['var(--font-h2)', { lineHeight: '1.12', fontWeight: '700' }],
+                h3: ['var(--font-h3)', { lineHeight: '1.15', fontWeight: '600' }],
+                h4: ['var(--font-h4)', { lineHeight: '1.2', fontWeight: '600' }],
+                h5: ['var(--font-h5)', { lineHeight: '1.3', fontWeight: '600' }],
+                h6: ['var(--font-h6)', { lineHeight: '1.4', fontWeight: '600' }],
+                body: ['var(--font-body)', { lineHeight: '1.6' }],
+                small: ['var(--font-small)', { lineHeight: '1.5' }],
+            },
+            spacing: {
+                4: 'var(--space-4)',
+                8: 'var(--space-8)',
+                12: 'var(--space-12)',
+                16: 'var(--space-16)',
+            },
+            borderRadius: {
+                12: 'var(--radius-12)',
+                16: 'var(--radius-16)',
+                20: 'var(--radius-20)',
             },
             boxShadow: {
-                soft: '0 28px 60px -32px rgba(11, 31, 51, 0.28)',
+                soft: 'var(--shadow-soft)',
                 chip: '0 0 0 1px rgba(255, 255, 255, 0.12)',
             },
         },
     },
+    plugins: [containerQueries],
 } satisfies Config;
 
 export default config;

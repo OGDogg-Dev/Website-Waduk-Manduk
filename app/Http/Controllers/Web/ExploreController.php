@@ -27,7 +27,7 @@ class ExploreController extends Controller
                 'gallery',
             ]);
 
-        return Inertia::render('Public/Explore/Index', [
+        return Inertia::render('Public/Peta/Index', [
             'status' => SiteStatus::query()->current()->first(),
             'spots' => $spots,
             'highlights' => [

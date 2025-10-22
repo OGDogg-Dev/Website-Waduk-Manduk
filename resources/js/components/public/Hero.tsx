@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import type { ReactNode } from 'react';
+import type { ReactNode, SourceHTMLAttributes } from 'react';
 
 interface HeroAction {
     label: string;
@@ -11,8 +11,13 @@ interface HeroAction {
     className?: string;
 }
 
+type HeroSource = Pick<SourceHTMLAttributes<HTMLSourceElement>, 'srcSet' | 'media' | 'type'>;
+
 interface HeroProps {
     image: string;
+    imageSrcSet?: string;
+    imageSizes?: string;
+    sources?: HeroSource[];
     alt: string;
     title: string;
     subtitle?: string;
@@ -21,14 +26,35 @@ interface HeroProps {
     children?: ReactNode;
 }
 
-export function Hero({ image, alt, title, subtitle, eyebrow, actions, children }: HeroProps) {
+export function Hero({
+    image,
+    imageSrcSet,
+    imageSizes = '100vw',
+    sources,
+    alt,
+    title,
+    subtitle,
+    eyebrow,
+    actions,
+    children,
+}: HeroProps) {
     return (
         <section className="relative isolate overflow-hidden bg-brand-900 scrim-hero text-on-media">
-            <img
-                src={image}
-                alt={alt}
-                className="absolute inset-0 -z-20 h-full w-full object-cover"
-            />
+            <picture className="absolute inset-0 -z-20 block h-full w-full">
+                {sources?.map((source) => (
+                    <source key={`${source.srcSet}-${source.media ?? 'all'}`} {...source} />
+                ))}
+                <img
+                    src={image}
+                    srcSet={imageSrcSet}
+                    sizes={imageSizes}
+                    alt={alt}
+                    decoding="async"
+                    loading="eager"
+                    fetchpriority="high"
+                    className="h-full w-full object-cover"
+                />
+            </picture>
             <div className="absolute inset-0 -z-10 bg-brand-900/40" aria-hidden />
             <div className="relative z-10">
                 <div className="container flex flex-col gap-10 py-16 lg:py-24">

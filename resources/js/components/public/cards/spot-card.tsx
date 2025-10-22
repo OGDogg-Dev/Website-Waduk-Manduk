@@ -28,6 +28,8 @@ export function SpotCard({ name, slug, type, headline, description, hero_image, 
                 <div className="relative aspect-[4/5] overflow-hidden">
                     <img
                         src={cover}
+                        loading="lazy"
+                        decoding="async"
                         alt={`Spot wisata ${name}`}
                         className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />

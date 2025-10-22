@@ -30,7 +30,7 @@ class VisitController extends Controller
                 'longitude',
             ]);
 
-        return Inertia::render('Public/Visit/Index', [
+        return Inertia::render('Public/Fasilitas/Index', [
             'status' => SiteStatus::query()->current()->first(),
             'spots' => $spots,
             'groupedSpots' => $spots->groupBy('type')->map(function (Collection $items) {

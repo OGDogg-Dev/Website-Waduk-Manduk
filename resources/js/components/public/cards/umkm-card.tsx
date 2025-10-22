@@ -36,6 +36,8 @@ export function UmkmCard({
                 <div className="relative mb-6 aspect-square overflow-hidden rounded-2xl">
                     <img
                         src={cover}
+                        loading="lazy"
+                        decoding="async"
                         alt={`Produk UMKM ${name}`}
                         className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />
