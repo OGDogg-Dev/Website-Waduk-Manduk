@@ -87,26 +87,42 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
     }, []);
 
     const resolvedVariant = variant === 'transparent' && !isScrolled ? 'transparent' : 'solid';
+    const isTransparent = resolvedVariant === 'transparent';
 
     return (
         <header
             className={cn(
-                'sticky top-0 z-40 w-full transition-all duration-300',
-                resolvedVariant === 'transparent'
+                'sticky top-0 z-40 w-full transition-all duration-300 backdrop-blur supports-[backdrop-filter]:bg-opacity-95',
+                isTransparent
                     ? 'bg-transparent'
-                    : 'border-b border-white/15 bg-[color:var(--overlay/700)] backdrop-blur supports-[backdrop-filter]:bg-[color:rgba(3,23,46,0.82)] shadow-[0_18px_40px_-28px_rgba(6,40,80,0.7)]',
+                    : 'border-b border-brand-900/10 bg-surface-0/95 shadow-soft',
             )}
         >
-            <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-4 text-white sm:px-10">
-                <Link href={route('home')} className="flex items-center gap-3 focus-visible-outline">
+            <div
+                className={cn(
+                    'mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-4 transition-colors sm:px-10',
+                    isTransparent ? 'text-on-media' : 'text-text-primary',
+                )}
+            >
+                <Link href={route('home')} className="flex items-center gap-3 focus-ring">
                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-wave-gold text-base font-semibold text-deep-navy shadow-reef">
                         WM
                     </span>
                     <div className="flex flex-col">
-                        <span className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-light">
+                        <span
+                            className={cn(
+                                'text-xs font-semibold uppercase tracking-[0.4em]',
+                                isTransparent ? 'text-on-media-muted' : 'text-text-secondary',
+                            )}
+                        >
                             Waduk Manduk
                         </span>
-                        <span className="text-lg font-semibold tracking-tight text-on-media">
+                        <span
+                            className={cn(
+                                'text-lg font-semibold tracking-tight',
+                                isTransparent ? 'text-on-media' : 'text-text-primary',
+                            )}
+                        >
                             Destinasi Ekowisata Bahari
                         </span>
                     </div>
@@ -120,8 +136,14 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                                 key={item.href}
                                 href={item.href}
                                 className={cn(
-                                    'transition-colors hover:text-gold-accent focus-visible-outline',
-                                    isActive ? 'text-gold-accent' : 'text-on-media-muted',
+                                    'rounded-md px-1.5 py-1 text-sm font-medium transition-colors focus-ring',
+                                    isTransparent
+                                        ? 'text-on-media-muted hover:text-accent-300'
+                                        : 'text-text-secondary hover:text-brand-600',
+                                    isActive &&
+                                        (isTransparent
+                                            ? 'text-accent-300'
+                                            : 'text-brand-700'),
                                 )}
                                 aria-current={isActive ? 'page' : undefined}
                             >
