@@ -28,42 +28,40 @@ export function UmkmCard({
     return (
         <article
             className={cn(
-                'group flex h-full flex-col overflow-hidden rounded-3xl border border-deep-navy/10 bg-white p-6 text-deep-navy shadow-reef/20 transition hover:-translate-y-1 hover:shadow-reef',
+                'group flex h-full flex-col overflow-hidden rounded-3xl border border-surface-3/60 bg-surface-0 p-6 text-text-primary shadow-soft transition hover:-translate-y-1 hover:border-brand-200',
                 className,
             )}
         >
             {cover && (
-                <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-2xl">
+                <div className="relative mb-6 aspect-square overflow-hidden rounded-2xl">
                     <img
                         src={cover}
-                        alt={name}
-                        className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                        alt={`Produk UMKM ${name}`}
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
-                    <div className="absolute left-4 top-4 flex items-center gap-2">
+                    <div className="absolute inset-0 bg-gradient-to-t from-overlay-scrim-48 via-overlay-scrim-32 to-transparent" aria-hidden />
+                    <div className="absolute left-4 top-4 flex flex-wrap gap-2">
                         {category && (
-                            <span className="rounded-full bg-brand-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-                                {category}
-                            </span>
+                            <span className="chip bg-accent-500 text-on-dark">{category}</span>
                         )}
                         {is_featured && (
-                            <span className="rounded-full bg-[color:var(--accent/600)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-deep-navy">
-                                Sorotan
-                            </span>
+                            <span className="chip bg-brand-500 text-on-dark">Sorotan</span>
                         )}
                     </div>
                 </div>
             )}
             <div className="flex flex-1 flex-col gap-3">
-                <h3 className="text-xl font-semibold leading-tight text-deep-navy">{name}</h3>
-                {tagline && <p className="text-sm leading-relaxed text-deep-navy/80">{tagline}</p>}
+                <h3 className="text-h3 text-text-primary line-2">{name}</h3>
+                {tagline && <p className="text-sm text-text-secondary line-3">{tagline}</p>}
                 <div className="mt-auto grid gap-2 text-sm font-medium">
                     {whatsapp_number && (
                         <a
                             href={`https://wa.me/${whatsapp_number}`}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center justify-center rounded-full bg-gold-accent px-5 py-2 text-deep-navy transition hover:bg-gold-accent/90 focus-visible-outline"
+                            className="focus-ring inline-flex items-center justify-center rounded-full bg-accent-500 px-5 py-2 text-on-dark transition hover:bg-accent-400"
                         >
                             Hubungi via WA
                         </a>
@@ -73,7 +71,7 @@ export function UmkmCard({
                             href={maps_url}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center justify-center rounded-full border border-deep-navy/20 px-5 py-2 text-deep-navy transition hover:border-gold-accent hover:text-gold-accent focus-visible-outline"
+                            className="focus-ring inline-flex items-center justify-center rounded-full border border-brand-200 px-5 py-2 text-text-primary transition hover:border-brand-400 hover:text-brand-600"
                         >
                             Buka Maps
                         </a>

@@ -12,7 +12,7 @@ class CommunityController extends Controller
 {
     public function __invoke(): Response
     {
-        return Inertia::render('Public/Community/Index', [
+        return Inertia::render('Public/Galeri/Index', [
             'events' => Event::query()
                 ->published()
                 ->orderByDesc('start_at')

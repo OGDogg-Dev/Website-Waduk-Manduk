@@ -1,0 +1,73 @@
+:root {
+    /* Brand palette */
+    --brand-950: #01060f;
+    --brand-900: #021229;
+    --brand-800: #032048;
+    --brand-700: #082f64;
+    --brand-600: #0d3f7d;
+    --brand-500: #0f519a;
+    --brand-400: #1f68b7;
+    --brand-300: #4686d1;
+    --brand-200: #7fa7de;
+    --brand-100: #d2e3f9;
+
+    /* Accent palette */
+    --accent-900: #331c00;
+    --accent-800: #6a3900;
+    --accent-700: #8c4a06;
+    --accent-600: #b7680f;
+    --accent-500: #f2a936;
+    --accent-400: #f8be55;
+    --accent-300: #ffd996;
+
+    /* Secondary accents */
+    --ocean-500: #2ab3ad;
+    --ocean-400: #42c6c1;
+    --sand-400: #f7e0b8;
+
+    /* Surface scale */
+    --surface-0: #ffffff;
+    --surface-1: #f4f7fb;
+    --surface-2: #e0e8f5;
+    --surface-3: #c3d3ea;
+
+    /* Text tokens */
+    --text-primary: #061838;
+    --text-secondary: rgba(6, 24, 56, 0.76);
+    --text-muted: rgba(6, 24, 56, 0.6);
+    --text-on-dark: #f5f7fb;
+    --text-on-media: #ffffff;
+    --text-on-media-muted: rgba(255, 255, 255, 0.84);
+
+    /* Overlay scrims */
+    --overlay-scrim-60: rgba(2, 18, 41, 0.72);
+    --overlay-scrim-48: rgba(2, 18, 41, 0.52);
+    --overlay-scrim-32: rgba(2, 18, 41, 0.32);
+
+    /* Focus */
+    --focus-ring-color: rgba(242, 169, 54, 0.7);
+
+    /* Typography scale */
+    --font-h1: clamp(2.75rem, 5vw, 3.5rem);
+    --font-h2: clamp(2.125rem, 4vw, 2.75rem);
+    --font-h3: clamp(1.75rem, 3vw, 2.2rem);
+    --font-h4: clamp(1.4rem, 2.5vw, 1.75rem);
+    --font-h5: clamp(1.2rem, 2vw, 1.4rem);
+    --font-h6: clamp(1.05rem, 1.5vw, 1.15rem);
+    --font-body: 1rem;
+    --font-small: 0.875rem;
+
+    /* Spacing tokens */
+    --space-4: 1rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+
+    /* Radius tokens */
+    --radius-12: 0.75rem;
+    --radius-16: 1rem;
+    --radius-20: 1.25rem;
+
+    /* Elevation */
+    --shadow-soft: 0 30px 60px -35px rgba(7, 23, 40, 0.4);
+}

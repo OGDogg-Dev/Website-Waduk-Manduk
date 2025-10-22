@@ -15,7 +15,7 @@ class AboutController extends Controller
 {
     public function __invoke(): Response
     {
-        return Inertia::render('Public/About/Index', [
+        return Inertia::render('Public/Kontak/Index', [
             'metrics' => [
                 'spots' => Spot::query()->published()->count(),
                 'umkm' => Umkm::query()->published()->count(),

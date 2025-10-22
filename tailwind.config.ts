@@ -1,0 +1,108 @@
+import type { Config } from 'tailwindcss';
+import containerQueries from '@tailwindcss/container-queries';
+
+const config = {
+    darkMode: ['class'],
+    content: [
+        './resources/**/*.{js,ts,jsx,tsx,vue,blade.php}',
+        './src/**/*.{js,ts,jsx,tsx}',
+    ],
+    safelist: ['focus-visible:outline-none'],
+    theme: {
+        container: {
+            center: true,
+            padding: '1rem',
+            screens: {
+                sm: '640px',
+                md: '768px',
+                lg: '1024px',
+                xl: '1280px',
+                '2xl': '1440px',
+            },
+        },
+        extend: {
+            colors: {
+                brand: {
+                    950: 'var(--brand-950)',
+                    900: 'var(--brand-900)',
+                    800: 'var(--brand-800)',
+                    700: 'var(--brand-700)',
+                    600: 'var(--brand-600)',
+                    500: 'var(--brand-500)',
+                    400: 'var(--brand-400)',
+                    300: 'var(--brand-300)',
+                    200: 'var(--brand-200)',
+                    100: 'var(--brand-100)',
+                },
+                accent: {
+                    900: 'var(--accent-900)',
+                    800: 'var(--accent-800)',
+                    700: 'var(--accent-700)',
+                    600: 'var(--accent-600)',
+                    500: 'var(--accent-500)',
+                    400: 'var(--accent-400)',
+                    300: 'var(--accent-300)',
+                },
+                ocean: {
+                    500: 'var(--ocean-500)',
+                    400: 'var(--ocean-400)',
+                },
+                sand: {
+                    400: 'var(--sand-400)',
+                },
+                surface: {
+                    0: 'var(--surface-0)',
+                    1: 'var(--surface-1)',
+                    2: 'var(--surface-2)',
+                    3: 'var(--surface-3)',
+                },
+                text: {
+                    primary: 'var(--text-primary)',
+                    secondary: 'var(--text-secondary)',
+                    muted: 'var(--text-muted)',
+                },
+                on: {
+                    dark: 'var(--text-on-dark)',
+                    media: 'var(--text-on-media)',
+                    'media-muted': 'var(--text-on-media-muted)',
+                },
+                overlay: {
+                    'scrim-60': 'var(--overlay-scrim-60)',
+                    'scrim-48': 'var(--overlay-scrim-48)',
+                    'scrim-32': 'var(--overlay-scrim-32)',
+                },
+                focus: {
+                    ring: 'var(--focus-ring-color)',
+                },
+            },
+            fontSize: {
+                h1: ['var(--font-h1)', { lineHeight: '1.08', fontWeight: '700' }],
+                h2: ['var(--font-h2)', { lineHeight: '1.12', fontWeight: '700' }],
+                h3: ['var(--font-h3)', { lineHeight: '1.15', fontWeight: '600' }],
+                h4: ['var(--font-h4)', { lineHeight: '1.2', fontWeight: '600' }],
+                h5: ['var(--font-h5)', { lineHeight: '1.3', fontWeight: '600' }],
+                h6: ['var(--font-h6)', { lineHeight: '1.4', fontWeight: '600' }],
+                body: ['var(--font-body)', { lineHeight: '1.6' }],
+                small: ['var(--font-small)', { lineHeight: '1.5' }],
+            },
+            spacing: {
+                4: 'var(--space-4)',
+                8: 'var(--space-8)',
+                12: 'var(--space-12)',
+                16: 'var(--space-16)',
+            },
+            borderRadius: {
+                12: 'var(--radius-12)',
+                16: 'var(--radius-16)',
+                20: 'var(--radius-20)',
+            },
+            boxShadow: {
+                soft: 'var(--shadow-soft)',
+                chip: '0 0 0 1px rgba(255, 255, 255, 0.12)',
+            },
+        },
+    },
+    plugins: [containerQueries],
+} satisfies Config;
+
+export default config;

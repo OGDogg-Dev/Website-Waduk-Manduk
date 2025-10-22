@@ -1,5 +1,5 @@
-import { PageContainer } from '@/components/public/layout/page-container';
-import { HeroBanner } from '@/components/public/sections/shared/hero-banner';
+import { Hero } from '@/components/public/Hero';
+import { QuickHelp } from '@/components/public/QuickHelp';
 import { UmkmCard } from '@/components/public/cards/umkm-card';
 import { Input } from '@/components/ui/input';
 import { PublicLayout } from '@/layouts/public/public-layout';
@@ -11,6 +11,8 @@ interface UmkmPageProps {
     umkm: UmkmResource[];
     categories: string[];
 }
+
+const heroImage = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80';
 
 export default function UmkmPage({ umkm, categories }: UmkmPageProps) {
     const [query, setQuery] = useState('');
@@ -24,64 +26,105 @@ export default function UmkmPage({ umkm, categories }: UmkmPageProps) {
         });
     }, [umkm, query, category]);
 
+    const quickHelpItems = [
+        {
+            href: route('support.index'),
+            title: 'Program pendampingan',
+            description: 'Pelatihan branding, kemasan ramah lingkungan, dan pemasaran digital.',
+        },
+        {
+            href: route('stories.index', { type: 'umkm' }),
+            title: 'Cerita UMKM mitra',
+            description: 'Profil usaha, inovasi produk, dan dampak ekonomi warga.',
+        },
+        {
+            href: route('visit.plan'),
+            title: 'Paket kuliner',
+            description: 'Paket wisata kuliner dan rute kunjungan ke sentra produksi.',
+        },
+    ];
+
     return (
         <>
             <Head title="UMKM & Kuliner" />
             <PublicLayout
                 hero={
-                    <PageContainer className="py-24">
-                        <HeroBanner
-                            title="UMKM & Kuliner Waduk Manduk"
-                            subtitle="Nikmati kuliner lokal, beli produk kerajinan warga, dan dukung ekonomi komunitas."
-                        />
-                    </PageContainer>
+                    <Hero
+                        image={heroImage}
+                        alt="Pelaku UMKM Waduk Manduk menyiapkan produk"
+                        eyebrow="UMKM & Kuliner"
+                        title="Kurasi rasa dan kriya pesisir Waduk Manduk"
+                        subtitle="Nikmati kuliner laut berkelanjutan, produk kriya warga, dan dukung ekonomi komunitas."
+                        actions={[
+                            { label: 'Pesan paket kuliner', href: route('visit.plan') },
+                            { label: 'Cerita UMKM', href: route('stories.index', { type: 'umkm' }), variant: 'ghost' },
+                        ]}
+                    />
                 }
             >
-                <section className="bg-white py-20">
-                    <PageContainer className="space-y-10">
-                        <div className="rounded-[32px] border border-deep-navy/10 bg-foam p-6 shadow-reef/10">
-                            <div className="flex flex-col gap-4 text-deep-navy md:flex-row md:items-center md:justify-between">
-                                <div className="space-y-2">
-                                    <p className="text-sm uppercase tracking-[0.4em] text-[#0f4c81]">Direktori UMKM</p>
-                                    <h2 className="text-3xl font-semibold md:text-4xl">
-                                        Kurasi rasa dan kriya pesisir Waduk Manduk
-                                    </h2>
+                <section className="relative bg-surface-0 pb-16 pt-28 lg:pt-32">
+                    <span
+                        aria-hidden
+                        className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[linear-gradient(180deg,rgba(2,18,41,0.08)_0%,rgba(255,255,255,0)_100%)]"
+                    />
+                    <div className="container">
+                        <div className="grid gap-8 lg:grid-cols-[1fr_20rem]">
+                            <div className="space-y-8">
+                                <div className="rounded-3xl border border-surface-3/80 bg-surface-0 p-8 shadow-soft">
+                                    <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                                        <div>
+                                            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-600">Direktori UMKM</p>
+                                            <h2 className="text-h2 text-text-primary">Cari UMKM mitra dan produk unggulan</h2>
+                                        </div>
+                                        <div className="flex w-full flex-col gap-3 lg:w-auto lg:flex-row">
+                                            <Input
+                                                value={query}
+                                                onChange={(event) => setQuery(event.target.value)}
+                                                placeholder="Cari nama UMKM atau produk..."
+                                                className="rounded-full border border-surface-3/80 bg-surface-0 text-sm text-text-primary focus:border-brand-400 focus:ring-0 lg:w-64"
+                                            />
+                                            <select
+                                                value={category}
+                                                onChange={(event) => setCategory(event.target.value)}
+                                                className="h-11 rounded-full border border-surface-3/80 bg-surface-0 px-4 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-400"
+                                            >
+                                                <option value="all">Semua kategori</option>
+                                                {categories.map((item) => (
+                                                    <option key={item} value={item}>
+                                                        {item}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row">
-                                    <Input
-                                        value={query}
-                                        onChange={(event) => setQuery(event.target.value)}
-                                        placeholder="Cari nama UMKM atau produk..."
-                                        className="md:w-72"
-                                    />
-                                    <select
-                                        value={category}
-                                        onChange={(event) => setCategory(event.target.value)}
-                                        className="h-11 rounded-full border border-deep-navy/15 bg-white px-4 text-sm text-deep-navy focus:outline-none focus:ring-2 focus:ring-gold-accent"
-                                    >
-                                        <option value="all">Semua kategori</option>
-                                        {categories.map((item) => (
-                                            <option key={item} value={item}>
-                                                {item}
-                                            </option>
-                                        ))}
-                                    </select>
+
+                                <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                                    {filtered.map((item) => (
+                                        <UmkmCard key={item.id} {...item} />
+                                    ))}
                                 </div>
-                            </div>
-                        </div>
 
-                        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                            {filtered.map((item) => (
-                                <UmkmCard key={item.id} {...item} />
-                            ))}
-                        </div>
-
-                        {filtered.length === 0 && (
-                            <div className="rounded-3xl border border-dashed border-deep-navy/20 p-10 text-center text-sm text-deep-navy/60">
-                                UMKM belum ditemukan untuk filter tersebut. Coba kategori lain atau reset pencarian.
+                                {filtered.length === 0 && (
+                                    <div className="rounded-3xl border border-dashed border-surface-3/70 p-10 text-center text-sm text-text-secondary">
+                                        UMKM belum ditemukan untuk filter tersebut. Coba kategori lain atau reset pencarian.
+                                    </div>
+                                )}
                             </div>
-                        )}
-                    </PageContainer>
+                            <QuickHelp
+                                items={quickHelpItems}
+                                heading="Bantuan UMKM"
+                                description="Mulai dari pendampingan hingga paket kuliner."
+                                className="hidden lg:block"
+                            />
+                        </div>
+                        <QuickHelp
+                            items={quickHelpItems}
+                            heading="Bantuan UMKM"
+                            description="Mulai dari pendampingan hingga paket kuliner."
+                            className="mt-8 lg:hidden"
+                        />
+                    </div>
                 </section>
             </PublicLayout>
         </>

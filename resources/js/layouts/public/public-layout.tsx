@@ -1,23 +1,29 @@
-import { PublicFooter } from '@/components/public/layout/public-footer';
-import { PublicHeader } from '@/components/public/layout/public-header';
-import { FloatingVisitorToolbar } from '@/components/public/layout/floating-visitor-toolbar';
+import type { ReactNode } from 'react';
+import { Head } from '@inertiajs/react';
+import { Header } from '@/components/public/Header';
+import { Footer } from '@/components/public/Footer';
 
 interface PublicLayoutProps {
-    hero?: React.ReactNode;
-    children: React.ReactNode;
-    headerVariant?: 'transparent' | 'solid';
+    children: ReactNode;
+    hero?: ReactNode;
 }
 
-export function PublicLayout({ hero, children, headerVariant }: PublicLayoutProps) {
-    const variant = headerVariant ?? (hero ? 'transparent' : 'solid');
-
+export function PublicLayout({ hero, children }: PublicLayoutProps) {
     return (
-        <div className="flex min-h-screen flex-col bg-deep-navy text-white">
-            <PublicHeader variant={variant} />
-            {hero && <div className="relative isolate">{hero}</div>}
-            <main className="flex-1 bg-white text-deep-navy">{children}</main>
-            <PublicFooter />
-            <FloatingVisitorToolbar />
+        <div className="flex min-h-screen flex-col bg-surface-0 text-text-primary">
+            <Head>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+            </Head>
+            <a href="#konten-utama" className="skip-link">
+                Loncat ke konten utama
+            </a>
+            <Header />
+            {hero}
+            <main id="konten-utama" className="flex-1">
+                {children}
+            </main>
+            <Footer />
         </div>
     );
 }

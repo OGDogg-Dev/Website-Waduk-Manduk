@@ -68,6 +68,7 @@ export interface QrisDownloadResource {
     url?: string | null;
     format?: string | null;
     size?: string | null;
+    download_name?: string | null;
 }
 
 export interface QrisStepResource {
