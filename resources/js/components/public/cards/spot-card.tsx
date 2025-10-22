@@ -20,7 +20,7 @@ export function SpotCard({ name, slug, type, headline, description, hero_image, 
     return (
         <article
             className={cn(
-                'group relative overflow-hidden rounded-3xl bg-white text-deep-navy shadow-reef/30 transition hover:-translate-y-1 hover:shadow-reef',
+                'group overflow-hidden rounded-3xl border border-surface-3/60 bg-surface-0 text-text-primary shadow-soft transition hover:-translate-y-1 hover:border-brand-200',
                 className,
             )}
         >
@@ -28,23 +28,18 @@ export function SpotCard({ name, slug, type, headline, description, hero_image, 
                 <div className="relative aspect-[4/5] overflow-hidden">
                     <img
                         src={cover}
-                        alt={name}
-                        className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                        alt={`Spot wisata ${name}`}
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
-                    <span className="absolute left-5 top-5 inline-flex rounded-full bg-brand-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white">
-                        {type}
-                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-t from-overlay-scrim-60 via-overlay-scrim-32 to-transparent" aria-hidden />
+                    <span className="chip absolute left-4 top-4 bg-accent-500 text-on-dark">{type}</span>
                 </div>
             )}
-            <div className="flex flex-col gap-3 px-6 pb-6 pt-5">
-                <h3 className="text-xl font-semibold leading-snug text-deep-navy">{name}</h3>
-                {headline && <p className="text-sm font-semibold text-[color:var(--brand/500)]">{headline}</p>}
-                {description && <p className="text-sm leading-relaxed text-deep-navy/80 line-clamp-3">{description}</p>}
-                <Link
-                    href={href}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary underline-offset-4 transition hover:underline focus-visible-outline"
-                >
+            <div className="flex flex-col gap-3 px-5 pb-6 pt-5">
+                <h3 className="text-h3 text-text-primary line-2">{name}</h3>
+                {headline && <p className="text-sm font-semibold text-brand-500 line-2">{headline}</p>}
+                {description && <p className="text-sm text-text-secondary line-3">{description}</p>}
+                <Link href={href} className="link focus-ring mt-auto inline-flex items-center gap-2 text-sm">
                     Lihat detail
                     <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
                 </Link>

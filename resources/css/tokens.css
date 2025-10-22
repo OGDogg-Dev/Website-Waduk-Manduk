@@ -1,0 +1,36 @@
+:root {
+    --brand-900: #051220;
+    --brand-800: #0a1f33;
+    --brand-700: #12324d;
+    --brand-600: #18486b;
+    --brand-500: #1f5f90;
+    --brand-400: #3677ac;
+    --brand-300: #4f8fc5;
+    --brand-200: #7fb0da;
+    --brand-100: #c5dff1;
+
+    --accent-800: #6b3600;
+    --accent-700: #87460a;
+    --accent-600: #b06212;
+    --accent-500: #d2801d;
+    --accent-400: #f3a437;
+    --accent-300: #ffd28f;
+
+    --surface-0: #ffffff;
+    --surface-1: #f4f7fb;
+    --surface-2: #e3ebf5;
+    --surface-3: #cbd9e8;
+
+    --text-primary: #0b1f33;
+    --text-secondary: rgba(11, 31, 51, 0.72);
+    --text-muted: rgba(11, 31, 51, 0.6);
+    --text-on-dark: #f5f9ff;
+    --text-on-media: #ffffff;
+    --text-on-media-muted: rgba(255, 255, 255, 0.86);
+
+    --overlay-scrim-60: rgba(6, 17, 29, 0.6);
+    --overlay-scrim-48: rgba(6, 17, 29, 0.48);
+    --overlay-scrim-32: rgba(6, 17, 29, 0.32);
+
+    --focus-ring-color: rgba(210, 128, 29, 0.65);
+}

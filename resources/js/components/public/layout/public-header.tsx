@@ -87,31 +87,53 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
     }, []);
 
     const resolvedVariant = variant === 'transparent' && !isScrolled ? 'transparent' : 'solid';
+    const isTransparent = resolvedVariant === 'transparent';
+
+    const baseBackground = 'shadow-[0_1px_0_rgba(255,255,255,0.08)] backdrop-blur';
+    const solidBackground = 'bg-[rgba(5,18,32,0.95)]';
+    const translucentBackground = 'bg-[rgba(5,18,32,0.72)]';
 
     return (
         <header
             className={cn(
-                'sticky top-0 z-40 w-full transition-all duration-300',
-                resolvedVariant === 'transparent'
-                    ? 'bg-transparent'
-                    : 'border-b border-white/15 bg-[color:var(--overlay/700)] backdrop-blur supports-[backdrop-filter]:bg-[color:rgba(3,23,46,0.82)] shadow-[0_18px_40px_-28px_rgba(6,40,80,0.7)]',
+                'sticky top-0 z-40 w-full border-b border-white/10 transition-all duration-300',
+                baseBackground,
+                isTransparent ? translucentBackground : solidBackground,
             )}
         >
-            <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-4 text-white sm:px-10">
-                <Link href={route('home')} className="flex items-center gap-3 focus-visible-outline">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-wave-gold text-base font-semibold text-deep-navy shadow-reef">
+            <div
+                className={cn(
+                    'mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-4 transition-colors sm:px-10',
+                    isTransparent ? 'text-on-media' : 'text-white',
+                )}
+            >
+                <Link href={route('home')} className="flex items-center gap-3 focus-ring">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-400 text-base font-semibold text-brand-900 shadow-soft">
                         WM
                     </span>
                     <div className="flex flex-col">
-                        <span className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-light">
+                        <span
+                            className={cn(
+                                'text-xs font-semibold uppercase tracking-[0.4em]',
+                                isTransparent ? 'text-on-media-muted' : 'text-white/70',
+                            )}
+                        >
                             Waduk Manduk
                         </span>
-                        <span className="text-lg font-semibold tracking-tight text-on-media">
+                        <span
+                            className={cn(
+                                'text-lg font-semibold tracking-tight',
+                                isTransparent ? 'text-on-media' : 'text-white',
+                            )}
+                        >
                             Destinasi Ekowisata Bahari
                         </span>
                     </div>
                 </Link>
-                <nav className="hidden items-center gap-6 text-sm font-medium lg:flex" aria-label="Navigasi utama">
+                <nav
+                    className="hidden items-center gap-8 text-[0.95rem] font-semibold uppercase tracking-[0.28em] lg:flex"
+                    aria-label="Navigasi utama"
+                >
                     {navItems.map((item) => {
                         const isActive =
                             currentUrl === item.match || currentUrl.startsWith(`${item.match}/`);
@@ -120,8 +142,16 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                                 key={item.href}
                                 href={item.href}
                                 className={cn(
-                                    'transition-colors hover:text-gold-accent focus-visible-outline',
-                                    isActive ? 'text-gold-accent' : 'text-on-media-muted',
+                                    'relative rounded-sm px-0.5 py-2 transition-colors focus-ring',
+                                    isTransparent
+                                        ? 'text-on-media-muted hover:text-on-media'
+                                        : 'text-white/70 hover:text-white',
+                                    'after:absolute after:left-0 after:-bottom-[0.35rem] after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:transition-transform after:content-[""] hover:after:scale-x-100',
+                                    isTransparent ? 'after:bg-accent-300' : 'after:bg-accent-400',
+                                    isActive && [
+                                        isTransparent ? 'text-accent-300' : 'text-accent-400',
+                                        'after:scale-x-100',
+                                    ],
                                 )}
                                 aria-current={isActive ? 'page' : undefined}
                             >
@@ -133,7 +163,7 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                 <div className="flex items-center gap-2">
                     <Button
                         size="sm"
-                        className="hidden rounded-full bg-gold-accent text-deep-navy shadow-reef hover:bg-gold-accent/90 focus-visible-outline lg:inline-flex"
+                        className="hidden rounded-full bg-accent-400 px-5 text-brand-900 shadow-soft transition hover:bg-accent-300 focus-ring lg:inline-flex"
                         asChild
                     >
                         <Link href={route('visit.plan')}>Reservasi</Link>
@@ -141,7 +171,7 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                     <Button
                         variant="ghost"
                         size="sm"
-                        className="hidden rounded-full border border-white/25 text-on-media hover:bg-white/10 focus-visible-outline lg:inline-flex"
+                        className="hidden rounded-full border border-white/25 text-on-dark hover:bg-white/10 focus-ring lg:inline-flex"
                         asChild
                     >
                         <Link href={route('login')}>Masuk Admin</Link>
@@ -151,7 +181,7 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="ml-1 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-on-media hover:bg-white/10 focus-visible-outline lg:hidden"
+                                className="ml-1 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 text-on-media hover:bg-white/10 focus-ring lg:hidden"
                                 aria-label="Buka navigasi"
                             >
                                 <Menu className="h-5 w-5" />
