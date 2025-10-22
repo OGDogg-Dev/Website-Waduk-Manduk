@@ -1,5 +1,6 @@
 import { PublicFooter } from '@/components/public/layout/public-footer';
 import { PublicHeader } from '@/components/public/layout/public-header';
+import { FloatingVisitorToolbar } from '@/components/public/layout/floating-visitor-toolbar';
 
 interface PublicLayoutProps {
     hero?: React.ReactNode;
@@ -16,6 +17,7 @@ export function PublicLayout({ hero, children, headerVariant }: PublicLayoutProp
             {hero && <div className="relative isolate">{hero}</div>}
             <main className="flex-1 bg-white text-deep-navy">{children}</main>
             <PublicFooter />
+            <FloatingVisitorToolbar />
         </div>
     );
 }
