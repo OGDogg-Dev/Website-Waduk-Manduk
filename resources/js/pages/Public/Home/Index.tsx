@@ -1,4 +1,10 @@
-import type { EventResource, SpotResource, StoryResource, UmkmResource } from '@/types/public';
+import type {
+    EventResource,
+    SpotResource,
+    StatusResource,
+    StoryResource,
+    UmkmResource,
+} from '@/types/public';
 import { Head } from '@inertiajs/react';
 import { PublicLayout } from '@/layouts/public/public-layout';
 import { HomeHeroSection } from '@/components/public/sections/home/hero-section';
@@ -10,6 +16,7 @@ import { CtaWaveSection } from '@/components/public/sections/home/cta-section';
 import { ArticlesSection } from '@/components/public/sections/home/articles-section';
 
 interface HomePageProps {
+    status: StatusResource | null;
     featuredSpots: SpotResource[];
     featuredUmkm: UmkmResource[];
     upcomingEvents: EventResource[];
@@ -137,6 +144,7 @@ const fallbackStories: StoryResource[] = [
 ];
 
 export default function HomePage({
+    status,
     featuredSpots = [],
     featuredUmkm = [],
     upcomingEvents = [],
@@ -150,7 +158,7 @@ export default function HomePage({
     return (
         <>
             <Head title="Beranda" />
-            <PublicLayout hero={<HomeHeroSection />}>
+            <PublicLayout hero={<HomeHeroSection status={status} />}>
                 <ExperienceSection />
                 <HighlightsSection featuredSpots={spots} featuredUmkm={umkm} />
                 <EventsSection upcomingEvents={events} />

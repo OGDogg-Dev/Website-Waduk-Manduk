@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\CommunityController;
 use App\Http\Controllers\Web\ConservationController;
 use App\Http\Controllers\Web\ExploreController;
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\QrisController;
 use App\Http\Controllers\Web\StoryController as PublicStoryController;
 use App\Http\Controllers\Web\SupportController;
 use App\Http\Controllers\Web\UmkmController as PublicUmkmController;
@@ -18,6 +19,7 @@ Route::get('/umkm', PublicUmkmController::class)->name('umkm.directory');
 Route::get('/konservasi-edukasi', ConservationController::class)->name('conservation.index');
 Route::get('/komunitas', CommunityController::class)->name('community.index');
 Route::get('/dukungan', SupportController::class)->name('support.index');
+Route::get('/pembayaran-qris', QrisController::class)->name('qris.index');
 Route::get('/cerita', PublicStoryController::class)->name('stories.index');
 Route::get('/tentang', AboutController::class)->name('about.index');
 

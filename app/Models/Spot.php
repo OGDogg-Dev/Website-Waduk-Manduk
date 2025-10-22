@@ -62,4 +62,12 @@ class Spot extends Model
     {
         return $query->where('status', ContentStatus::PUBLISHED)->orderBy('sort_order');
     }
+
+    public function scopeFeatured(Builder $query): Builder
+    {
+        return $query
+            ->where('is_featured', true)
+            ->where('status', ContentStatus::PUBLISHED)
+            ->orderBy('sort_order');
+    }
 }

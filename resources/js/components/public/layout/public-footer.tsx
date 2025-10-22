@@ -70,6 +70,9 @@ export function PublicFooter() {
                             <Link href={route('stories.index')} className="transition hover:text-gold-accent">
                                 Cerita & dokumentasi
                             </Link>
+                            <Link href={route('qris.index')} className="transition hover:text-gold-accent">
+                                Informasi QRIS
+                            </Link>
                             <Link href={route('support.index')} className="transition hover:text-gold-accent">
                                 Dukung konservasi
                             </Link>

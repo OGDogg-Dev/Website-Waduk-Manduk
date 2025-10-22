@@ -19,9 +19,8 @@ class HomeController extends Controller
 
         return Inertia::render('Public/Home/Index', [
             'status' => $status,
-            'spots' => Spot::query()
-                ->published()
-                ->orderBy('sort_order')
+            'featuredSpots' => Spot::query()
+                ->featured()
                 ->take(4)
                 ->get([
                     'id',
@@ -29,10 +28,8 @@ class HomeController extends Controller
                     'slug',
                     'type',
                     'headline',
+                    'description',
                     'hero_image',
-                    'status',
-                    'latitude',
-                    'longitude',
                 ]),
             'featuredUmkm' => Umkm::query()
                 ->featured()
@@ -46,6 +43,8 @@ class HomeController extends Controller
                     'category',
                     'hero_image',
                     'whatsapp_number',
+                    'maps_url',
+                    'is_featured',
                 ]),
             'upcomingEvents' => Event::query()
                 ->published()
@@ -62,8 +61,9 @@ class HomeController extends Controller
                     'location',
                     'cover_image',
                 ]),
-            'stories' => Story::query()
+            'recentStories' => Story::query()
                 ->published()
+                ->orderByDesc('published_at')
                 ->take(3)
                 ->get([
                     'id',

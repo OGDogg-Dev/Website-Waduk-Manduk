@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { PageContainer } from '@/components/public/layout/page-container';
 import { WaveBackground } from '@/components/public/layout/wave-background';
+import { StatusBanner } from '@/components/public/sections/shared/status-banner';
+import type { StatusResource } from '@/types/public';
 import { Link } from '@inertiajs/react';
 import { Compass, Leaf, Users, Waves } from 'lucide-react';
 
@@ -61,7 +63,11 @@ function DeviceMockup() {
     );
 }
 
-export function HomeHeroSection() {
+interface HomeHeroSectionProps {
+    status?: StatusResource | null;
+}
+
+export function HomeHeroSection({ status }: HomeHeroSectionProps) {
     return (
         <section className="relative bg-[#001629] pb-16 pt-28 text-white">
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-40" />
@@ -101,6 +107,17 @@ export function HomeHeroSection() {
                     </div>
                 </WaveBackground>
                 <StatsGrid />
+                {status && (
+                    <div className="mt-8">
+                        <StatusBanner
+                            crowd_level={status.crowd_level}
+                            weather_summary={status.weather_summary}
+                            temperature={status.temperature}
+                            advisory={status.advisory}
+                            startLabel="Status lokasi terbaru"
+                        />
+                    </div>
+                )}
             </PageContainer>
         </section>
     );

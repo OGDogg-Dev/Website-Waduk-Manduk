@@ -42,6 +42,11 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                 match: '/konservasi-edukasi',
             },
             {
+                label: 'Informasi QRIS',
+                href: route('qris.index'),
+                match: '/pembayaran-qris',
+            },
+            {
                 label: 'Komunitas',
                 href: route('community.index'),
                 match: '/komunitas',

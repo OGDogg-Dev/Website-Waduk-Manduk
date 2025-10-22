@@ -56,3 +56,42 @@ export interface StoryResource {
     hero_image?: string | null;
     published_at?: string | null;
 }
+
+export interface QrisHeroResource {
+    title: string;
+    subtitle?: string | null;
+    highlight?: string | null;
+}
+
+export interface QrisDownloadResource {
+    label: string;
+    url?: string | null;
+    format?: string | null;
+    size?: string | null;
+}
+
+export interface QrisStepResource {
+    title?: string | null;
+    description?: string | null;
+}
+
+export interface QrisFaqResource {
+    question?: string | null;
+    description?: string | null;
+}
+
+export interface QrisContactResource {
+    label?: string | null;
+    value?: string | null;
+    href?: string | null;
+    type?: string | null;
+}
+
+export interface QrisPageResource {
+    hero: QrisHeroResource;
+    downloads: QrisDownloadResource[];
+    steps: QrisStepResource[];
+    faq: QrisFaqResource[];
+    contacts: QrisContactResource[];
+    disclaimer?: string | null;
+}
