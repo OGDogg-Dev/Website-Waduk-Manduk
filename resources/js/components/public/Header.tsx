@@ -16,19 +16,21 @@ export function Header() {
     const [open, setOpen] = useState(false);
 
     const navItems: NavItem[] = [
-        { label: 'Beranda', href: route('home'), match: '/' },
-        { label: 'QRIS', href: route('qris.index'), match: '/pembayaran-qris' },
-        { label: 'Fasilitas & Harga', href: route('visit.plan'), match: '/rencanakan-kunjungan' },
-        { label: 'Peta', href: route('explore.index'), match: '/jelajah-aktivitas' },
-        { label: 'Galeri', href: route('community.index'), match: '/komunitas' },
+        { label: 'Tentang', href: route('about.index'), match: '/tentang' },
         { label: 'Berita', href: route('stories.index'), match: '/cerita' },
-        { label: 'Kontak', href: route('about.index'), match: '/tentang' },
+        { label: 'Komunitas', href: route('community.index'), match: '/komunitas' },
+        { label: 'Panduan', href: route('support.index'), match: '/dukungan' },
+        { label: 'Konservasi', href: route('conservation.index'), match: '/konservasi-edukasi' },
+        { label: 'UMKM', href: route('umkm.directory'), match: '/umkm' },
+        { label: 'Jelajah', href: route('explore.index'), match: '/jelajah-aktivitas' },
+        { label: 'Rencanakan', href: route('visit.plan'), match: '/rencanakan-kunjungan' },
+        { label: 'QRIS', href: route('qris.index'), match: '/pembayaran-qris' },
     ];
 
     const isActive = (match: string) => url === match || url.startsWith(`${match}/`);
 
     return (
-        <header className="sticky top-0 z-50 bg-brand-900/95 text-on-dark shadow-soft backdrop-blur">
+        <header className="sticky top-0 z-50 bg-[linear-gradient(120deg,rgba(2,19,45,0.92)_0%,rgba(3,30,63,0.92)_60%,rgba(5,46,90,0.9)_100%)] text-on-dark shadow-soft backdrop-blur">
             <div className="container flex items-center justify-between py-4">
                 <Link href={route('home')} className="focus-ring flex items-center gap-3" aria-label="Beranda Waduk Manduk">
                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-500 text-base font-semibold text-brand-900 shadow-soft">
@@ -39,7 +41,7 @@ export function Header() {
                         <p className="text-sm font-semibold text-on-dark">Ekowisata Bahari</p>
                     </div>
                 </Link>
-                <nav className="hidden items-center gap-6 text-sm font-semibold uppercase tracking-[0.24em] lg:flex" aria-label="Navigasi utama">
+                <nav className="hidden items-center gap-6 text-xs font-semibold uppercase tracking-[0.32em] lg:flex" aria-label="Navigasi utama">
                     {navItems.map((item) => (
                         <Link
                             key={item.href}
@@ -47,7 +49,7 @@ export function Header() {
                             className={cn(
                                 'group focus-ring relative px-1 py-2 transition-colors',
                                 isActive(item.match)
-                                    ? 'text-accent-300'
+                                    ? 'text-accent-200'
                                     : 'text-on-dark/80 hover:text-on-dark',
                             )}
                             aria-current={isActive(item.match) ? 'page' : undefined}
@@ -55,7 +57,7 @@ export function Header() {
                             <span>{item.label}</span>
                             <span
                                 className={cn(
-                                    'absolute left-0 right-0 -bottom-1 h-0.5 origin-left rounded-full bg-accent-400 transition-transform',
+                                    'absolute left-0 right-0 -bottom-1 h-0.5 origin-left rounded-full bg-accent-300 transition-transform',
                                     isActive(item.match) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
                                 )}
                                 aria-hidden
@@ -64,7 +66,7 @@ export function Header() {
                     ))}
                 </nav>
                 <div className="flex items-center gap-3">
-                    <Button asChild size="sm" className="focus-ring hidden rounded-full bg-accent-400 px-4 text-brand-950 hover:bg-accent-300 lg:inline-flex">
+                    <Button asChild size="sm" className="focus-ring hidden rounded-full bg-accent-300 px-4 text-brand-950 hover:bg-accent-200 lg:inline-flex">
                         <Link href={route('visit.plan')}>Reservasi</Link>
                     </Button>
                     <Sheet open={open} onOpenChange={setOpen}>
@@ -79,7 +81,7 @@ export function Header() {
                                 <Menu className="h-5 w-5" />
                             </Button>
                         </SheetTrigger>
-                        <SheetContent className="flex flex-col gap-6 bg-brand-900/95 text-on-dark">
+                        <SheetContent className="flex flex-col gap-6 bg-[linear-gradient(150deg,#04132d,#041e45)] text-on-dark">
                             <SheetHeader>
                                 <SheetTitle className="text-lg font-semibold text-on-dark">Navigasi Waduk Manduk</SheetTitle>
                             </SheetHeader>
@@ -91,7 +93,7 @@ export function Header() {
                                         className={cn(
                                             'focus-ring rounded-xl px-3 py-3 text-base font-semibold transition-colors',
                                             isActive(item.match)
-                                                ? 'bg-accent-500/15 text-accent-300'
+                                                ? 'bg-accent-400/15 text-accent-200'
                                                 : 'hover:bg-white/10',
                                         )}
                                         aria-current={isActive(item.match) ? 'page' : undefined}

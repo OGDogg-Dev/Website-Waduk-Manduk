@@ -1,7 +1,7 @@
-import { FormEvent, useRef, useState } from 'react';
 import { Head, Link } from '@inertiajs/react';
-import { PublicLayout } from '@/layouts/public/public-layout';
+import { PageHero } from '@/components/public/sections/shared/page-hero';
 import { StatusBanner } from '@/components/public/sections/shared/status-banner';
+import { PublicLayout } from '@/layouts/public/public-layout';
 import type { StatusResource } from '@/types/public';
 
 interface KontakPageProps {
@@ -14,214 +14,248 @@ interface KontakPageProps {
     latestStatus: Array<Pick<StatusResource, 'crowd_level' | 'weather_summary' | 'reported_at' | 'advisory'>>;
 }
 
-interface FormState {
-    name: string;
-    email: string;
-    message: string;
-}
+const contactChannels = [
+    { label: 'Whatsapp Center', value: '0813-1122-3344', href: 'https://wa.me/6281311223344' },
+    { label: 'Email layanan', value: 'halo@wadukmanduk.id', href: 'mailto:halo@wadukmanduk.id' },
+    { label: 'Jam operasional', value: 'Setiap hari · 07.00 – 17.00 WIB' },
+];
 
-export default function KontakPage({ metrics, latestStatus }: KontakPageProps) {
-    const [form, setForm] = useState<FormState>({ name: '', email: '', message: '' });
-    const [errors, setErrors] = useState<Partial<FormState>>({});
-    const [submitting, setSubmitting] = useState(false);
-    const [feedback, setFeedback] = useState<string | null>(null);
-    const feedbackRef = useRef<HTMLParagraphElement | null>(null);
+export default function KontakPage({ metrics, latestStatus = [] }: KontakPageProps) {
+    const dateFormatter = new Intl.DateTimeFormat('id-ID', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
 
-    const handleChange = (field: keyof FormState) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setForm((prev) => ({ ...prev, [field]: event.target.value }));
-        setErrors((prev) => ({ ...prev, [field]: undefined }));
-    };
+    const stats = [
+        {
+            label: 'Spot terkelola',
+            value: `${metrics.spots} lokasi`,
+            description: 'Zona interpretasi bahari dengan fasilitas pemandu bersertifikat.',
+        },
+        {
+            label: 'UMKM mitra',
+            value: `${metrics.umkm} pelaku`,
+            description: 'Kuliner pesisir dan kriya lokal yang dikurasi setiap musim.',
+        },
+        {
+            label: 'Agenda komunitas',
+            value: `${metrics.events} kegiatan`,
+            description: 'Program edukasi konservasi lintas usia sepanjang tahun.',
+        },
+        {
+            label: 'Arsip cerita',
+            value: `${metrics.stories} artikel`,
+            description: 'Rangkuman kabar konservasi, komunitas, dan UMKM Waduk Manduk.',
+        },
+    ];
 
-    const validate = () => {
-        const nextErrors: Partial<FormState> = {};
-        if (!form.name.trim()) {
-            nextErrors.name = 'Nama wajib diisi.';
-        }
-        if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-            nextErrors.email = 'Masukkan email yang valid.';
-        }
-        if (!form.message.trim()) {
-            nextErrors.message = 'Tulis pertanyaan atau pesan Anda.';
-        }
-        setErrors(nextErrors);
-        return Object.keys(nextErrors).length === 0;
-    };
-
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (!validate()) {
-            setFeedback('Periksa kembali data yang belum lengkap.');
-            feedbackRef.current?.focus();
-            return;
-        }
-        setSubmitting(true);
-        setFeedback('Mengirim pesan…');
-        setTimeout(() => {
-            setSubmitting(false);
-            setFeedback('Pesan Anda berhasil dikirim. Tim kami akan merespons dalam 1x24 jam kerja.');
-            setForm({ name: '', email: '', message: '' });
-            feedbackRef.current?.focus();
-        }, 800);
-    };
+    const quickHelpItems = [
+        {
+            href: route('visit.plan'),
+            title: 'Reservasi rombongan & sekolah',
+            description: 'Atur jadwal kunjungan bersama tim reservasi resmi Waduk Manduk.',
+        },
+        {
+            href: route('explore.index'),
+            title: 'Peta interaktif destinasi',
+            description: 'Telusuri jalur interpretasi, dermaga, hingga kios UMKM pesisir.',
+        },
+        {
+            href: route('stories.index'),
+            title: 'Pusat dokumentasi & berita',
+            description: 'Dapatkan kabar konservasi, agenda komunitas, dan update status waduk.',
+        },
+    ];
 
     return (
         <PublicLayout>
-            <Head title="Kontak">
+            <Head title="Tentang Waduk Manduk">
                 <meta
                     name="description"
-                    content="Hubungi pengelola Waduk Manduk untuk reservasi, kolaborasi komunitas, dan permintaan media."
+                    content="Kenali ekowisata Waduk Manduk, status kunjungan terbaru, dan kanal komunikasi resmi pengelola."
                 />
-                <meta property="og:title" content="Kontak Pengelola Waduk Manduk" />
+                <meta property="og:title" content="Tentang Ekowisata Waduk Manduk" />
                 <meta
                     property="og:description"
-                    content="Kirim pesan melalui formulir aksesibel atau temukan jam operasional dan kontak resmi Waduk Manduk."
+                    content="Informasi lengkap pengelola Waduk Manduk, status harian, dan kanal komunikasi warga."
                 />
                 <meta property="og:type" content="website" />
                 <link rel="canonical" href={route('about.index')} />
             </Head>
 
-            <section className="py-12 lg:py-16">
-                <div className="container grid gap-8 lg:grid-cols-[1fr,0.9fr]">
-                    <div className="space-y-4">
-                        <h1 className="text-h1">Hubungi Pengelola Waduk Manduk</h1>
-                        <p className="text-text-secondary">
-                            Tim Sahabat Manduk siap membantu kebutuhan reservasi, kolaborasi komunitas, hingga permintaan media.
+            <PageHero
+                eyebrow="Profil destinasi"
+                title="Tentang Ekowisata Waduk Manduk"
+                description="Inisiatif kolaboratif antara desa, nelayan, dan pemerhati ekosistem untuk menjaga waduk sebagai ruang wisata berkelanjutan yang lestari."
+                stats={stats}
+                quickHelpItems={quickHelpItems}
+                quickHelpHeading="Bantuan cepat"
+                quickHelpDescription="Hubungi tim kami atau akses panduan siap pakai untuk menyiapkan perjalanan Anda."
+                quickHelpCta={{
+                    label: 'Hubungi pusat informasi',
+                    href: 'https://wa.me/6281311223344',
+                    description: 'Whatsapp +62813-1122-3344',
+                }}
+            />
+
+            <section className="relative overflow-hidden bg-[#041939] py-20 text-white lg:py-24">
+                <div className="absolute inset-x-[-20%] top-[-12rem] h-[18rem] rounded-full bg-[radial-gradient(circle,_rgba(47,107,202,0.24),_rgba(4,25,57,0))] blur-3xl" aria-hidden />
+                <div className="container relative space-y-12">
+                    <div className="space-y-3">
+                        <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Status terkini</p>
+                        <h2 className="text-3xl font-semibold sm:text-4xl">Pembaruan lapangan langsung dari petugas</h2>
+                        <p className="max-w-3xl text-brand-100/80">
+                            Pantau kepadatan pengunjung, cuaca, dan imbauan keselamatan terakhir. Data dikirim setiap 30 menit oleh pusat kontrol Waduk Manduk.
                         </p>
-                        <div className="grid gap-4 sm:grid-cols-2">
-                            {[
-                                { label: 'Spot terkelola', value: metrics.spots },
-                                { label: 'UMKM mitra', value: metrics.umkm },
-                                { label: 'Event per tahun', value: metrics.events },
-                                { label: 'Artikel terbit', value: metrics.stories },
-                            ].map((item) => (
-                                <div key={item.label} className="rounded-3xl border border-surface-3/70 bg-surface-0 p-6 shadow-soft">
-                                    <p className="eyebrow text-xs text-brand-600">{item.label}</p>
-                                    <p className="mt-2 text-3xl font-semibold text-brand-600">{item.value}</p>
-                                </div>
-                            ))}
-                        </div>
                     </div>
-                    <div className="rounded-3xl border border-surface-3/70 bg-surface-0 p-6 shadow-soft">
-                        <h2 className="text-h3 text-text-primary">Informasi kontak</h2>
-                        <div className="mt-4 space-y-3 text-sm text-text-secondary">
-                            <p>Alamat: Jl. Danau Biru No. 88, Desa Manduk, Kabupaten Gresik.</p>
-                            <p>Whatsapp Center: <a href="https://wa.me/6281311223344" className="link focus-ring">0813-1122-3344</a></p>
-                            <p>Email layanan: <a href="mailto:halo@wadukmanduk.id" className="link focus-ring">halo@wadukmanduk.id</a></p>
-                        </div>
-                        <Link href="https://maps.google.com" target="_blank" rel="noreferrer" className="link focus-ring mt-4 inline-flex text-sm">
-                            Buka lokasi di Google Maps →
-                        </Link>
+                    <div className="grid gap-6 lg:grid-cols-3">
+                        {latestStatus.length > 0 ? (
+                            latestStatus.map((statusItem, index) => (
+                                <article
+                                    key={`status-${index}`}
+                                    className="flex h-full flex-col gap-4 rounded-[2rem] border border-white/12 bg-white/6 p-6 shadow-soft backdrop-blur"
+                                >
+                                    <div>
+                                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.42em] text-brand-100/70">
+                                            Dilaporkan pada
+                                        </p>
+                                        <p className="mt-2 text-base font-semibold text-white">
+                                            {statusItem.reported_at
+                                                ? dateFormatter.format(new Date(statusItem.reported_at))
+                                                : 'Belum tersedia'}
+                                        </p>
+                                    </div>
+                                    <StatusBanner
+                                        tone="dark"
+                                        startLabel="Kepadatan pengunjung"
+                                        crowd_level={statusItem.crowd_level}
+                                        weather_summary={statusItem.weather_summary}
+                                        advisory={statusItem.advisory}
+                                    />
+                                </article>
+                            ))
+                        ) : (
+                            <p className="rounded-[2rem] border border-dashed border-white/20 bg-white/5 p-6 text-sm text-brand-100/80 lg:col-span-3">
+                                Status lapangan belum tersedia. Tim kami akan memperbarui informasi dalam waktu dekat.
+                            </p>
+                        )}
                     </div>
                 </div>
             </section>
 
-            <section className="bg-surface-1 py-12 lg:py-16">
-                <div className="container grid gap-6 lg:grid-cols-[1.1fr,0.9fr] lg:items-start">
-                    <form onSubmit={handleSubmit} className="space-y-4 rounded-3xl border border-surface-3/70 bg-surface-0 p-8 shadow-soft">
-                        <h2 className="text-h2 text-text-primary">Formulir kontak</h2>
-                        <p className="text-sm text-text-secondary">Isi formulir di bawah ini dan tim kami akan merespons melalui email.</p>
-                        <p ref={feedbackRef} tabIndex={-1} aria-live="polite" className="text-sm font-semibold text-brand-600">
-                            {feedback}
-                        </p>
-                        <div className="space-y-2">
-                            <label htmlFor="name" className="text-sm font-semibold text-text-primary">
-                                Nama lengkap
-                            </label>
-                            <input
-                                id="name"
-                                type="text"
-                                value={form.name}
-                                onChange={handleChange('name')}
-                                aria-invalid={Boolean(errors.name)}
-                                aria-describedby={errors.name ? 'name-error' : undefined}
-                                className="focus-ring w-full rounded-2xl border border-surface-3/80 bg-surface-1 px-4 py-3 text-sm text-text-primary"
-                                placeholder="Masukkan nama Anda"
-                            />
-                            {errors.name && (
-                                <p id="name-error" className="text-xs text-red-600">
-                                    {errors.name}
-                                </p>
-                            )}
-                        </div>
-                        <div className="space-y-2">
-                            <label htmlFor="email" className="text-sm font-semibold text-text-primary">
-                                Email
-                            </label>
-                            <input
-                                id="email"
-                                type="email"
-                                value={form.email}
-                                onChange={handleChange('email')}
-                                aria-invalid={Boolean(errors.email)}
-                                aria-describedby={errors.email ? 'email-error' : undefined}
-                                className="focus-ring w-full rounded-2xl border border-surface-3/80 bg-surface-1 px-4 py-3 text-sm text-text-primary"
-                                placeholder="nama@organisasi.id"
-                            />
-                            {errors.email && (
-                                <p id="email-error" className="text-xs text-red-600">
-                                    {errors.email}
-                                </p>
-                            )}
-                        </div>
-                        <div className="space-y-2">
-                            <label htmlFor="message" className="text-sm font-semibold text-text-primary">
-                                Pesan
-                            </label>
-                            <textarea
-                                id="message"
-                                value={form.message}
-                                onChange={handleChange('message')}
-                                aria-invalid={Boolean(errors.message)}
-                                aria-describedby={errors.message ? 'message-error' : undefined}
-                                className="focus-ring h-32 w-full rounded-2xl border border-surface-3/80 bg-surface-1 px-4 py-3 text-sm text-text-primary"
-                                placeholder="Sampaikan pertanyaan, kebutuhan reservasi, atau rencana kolaborasi."
-                            />
-                            {errors.message && (
-                                <p id="message-error" className="text-xs text-red-600">
-                                    {errors.message}
-                                </p>
-                            )}
-                        </div>
-                        <button
-                            type="submit"
-                            className="focus-ring inline-flex items-center justify-center rounded-full bg-brand-600 px-6 py-2 text-sm font-semibold text-on-dark transition hover:bg-brand-500 disabled:cursor-not-allowed disabled:bg-brand-300"
-                            disabled={submitting}
-                        >
-                            {submitting ? 'Mengirim…' : 'Kirim pesan'}
-                        </button>
-                    </form>
+            <section className="relative overflow-hidden bg-[#04132d] py-20 text-white lg:py-24">
+                <div className="absolute inset-x-[-18%] top-[-18rem] h-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(236,172,72,0.16),_rgba(4,19,45,0))] blur-3xl" aria-hidden />
+                <div className="container relative grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
                     <div className="space-y-6">
-                        {latestStatus.length > 0 && (
-                            <div className="rounded-3xl border border-surface-3/70 bg-surface-0 p-6 shadow-soft">
-                                <h3 className="text-h3 text-text-primary">Status terbaru</h3>
-                                <div className="mt-4 space-y-4">
-                                    {latestStatus.map((statusItem, index) => (
-                                        <StatusBanner
-                                            key={`status-${index}`}
-                                            crowd_level={statusItem.crowd_level}
-                                            weather_summary={statusItem.weather_summary}
-                                            advisory={statusItem.advisory}
-                                            startLabel={
-                                                statusItem.reported_at
-                                                    ? `Dilaporkan ${new Date(statusItem.reported_at).toLocaleDateString('id-ID')}`
-                                                    : 'Dilaporkan'
-                                            }
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-                        <div className="rounded-3xl border border-surface-3/70 bg-surface-0 p-6 shadow-soft">
-                            <h3 className="text-h3 text-text-primary">Jam operasional</h3>
-                            <p className="mt-3 text-sm text-text-secondary">
-                                Loket tiket: 07.00 – 16.00 WIB setiap hari.
-                                <br />
-                                Layanan reservasi kelompok: Senin – Jumat, 09.00 – 17.00 WIB.
+                        <div className="space-y-3">
+                            <p className="text-xs font-semibold uppercase tracking-[0.42em] text-brand-100/80">Kontak & media sosial</p>
+                            <h2 className="text-3xl font-semibold sm:text-4xl">Saluran resmi pengelola Waduk Manduk</h2>
+                            <p className="max-w-2xl text-brand-100/80">
+                                Tim Sahabat Manduk siap membantu reservasi, kolaborasi komunitas, permintaan media, hingga pengelolaan kegiatan konservasi warga.
                             </p>
-                            <Link href={route('visit.plan')} className="link focus-ring mt-4 inline-flex text-sm">
-                                Lihat detail fasilitas →
+                        </div>
+                        <div className="grid gap-4 sm:grid-cols-2">
+                            {contactChannels.map((channel) => (
+                                <div
+                                    key={channel.label}
+                                    className="rounded-[1.9rem] border border-white/12 bg-white/6 p-6 shadow-soft backdrop-blur"
+                                >
+                                    <p className="text-[0.7rem] font-semibold uppercase tracking-[0.38em] text-brand-100/70">
+                                        {channel.label}
+                                    </p>
+                                    {channel.href ? (
+                                        <Link
+                                            href={channel.href}
+                                            className="focus-ring mt-3 inline-flex items-center gap-2 text-lg font-semibold text-white"
+                                        >
+                                            {channel.value}
+                                            <span aria-hidden className="text-sm">→</span>
+                                        </Link>
+                                    ) : (
+                                        <p className="mt-3 text-lg font-semibold text-white">{channel.value}</p>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="rounded-[1.9rem] border border-white/12 bg-white/5 p-6 shadow-soft backdrop-blur">
+                            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.38em] text-brand-100/70">Alamat kantor</p>
+                            <p className="mt-3 text-lg font-semibold text-white">Jl. Danau Biru No. 88, Desa Manduk, Kabupaten Bahari, Jawa Timur 65123</p>
+                            <Link
+                                href="https://maps.google.com/?q=Waduk+Manduk"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="focus-ring mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent-200"
+                            >
+                                Lihat peta lokasi
+                                <span aria-hidden className="text-base">↗</span>
                             </Link>
                         </div>
+                    </div>
+                    <div className="space-y-6 rounded-[2.2rem] border border-white/15 bg-white/8 p-8 shadow-soft backdrop-blur">
+                        <h3 className="text-2xl font-semibold text-white">Kolaborasi & kemitraan</h3>
+                        <p className="text-brand-100/80">
+                            Kami membuka peluang kerjasama riset, pengembangan produk UMKM, hingga program tanggung jawab sosial perusahaan. Hubungi kami untuk sesi presentasi daring.
+                        </p>
+                        <Link
+                            href="mailto:kolaborasi@wadukmanduk.id"
+                            className="focus-ring inline-flex w-max items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/35 hover:bg-white/10"
+                        >
+                            Jadwalkan diskusi →
+                        </Link>
+                        <div className="rounded-[1.8rem] border border-white/12 bg-white/6 p-6">
+                            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.38em] text-brand-100/70">Ikuti kabar terbaru</p>
+                            <p className="mt-3 text-sm text-brand-100/80">
+                                Instagram · Youtube · Facebook · @wadukmanduk
+                            </p>
+                            <Link
+                                href={route('stories.index')}
+                                className="focus-ring mt-4 inline-flex items-center gap-2 text-sm font-semibold text-accent-200"
+                            >
+                                Baca cerita dan siaran pers →
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="relative overflow-hidden bg-[linear-gradient(140deg,#f7d08a_0%,#f0b156_35%,#f29a36_70%,#e88a2d_100%)] py-16 text-brand-950 lg:py-20">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.38),_rgba(240,173,82,0))]" aria-hidden />
+                <div className="container relative grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center">
+                    <div className="space-y-4">
+                        <span className="inline-flex w-max items-center gap-2 rounded-full border border-black/10 bg-white/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-brand-900">
+                            Kabar terbaru
+                        </span>
+                        <h2 className="text-3xl font-semibold sm:text-4xl">Ikuti perkembangan Waduk Manduk lebih dekat</h2>
+                        <p className="max-w-2xl text-base text-brand-900/80">
+                            Dapatkan buletin berkala berisi agenda konservasi, peluang kolaborasi, dan cerita inspiratif dari warga pesisir Manduk.
+                        </p>
+                    </div>
+                    <div className="rounded-[2rem] border border-black/10 bg-white/70 p-6 shadow-soft backdrop-blur">
+                        <p className="text-sm font-semibold text-brand-900">Langganan buletin elektronik</p>
+                        <form className="mt-4 space-y-3">
+                            <label className="sr-only" htmlFor="newsletter-email">
+                                Alamat email
+                            </label>
+                            <input
+                                id="newsletter-email"
+                                type="email"
+                                placeholder="nama@domain.id"
+                                className="focus-ring w-full rounded-[1.2rem] border border-black/10 bg-white/90 px-4 py-3 text-sm text-brand-900"
+                            />
+                            <button
+                                type="submit"
+                                className="focus-ring inline-flex w-full items-center justify-center rounded-full bg-brand-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-800"
+                            >
+                                Daftar sekarang
+                            </button>
+                        </form>
+                        <p className="mt-3 text-xs text-brand-900/70">
+                            Kami hanya mengirim email bulanan. Anda dapat berhenti berlangganan kapan saja.
+                        </p>
                     </div>
                 </div>
             </section>
