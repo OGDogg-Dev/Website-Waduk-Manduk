@@ -95,6 +95,29 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.87 0 0);
+
+    /* public brand tokens */
+    --text/primary: #0b1f33;
+    --text/muted: rgba(11, 31, 51, 0.86);
+    --text/subtle: rgba(11, 31, 51, 0.68);
+    --surface/0: #ffffff;
+    --surface/1: #f4f7fb;
+    --surface/2: #e7eff7;
+    --surface/3: #d9e7f3;
+    --brand/700: #0f3f6d;
+    --brand/500: #0f4c81;
+    --brand/300: #3a7ab2;
+    --accent/600: #d68b1a;
+    --overlay/700: rgba(5, 14, 25, 0.6);
+    --overlay/600: rgba(5, 14, 25, 0.48);
+    --on-media: #ffffff;
+    --on-media-muted: rgba(255, 255, 255, 0.88);
+    --scrim: linear-gradient(
+        180deg,
+        rgba(3, 7, 18, 0.64) 0%,
+        rgba(3, 7, 18, 0.48) 45%,
+        rgba(3, 7, 18, 0)
+    );
 }
 
 .dark {
@@ -151,6 +174,32 @@
     --brand-foam: #eef5ff;
 }
 
+@layer components {
+    .hero-scrim {
+        position: relative;
+        isolation: isolate;
+    }
+
+    .hero-scrim::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--scrim);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .on-media {
+        color: var(--on-media);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+
+    .on-media-muted {
+        color: var(--on-media-muted);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.32);
+    }
+}
+
 @layer utilities {
     .bg-deep-navy {
         background-color: var(--brand-navy);
@@ -185,6 +234,26 @@
         color: var(--brand-sky);
     }
 
+    .text-brand-primary {
+        color: var(--brand/700);
+    }
+
+    .bg-brand-primary {
+        background-color: var(--brand/700);
+    }
+
+    .bg-brand-soft {
+        background-color: var(--surface/1);
+    }
+
+    .text-muted-strong {
+        color: var(--text/muted);
+    }
+
+    .text-subtle {
+        color: var(--text/subtle);
+    }
+
     .shadow-reef {
         box-shadow: 0 20px 60px rgba(0, 27, 59, 0.35);
     }
@@ -193,4 +262,13 @@
         background-image: radial-gradient(rgba(0, 27, 59, 0.08) 1px, transparent 0);
         background-size: 18px 18px;
     }
+
+    .focus-visible-outline {
+        @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-primary/70;
+    }
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(11, 31, 51, 0.55);
 }

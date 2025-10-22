@@ -68,14 +68,15 @@ export default function VisitPage({
                                 temperature={status.temperature}
                                 advisory={status.advisory}
                                 startLabel="Status terbaru"
+                                tone="dark"
                             />
                         )}
 
                         <div className="space-y-6">
                             <div className="space-y-3">
                                 <p className="text-sm uppercase tracking-[0.4em] text-sky-light">Denah Spot & Jalur</p>
-                                <h2 className="text-3xl font-semibold md:text-4xl">Rancang pengalaman jelajah Anda</h2>
-                                <p className="max-w-2xl text-sm text-white/75">
+                                <h2 className="text-3xl font-semibold text-on-media md:text-4xl">Rancang pengalaman jelajah Anda</h2>
+                                <p className="max-w-2xl text-sm leading-relaxed text-on-media-muted">
                                     Spot dikelompokkan berdasarkan kategori agar memudahkan perencanaan rute dan aktivitas konservasi.
                                 </p>
                             </div>
@@ -102,16 +103,16 @@ export default function VisitPage({
                                     key={type}
                                     className="overflow-hidden rounded-2xl border border-deep-navy/10 bg-foam"
                                 >
-                                    <summary className="cursor-pointer list-none px-6 py-4 text-sm font-semibold uppercase tracking-[0.3em] text-deep-navy">
+                                    <summary className="cursor-pointer list-none px-6 py-4 text-sm font-semibold uppercase tracking-[0.25em] text-deep-navy">
                                         {typeLabels[type] ?? type}
                                     </summary>
                                     <div className="space-y-2 px-6 pb-6">
-                                        <ul className="grid gap-3 text-sm text-deep-navy/70 md:grid-cols-2">
+                                        <ul className="grid gap-3 text-sm text-deep-navy/80 md:grid-cols-2">
                                             {items.map((item) => (
                                                 <li key={item.id} className="rounded-xl border border-deep-navy/10 bg-white p-4 shadow-reef/10">
                                                     <p className="font-semibold text-deep-navy">{item.name}</p>
                                                     {item.headline && (
-                                                        <p className="text-xs text-deep-navy/60">{item.headline}</p>
+                                                        <p className="text-xs text-deep-navy/70">{item.headline}</p>
                                                     )}
                                                 </li>
                                             ))}
@@ -143,7 +144,7 @@ export default function VisitPage({
                             <p className="text-sm uppercase tracking-[0.4em] text-[#0f4c81]">Tips Persiapan</p>
                             <h3 className="text-3xl font-semibold md:text-4xl">Hal-hal penting sebelum berangkat</h3>
                         </div>
-                        <ul className="grid gap-4 text-sm text-deep-navy/70 md:grid-cols-2">
+                        <ul className="grid gap-4 text-sm text-deep-navy/80 md:grid-cols-2">
                             {visitTips.map((tip, index) => (
                                 <li
                                     key={`${tip}-${index}`}

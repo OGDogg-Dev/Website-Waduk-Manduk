@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useMemo } from 'react';
 import type { ReactNode } from 'react';
+import { AdminQuickActions } from '@/components/admin/layout/admin-quick-actions';
 
 interface AdminLayoutProps {
     title: string;
@@ -86,25 +87,39 @@ export function AdminLayout({
     );
 
     const renderNav = () => (
-        <nav className="flex flex-1 flex-col gap-1">
+        <nav className="flex flex-1 flex-col gap-1" aria-label="Navigasi admin">
             {navItems.map((item) => {
                 const isActive =
                     currentUrl === item.match ||
                     currentUrl.startsWith(`${item.match}/`);
+                const metaLabel = item.label.toLowerCase();
 
                 return (
                     <Link
                         key={item.href}
                         href={item.href}
                         className={cn(
-                            'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-primary/10 hover:text-primary',
+                            'group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40',
                             isActive
-                                ? 'bg-primary/10 text-primary'
-                                : 'text-muted-foreground',
+                                ? 'bg-primary/10 text-primary shadow-sm shadow-primary/20 ring-1 ring-primary/15'
+                                : 'text-muted-foreground hover:bg-primary/5 hover:text-primary',
                         )}
+                        aria-current={isActive ? 'page' : undefined}
                     >
-                        <item.icon className="size-4 shrink-0" />
-                        {item.label}
+                        <span
+                            className={cn(
+                                'flex h-8 w-8 items-center justify-center rounded-full border border-transparent bg-primary/5 text-primary transition group-hover:border-primary/40 group-hover:bg-primary/10',
+                                isActive && 'border-primary/40 bg-primary/10',
+                            )}
+                        >
+                            <item.icon className="size-4" aria-hidden />
+                        </span>
+                        <span className="flex flex-col">
+                            <span>{item.label}</span>
+                            <span className="text-[11px] font-normal uppercase tracking-[0.22em] text-muted-foreground group-hover:text-primary/80">
+                                {metaLabel}
+                            </span>
+                        </span>
                     </Link>
                 );
             })}
@@ -116,7 +131,7 @@ export function AdminLayout({
     };
 
     const HeaderContent = () => (
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-background/95 px-4 backdrop-blur sm:px-6">
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/80 bg-background/95/95 px-4 backdrop-blur sm:px-6">
             <div className="flex items-center gap-3">
                 <Sheet>
                     <SheetTrigger asChild className="lg:hidden">
@@ -158,9 +173,7 @@ export function AdminLayout({
                 <ThemeToggle />
                 <div className="hidden text-right text-sm lg:block">
                     <p className="font-medium text-foreground">{auth.user.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                        {auth.user.email}
-                    </p>
+                    <p className="text-xs text-muted-foreground">{auth.user.email}</p>
                 </div>
                 <Button
                     variant="outline"
@@ -182,9 +195,9 @@ export function AdminLayout({
           ];
 
     return (
-        <div className="min-h-screen bg-muted/10 text-foreground lg:flex">
-            <aside className="hidden w-64 flex-col border-r border-border bg-background/95 px-4 py-6 lg:flex">
-                <div className="pb-6">
+        <div className="relative min-h-screen bg-gradient-to-br from-muted/40 via-background to-muted/60 text-foreground lg:flex">
+            <aside className="hidden w-72 flex-col border-r border-border/70 bg-background/90 px-4 py-6 backdrop-blur lg:flex">
+                <div className="flex flex-col gap-2 pb-6">
                     <Link
                         href={route('admin.dashboard')}
                         className="flex items-center gap-2 text-lg font-semibold"
@@ -192,6 +205,9 @@ export function AdminLayout({
                         <Users className="size-5 text-primary" />
                         <span>Waduk Manduk Admin</span>
                     </Link>
+                    <p className="text-xs leading-relaxed text-muted-foreground">
+                        Kelola konten ekowisata, jadwal event, dan update status lokasi dalam satu tempat.
+                    </p>
                 </div>
                 {renderNav()}
                 <div className="mt-auto space-y-2 border-t border-border pt-4">
@@ -231,7 +247,7 @@ export function AdminLayout({
                                 {actions}
                             </div>
                         )}
-                        <div className="rounded-3xl border border-border/60 bg-background/70 p-6 shadow-sm">
+                        <div className="rounded-3xl border border-border/60 bg-background/80 p-6 shadow-sm">
                             <h1 className="text-2xl font-semibold tracking-tight text-foreground lg:hidden">
                                 {title}
                             </h1>
@@ -245,6 +261,7 @@ export function AdminLayout({
                     </div>
                 </main>
             </div>
+            <AdminQuickActions />
         </div>
     );
 }

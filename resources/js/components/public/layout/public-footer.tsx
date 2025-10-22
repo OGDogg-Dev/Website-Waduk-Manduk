@@ -1,3 +1,4 @@
+
 import { Link } from '@inertiajs/react';
 
 export function PublicFooter() {
@@ -20,75 +21,74 @@ export function PublicFooter() {
                     </defs>
                 </svg>
             </div>
-            <div className="relative mx-auto flex w-full max-w-[1220px] flex-col gap-12 px-6 py-16 sm:px-10">
+            <div className="relative mx-auto flex w-full max-w-[1200px] flex-col gap-12 px-6 py-16 sm:px-10">
                 <div className="grid gap-10 text-sm md:grid-cols-[1.2fr,1fr,1fr]">
                     <div className="space-y-6">
                         <div>
                             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-sky-light">
                                 Ekowisata Waduk Manduk
                             </p>
-                            <h3 className="mt-3 max-w-sm text-2xl font-semibold leading-tight">
+                            <h3 className="mt-3 max-w-sm text-2xl font-semibold leading-tight text-on-media">
                                 Menjaga harmoni alam & budaya lewat pariwisata bahari.
                             </h3>
                         </div>
-                        <p className="max-w-md text-white/70">
-                            Jelajahi keindahan bawah air, dukung UMKM lokal, dan menjadi bagian dari gerakan konservasi air di
-                            Waduk Manduk.
+                        <p className="max-w-md text-on-media-muted">
+                            Jelajahi keindahan bawah air, dukung UMKM lokal, dan menjadi bagian dari gerakan konservasi air di Waduk Manduk.
                         </p>
                     </div>
-                    <div className="grid gap-4 text-white/75">
+                    <div className="grid gap-4 text-on-media-muted">
                         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-light">Kontak</p>
                         <div className="space-y-2">
-                            <p>Jl. Danau Biru No. 88, Desa Manduk, Jawa Timur</p>
-                            <p>Telp. (+62) 812-3456-7890</p>
-                            <p>Email: halo@wadukmanduk.id</p>
+                            <p className="text-on-media">Jl. Danau Biru No. 88, Desa Manduk, Jawa Timur</p>
+                            <p className="text-on-media">Telp. (+62) 812-3456-7890</p>
+                            <p className="text-on-media">Email: halo@wadukmanduk.id</p>
                         </div>
-                        <div className="flex gap-4 text-sm">
-                            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="transition hover:text-gold-accent">
+                        <div className="flex gap-4 text-sm text-on-media">
+                            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="transition hover:text-gold-accent focus-visible-outline">
                                 Instagram
                             </a>
-                            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="transition hover:text-gold-accent">
+                            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="transition hover:text-gold-accent focus-visible-outline">
                                 YouTube
                             </a>
-                            <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="transition hover:text-gold-accent">
+                            <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="transition hover:text-gold-accent focus-visible-outline">
                                 Google Maps
                             </a>
                         </div>
                     </div>
-                    <div className="grid gap-4 text-white/75">
+                    <div className="grid gap-4 text-on-media-muted">
                         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-light">Navigasi</p>
                         <div className="grid gap-2 text-sm">
-                            <Link href={route('visit.plan')} className="transition hover:text-gold-accent">
+                            <Link href={route('visit.plan')} className="transition hover:text-gold-accent focus-visible-outline">
                                 Rencanakan kunjungan
                             </Link>
-                            <Link href={route('explore.index')} className="transition hover:text-gold-accent">
+                            <Link href={route('explore.index')} className="transition hover:text-gold-accent focus-visible-outline">
                                 Jelajah & aktivitas
                             </Link>
-                            <Link href={route('umkm.directory')} className="transition hover:text-gold-accent">
+                            <Link href={route('umkm.directory')} className="transition hover:text-gold-accent focus-visible-outline">
                                 UMKM & kuliner
                             </Link>
-                            <Link href={route('stories.index')} className="transition hover:text-gold-accent">
+                            <Link href={route('stories.index')} className="transition hover:text-gold-accent focus-visible-outline">
                                 Cerita & dokumentasi
                             </Link>
-                            <Link href={route('qris.index')} className="transition hover:text-gold-accent">
+                            <Link href={route('qris.index')} className="transition hover:text-gold-accent focus-visible-outline">
                                 Informasi QRIS
                             </Link>
-                            <Link href={route('support.index')} className="transition hover:text-gold-accent">
+                            <Link href={route('support.index')} className="transition hover:text-gold-accent focus-visible-outline">
                                 Dukung konservasi
                             </Link>
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
-                    <p>© {currentYear} Waduk Manduk. Hak cipta dilindungi.</p>
+                <div className="flex flex-col gap-3 border-t border-white/15 pt-6 text-xs text-on-media-muted sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-on-media">© {currentYear} Waduk Manduk. Hak cipta dilindungi.</p>
                     <div className="flex gap-4">
-                        <Link href={route('about.index')} className="transition hover:text-gold-accent">
+                        <Link href={route('about.index')} className="transition hover:text-gold-accent focus-visible-outline">
                             Tentang Kami
                         </Link>
-                        <Link href={route('support.index')} className="transition hover:text-gold-accent">
+                        <Link href={route('support.index')} className="transition hover:text-gold-accent focus-visible-outline">
                             Dukungan
                         </Link>
-                        <Link href={route('community.index')} className="transition hover:text-gold-accent">
+                        <Link href={route('community.index')} className="transition hover:text-gold-accent focus-visible-outline">
                             Komunitas
                         </Link>
                     </div>

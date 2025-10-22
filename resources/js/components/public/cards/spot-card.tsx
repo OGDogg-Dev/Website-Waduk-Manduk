@@ -32,18 +32,18 @@ export function SpotCard({ name, slug, type, headline, description, hero_image, 
                         className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
-                    <span className="absolute left-5 top-5 inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-deep-navy">
+                    <span className="absolute left-5 top-5 inline-flex rounded-full bg-brand-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white">
                         {type}
                     </span>
                 </div>
             )}
             <div className="flex flex-col gap-3 px-6 pb-6 pt-5">
-                <h3 className="text-xl font-semibold leading-snug">{name}</h3>
-                {headline && <p className="text-sm font-medium text-gold-accent">{headline}</p>}
-                {description && <p className="text-sm text-deep-navy/70 line-clamp-3">{description}</p>}
+                <h3 className="text-xl font-semibold leading-snug text-deep-navy">{name}</h3>
+                {headline && <p className="text-sm font-semibold text-[color:var(--brand/500)]">{headline}</p>}
+                {description && <p className="text-sm leading-relaxed text-deep-navy/80 line-clamp-3">{description}</p>}
                 <Link
                     href={href}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-deep-navy hover:text-gold-accent"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary underline-offset-4 transition hover:underline focus-visible-outline"
                 >
                     Lihat detail
                     <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
