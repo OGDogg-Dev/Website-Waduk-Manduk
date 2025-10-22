@@ -26,18 +26,18 @@ export function HeroBanner({
     return (
         <section
             className={cn(
-                'relative overflow-hidden rounded-[40px] border border-white/10 bg-wave-gradient px-8 py-16 text-white shadow-reef sm:px-12 md:py-20',
+                'relative overflow-hidden rounded-[40px] border border-white/15 bg-wave-gradient px-8 py-16 text-white shadow-reef sm:px-12 md:py-20',
                 className,
             )}
         >
             {background && (
                 <div
-                    className="absolute inset-0 opacity-40"
+                    className="absolute inset-0"
                     style={{
-                        backgroundImage: `url(${background})`,
+                        backgroundImage: `linear-gradient(180deg, rgba(3,7,18,0.55), rgba(3,7,18,0.35) 55%, rgba(3,7,18,0)), url(${background})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
-                        mixBlendMode: 'soft-light',
+                        mixBlendMode: 'normal',
                     }}
                 />
             )}
@@ -56,15 +56,17 @@ export function HeroBanner({
                     </defs>
                 </svg>
             </div>
-            <div className={cn('relative z-10 flex flex-col gap-6', align === 'center' ? 'items-center text-center' : 'items-start text-left')}>
+            <div className={cn('relative z-10 flex flex-col gap-6 text-balance', align === 'center' ? 'items-center text-center' : 'items-start text-left')}>
                 {badgeText && (
-                    <span className="inline-flex w-fit rounded-full bg-white/15 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-sky-light">
+                    <span className="inline-flex w-fit rounded-full bg-white/18 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-sky-light">
                         {badgeText}
                     </span>
                 )}
-                <h1 className="max-w-3xl text-3xl font-semibold leading-tight md:text-5xl">{title}</h1>
+                <h1 className="max-w-3xl text-[clamp(2.25rem,5.5vw,3.25rem)] font-bold leading-tight text-on-media md:text-[50px]">
+                    {title}
+                </h1>
                 {subtitle && (
-                    <p className="max-w-2xl text-base text-white/80 md:text-lg">
+                    <p className="max-w-2xl text-base leading-relaxed text-on-media-muted md:text-lg">
                         {subtitle}
                     </p>
                 )}

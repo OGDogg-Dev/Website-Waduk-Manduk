@@ -94,19 +94,21 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                 'sticky top-0 z-40 w-full transition-all duration-300',
                 resolvedVariant === 'transparent'
                     ? 'bg-transparent'
-                    : 'border-b border-white/10 bg-deep-navy/95/90 backdrop-blur supports-[backdrop-filter]:bg-deep-navy/80 shadow-[0_18px_40px_-28px_rgba(6,40,80,0.7)]',
+                    : 'border-b border-white/15 bg-[color:var(--overlay/700)] backdrop-blur supports-[backdrop-filter]:bg-[color:rgba(3,23,46,0.82)] shadow-[0_18px_40px_-28px_rgba(6,40,80,0.7)]',
             )}
         >
-            <div className="mx-auto flex w-full max-w-[1220px] items-center justify-between px-6 py-4 text-white sm:px-10">
-                <Link href={route('home')} className="flex items-center gap-3">
+            <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-4 text-white sm:px-10">
+                <Link href={route('home')} className="flex items-center gap-3 focus-visible-outline">
                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-wave-gold text-base font-semibold text-deep-navy shadow-reef">
                         WM
                     </span>
                     <div className="flex flex-col">
-                        <span className="text-sm font-semibold uppercase tracking-[0.4em] text-sky-light">
+                        <span className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-light">
                             Waduk Manduk
                         </span>
-                        <span className="text-lg font-semibold tracking-tight">Destinasi Ekowisata Bahari</span>
+                        <span className="text-lg font-semibold tracking-tight text-on-media">
+                            Destinasi Ekowisata Bahari
+                        </span>
                     </div>
                 </Link>
                 <nav className="hidden items-center gap-6 text-sm font-medium lg:flex" aria-label="Navigasi utama">
@@ -118,8 +120,8 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                                 key={item.href}
                                 href={item.href}
                                 className={cn(
-                                    'transition-colors hover:text-gold-accent',
-                                    isActive ? 'text-gold-accent' : 'text-white/80',
+                                    'transition-colors hover:text-gold-accent focus-visible-outline',
+                                    isActive ? 'text-gold-accent' : 'text-on-media-muted',
                                 )}
                                 aria-current={isActive ? 'page' : undefined}
                             >
@@ -129,13 +131,17 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                     })}
                 </nav>
                 <div className="flex items-center gap-2">
-                    <Button size="sm" className="hidden rounded-full bg-gold-accent text-deep-navy shadow-reef hover:bg-gold-accent/90 lg:inline-flex" asChild>
+                    <Button
+                        size="sm"
+                        className="hidden rounded-full bg-gold-accent text-deep-navy shadow-reef hover:bg-gold-accent/90 focus-visible-outline lg:inline-flex"
+                        asChild
+                    >
                         <Link href={route('visit.plan')}>Reservasi</Link>
                     </Button>
                     <Button
                         variant="ghost"
                         size="sm"
-                        className="hidden rounded-full border border-white/20 text-white hover:bg-white/10 lg:inline-flex"
+                        className="hidden rounded-full border border-white/25 text-on-media hover:bg-white/10 focus-visible-outline lg:inline-flex"
                         asChild
                     >
                         <Link href={route('login')}>Masuk Admin</Link>
@@ -145,7 +151,7 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="ml-1 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white hover:bg-white/10 lg:hidden"
+                                className="ml-1 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-on-media hover:bg-white/10 focus-visible-outline lg:hidden"
                                 aria-label="Buka navigasi"
                             >
                                 <Menu className="h-5 w-5" />
@@ -153,7 +159,7 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                         </SheetTrigger>
                         <SheetContent
                             side="right"
-                            className="w-[88vw] max-w-sm border-none bg-gradient-to-b from-deep-navy via-[#0c2f53] to-[#05192f] text-white shadow-reef"
+                            className="w-[88vw] max-w-sm border-none bg-gradient-to-b from-[rgba(2,18,36,0.98)] via-[#0c2f53] to-[#05192f] text-white shadow-reef"
                         >
                             <div className="flex flex-1 flex-col gap-6 py-4">
                                 <div className="flex items-center gap-3">
@@ -164,7 +170,7 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                                         <p className="text-xs font-semibold uppercase tracking-[0.4em] text-sky-light">
                                             Waduk Manduk
                                         </p>
-                                        <p className="text-base font-semibold">Destinasi Ekowisata Bahari</p>
+                                        <p className="text-base font-semibold text-on-media">Destinasi Ekowisata Bahari</p>
                                     </div>
                                 </div>
 
@@ -183,8 +189,8 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                                                     key={`mobile-${item.href}`}
                                                     href={item.href}
                                                     className={cn(
-                                                        'flex items-center justify-between rounded-xl border border-white/5 bg-white/5 px-4 py-3 text-base font-medium transition hover:border-gold-accent/60 hover:bg-white/10',
-                                                        isActive && 'border-gold-accent/60 bg-white/15 text-gold-accent',
+                                                        'flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-base font-medium transition hover:border-gold-accent/60 hover:bg-white/10 focus-visible-outline',
+                                                        isActive && 'border-gold-accent/70 bg-white/15 text-gold-accent',
                                                     )}
                                                     aria-current={isActive ? 'page' : undefined}
                                                 >
@@ -201,7 +207,7 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                                         Aksi cepat
                                     </p>
                                     <Button
-                                        className="w-full justify-between rounded-full bg-gold-accent px-6 text-deep-navy shadow-reef hover:bg-gold-accent/90"
+                                        className="w-full justify-between rounded-full bg-gold-accent px-6 text-deep-navy shadow-reef hover:bg-gold-accent/90 focus-visible-outline"
                                         asChild
                                     >
                                         <Link href={route('visit.plan')}>
@@ -215,7 +221,7 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                                     <div className="grid gap-2 text-sm">
                                         <a
                                             href="https://wa.me/6281234567890"
-                                            className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:border-gold-accent/60 hover:bg-white/10"
+                                            className="flex items-center gap-3 rounded-xl border border-white/15 bg-white/8 px-4 py-3 transition hover:border-gold-accent/60 hover:bg-white/12 focus-visible-outline"
                                         >
                                             <MessageCircle className="h-4 w-4 text-gold-accent" aria-hidden />
                                             <div className="flex flex-col">
@@ -225,7 +231,7 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
                                         </a>
                                         <a
                                             href="tel:+6281234567890"
-                                            className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 transition hover:border-gold-accent/60 hover:bg-white/10"
+                                            className="flex items-center gap-3 rounded-xl border border-white/15 bg-white/8 px-4 py-3 transition hover:border-gold-accent/60 hover:bg-white/12 focus-visible-outline"
                                         >
                                             <Phone className="h-4 w-4 text-gold-accent" aria-hidden />
                                             <div className="flex flex-col">
@@ -238,7 +244,7 @@ export function PublicHeader({ variant = 'transparent' }: PublicHeaderProps) {
 
                                 <Separator className="border-white/10" />
 
-                                <div className="space-y-2 text-xs text-white/70">
+                                <div className="space-y-2 text-xs text-on-media-muted">
                                     <p className="font-semibold uppercase tracking-[0.35em] text-sky-light">
                                         Informasi penting
                                     </p>

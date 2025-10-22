@@ -15,10 +15,10 @@ export function EventsSection({ upcomingEvents }: EventsSectionProps) {
                 <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                     <div className="max-w-xl space-y-4">
                         <p className="text-sm uppercase tracking-[0.4em] text-sky-light">Event & Agenda</p>
-                        <h2 className="text-3xl font-semibold md:text-4xl">
+                        <h2 className="text-3xl font-semibold text-on-media md:text-4xl">
                             Ikuti agenda konservasi, budaya, dan olahraga air
                         </h2>
-                        <p className="text-sm text-white/75">
+                        <p className="text-sm leading-relaxed text-on-media-muted">
                             Tim kami merancang aktivitas sepanjang tahun untuk menjaga ekosistem dan mempererat jejaring komunitas bahari.
                         </p>
                     </div>

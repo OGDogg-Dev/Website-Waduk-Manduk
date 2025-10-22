@@ -42,12 +42,12 @@ export function UmkmCard({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />
                     <div className="absolute left-4 top-4 flex items-center gap-2">
                         {category && (
-                            <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-deep-navy">
+                            <span className="rounded-full bg-brand-primary px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">
                                 {category}
                             </span>
                         )}
                         {is_featured && (
-                            <span className="rounded-full bg-gold-accent px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-deep-navy">
+                            <span className="rounded-full bg-[color:var(--accent/600)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-deep-navy">
                                 Sorotan
                             </span>
                         )}
@@ -55,15 +55,15 @@ export function UmkmCard({
                 </div>
             )}
             <div className="flex flex-1 flex-col gap-3">
-                <h3 className="text-xl font-semibold leading-tight">{name}</h3>
-                {tagline && <p className="text-sm text-deep-navy/70">{tagline}</p>}
+                <h3 className="text-xl font-semibold leading-tight text-deep-navy">{name}</h3>
+                {tagline && <p className="text-sm leading-relaxed text-deep-navy/80">{tagline}</p>}
                 <div className="mt-auto grid gap-2 text-sm font-medium">
                     {whatsapp_number && (
                         <a
                             href={`https://wa.me/${whatsapp_number}`}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center justify-center rounded-full bg-gold-accent px-5 py-2 text-deep-navy transition hover:bg-gold-accent/90"
+                            className="inline-flex items-center justify-center rounded-full bg-gold-accent px-5 py-2 text-deep-navy transition hover:bg-gold-accent/90 focus-visible-outline"
                         >
                             Hubungi via WA
                         </a>
@@ -73,7 +73,7 @@ export function UmkmCard({
                             href={maps_url}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center justify-center rounded-full border border-deep-navy/15 px-5 py-2 text-deep-navy transition hover:border-gold-accent hover:text-gold-accent"
+                            className="inline-flex items-center justify-center rounded-full border border-deep-navy/20 px-5 py-2 text-deep-navy transition hover:border-gold-accent hover:text-gold-accent focus-visible-outline"
                         >
                             Buka Maps
                         </a>
