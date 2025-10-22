@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\EventStatus;
+use App\Enums\ContentStatus;
 use App\Http\Requests\Admin\Event\EventStoreRequest;
 use App\Http\Requests\Admin\Event\EventUpdateRequest;
 use App\Models\Event;
@@ -142,9 +142,11 @@ class EventController extends AdminController
 
     private function formOptions(): array
     {
-        $status = collect(EventStatus::cases())->map(fn ($status) => [
+        $status = collect(ContentStatus::cases())->filter(function (ContentStatus $status) {
+            return $status !== ContentStatus::ARCHIVED;
+        })->map(fn (ContentStatus $status) => [
             'value' => $status->value,
-            'label' => ucfirst($status->label()),
+            'label' => ucfirst($status->value),
         ])->values()->all();
 
         $types = Event::query()

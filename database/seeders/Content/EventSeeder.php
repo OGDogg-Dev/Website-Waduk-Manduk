@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Content;
 
-use App\Enums\EventStatus;
+use App\Enums\ContentStatus;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -21,7 +21,7 @@ class EventSeeder extends Seeder
                 'summary' => 'Tur 90 menit mengelilingi jalur interpretasi rawa untuk mempelajari ekosistem waduk.',
                 'body' => 'Peserta diajak mengenal jenis burung air dan tanaman khas rawa Manduk. Termasuk sesi praktik singkat mencatat temuan.',
                 'location' => 'Jalur Interpretasi Rawa',
-                'status' => EventStatus::SCHEDULED,
+                'status' => ContentStatus::REVIEW,
                 'start_at' => Carbon::now()->addDays(7)->setTime(8, 0),
                 'end_at' => Carbon::now()->addDays(7)->setTime(10, 0),
                 'event_type' => 'tur-edukasi',
@@ -44,7 +44,7 @@ class EventSeeder extends Seeder
                 'summary' => 'Menikmati ragam kuliner desa, live akustik, dan demo memasak bahan lokal.',
                 'body' => 'Acara rutin yang menghadirkan 15 UMKM mitra dengan fokus menu berbahan hasil kebun warga.',
                 'location' => 'Lapangan Komunitas',
-                'status' => EventStatus::PUBLISHED,
+                'status' => ContentStatus::PUBLISHED,
                 'start_at' => Carbon::now()->addDays(3)->setTime(16, 0),
                 'end_at' => Carbon::now()->addDays(3)->setTime(20, 0),
                 'event_type' => 'festival',
@@ -65,7 +65,7 @@ class EventSeeder extends Seeder
                 array_merge($attributes, [
                     'created_by' => $admin?->id,
                     'updated_by' => $admin?->id,
-                    'published_at' => $attributes['status'] === EventStatus::PUBLISHED
+                    'published_at' => $attributes['status'] === ContentStatus::PUBLISHED
                         ? ($attributes['published_at'] ?? now()->subDay())
                         : $attributes['published_at'] ?? null,
                 ])

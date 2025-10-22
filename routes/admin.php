@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\SiteStatusController;
 use App\Http\Controllers\Admin\SpotController;
 use App\Http\Controllers\Admin\StoryController;
 use App\Http\Controllers\Admin\UmkmController;
+use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])
@@ -18,6 +20,8 @@ Route::middleware(['auth', 'verified'])
         Route::resource('umkm', UmkmController::class);
         Route::resource('events', EventController::class);
         Route::resource('stories', StoryController::class);
+        Route::resource('posts', PostController::class);
+        Route::resource('media', MediaController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('site-statuses', SiteStatusController::class)->except('show');
     });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Event;
 
+use App\Enums\ContentStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
@@ -30,7 +31,7 @@ abstract class EventRequest extends FormRequest
             'summary' => ['nullable', 'string'],
             'body' => ['nullable', 'string'],
             'location' => ['nullable', 'string', 'max:180'],
-            'status' => ['required', 'string', 'in:draft,scheduled,published,completed,cancelled'],
+            'status' => ['required', 'string', Rule::in($this->statusValues())],
             'is_featured' => ['sometimes', 'boolean'],
             'start_at' => ['nullable', 'date'],
             'end_at' => ['nullable', 'date'],
@@ -75,4 +76,16 @@ abstract class EventRequest extends FormRequest
     }
 
     abstract protected function eventId(): ?int;
+
+    /**
+     * @return array<int, string>
+     */
+    protected function statusValues(): array
+    {
+        return collect(ContentStatus::cases())
+            ->reject(fn (ContentStatus $status) => $status === ContentStatus::ARCHIVED)
+            ->map(fn (ContentStatus $status) => $status->value)
+            ->values()
+            ->all();
+    }
 }

@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App\Domain\Content\Models;
 
 use App\Domain\Shared\Concerns\HasSlugFromTitle;
 use App\Enums\ContentStatus;
-use App\Enums\StoryType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Story extends Model
+class Post extends Model
 {
     use HasFactory;
     use HasSlugFromTitle;
@@ -22,41 +21,42 @@ class Story extends Model
     protected $fillable = [
         'title',
         'slug',
-        'type',
-        'status',
-        'hero_image',
         'excerpt',
         'body',
-        'tags',
-        'gallery',
-        'source_name',
-        'source_url',
+        'status',
+        'cover_media_id',
         'published_at',
-        'author_id',
-        'reviewed_by',
-        'metadata',
+        'meta',
+        'created_by',
+        'updated_by',
     ];
 
     /**
      * @var array<string, string>
      */
     protected $casts = [
-        'type' => StoryType::class,
         'status' => ContentStatus::class,
-        'tags' => 'array',
-        'gallery' => 'array',
-        'metadata' => 'array',
         'published_at' => 'datetime',
+        'meta' => 'array',
     ];
+
+    protected $attributes = [
+        'status' => ContentStatus::DRAFT->value,
+    ];
+
+    public function coverMedia(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'cover_media_id');
+    }
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function reviewer(): BelongsTo
+    public function editor(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'reviewed_by');
+        return $this->belongsTo(User::class, 'updated_by');
     }
 
     public function scopePublished(Builder $query): Builder

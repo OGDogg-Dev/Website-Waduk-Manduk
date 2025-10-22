@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Database\Seeders\Content\EventSeeder;
+use Database\Seeders\Content\PostSeeder;
 use Database\Seeders\Content\SpotSeeder;
 use Database\Seeders\Content\StorySeeder;
 use Database\Seeders\Content\UmkmSeeder;
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             HomepageSeeder::class,
             SpotSeeder::class,
             UmkmSeeder::class,
+            PostSeeder::class,
             EventSeeder::class,
             StorySeeder::class,
         ]);
