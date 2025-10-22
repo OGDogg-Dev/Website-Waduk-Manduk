@@ -106,7 +106,7 @@ export default function HomePage({
     ];
 
     return (
-        <PublicLayout hero={<HomeHero status={status} quickHelpItems={quickHelpItems} />}> 
+        <PublicLayout hero={<HomeHero status={status} quickHelpItems={quickHelpItems} />}>
             <Head title="Beranda">
                 <meta
                     name="description"
@@ -121,21 +121,22 @@ export default function HomePage({
                 <link rel="canonical" href={route('home')} />
             </Head>
 
-            <section className="relative overflow-hidden bg-surface-0 py-16 lg:py-24">
-                <div className="absolute inset-x-[-30vw] bottom-[-20%] z-0 h-[30rem] rounded-[48rem] bg-gradient-to-r from-accent-200/30 via-accent-100/40 to-brand-100/40 blur-3xl" aria-hidden />
-                <div className="container relative z-10 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+            <section className="relative overflow-hidden bg-surface-0 py-20 lg:py-[6.5rem]">
+                <div className="absolute inset-x-[-20%] top-[-18rem] h-[30rem] rounded-full bg-brand-200/20 blur-[120px]" aria-hidden />
+                <div className="absolute inset-x-[-30vw] bottom-[-30%] h-[36rem] rounded-[48rem] bg-gradient-to-r from-accent-200/40 via-accent-100/40 to-brand-100/40 blur-3xl" aria-hidden />
+                <div className="container relative grid gap-14 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center">
                     <div className="space-y-8">
                         <div className="space-y-3">
-                            <p className="eyebrow text-xs text-brand-600">Narasi konservasi</p>
-                            <h2 className="text-h2 text-text-primary">Selamat datang di pusat edukasi Waduk Manduk</h2>
+                            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-600">Narasi konservasi</p>
+                            <h2 className="text-h2 text-text-primary">Program edukasi lapangan yang tersusun rapi</h2>
                             <p className="text-text-secondary">
-                                Ragam aktivitas bahari kami dirancang menyatu dengan konservasi dan pemberdayaan masyarakat pesisir. Dapatkan panduan lengkap untuk setiap rombongan, dari siswa hingga peneliti.
+                                Setiap kunjungan dirancang untuk mempertemukan wisatawan dengan cerita konservasi. Materi edukasi, perangkat keselamatan, hingga jalur interpretasi tersusun sistematis di bawah koordinasi tim Waduk Manduk.
                             </p>
                         </div>
-                        <ul className="space-y-5">
+                        <ul className="grid gap-5 sm:grid-cols-2">
                             {stewardshipHighlights.map((item) => (
-                                <li key={item.title} className="flex gap-4 rounded-3xl border border-surface-3/80 bg-white/80 p-5 shadow-soft backdrop-blur">
-                                    <span className="mt-1 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-brand-100 text-brand-700">
+                                <li key={item.title} className="flex gap-4 rounded-[2rem] border border-surface-3/80 bg-white/80 p-6 shadow-soft backdrop-blur">
+                                    <span className="mt-1 inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-brand-100 text-brand-700 shadow-soft">
                                         <CheckCircle2 className="h-5 w-5" aria-hidden />
                                     </span>
                                     <div className="space-y-2">
@@ -146,12 +147,12 @@ export default function HomePage({
                             ))}
                         </ul>
                     </div>
-                    <div className="grid gap-5">
+                    <div className="grid gap-6">
                         {discoveryPrograms.map((program) => (
                             <Link
                                 key={program.title}
                                 href={program.href}
-                                className="focus-ring group relative overflow-hidden rounded-3xl border border-brand-200/60 bg-gradient-to-br from-white via-surface-0 to-brand-50 p-6 shadow-soft transition hover:-translate-y-1 hover:border-brand-300"
+                                className="focus-ring group relative overflow-hidden rounded-[2.3rem] border border-brand-200/70 bg-gradient-to-br from-white via-surface-0 to-brand-50 p-7 shadow-soft transition hover:-translate-y-1 hover:border-brand-300"
                             >
                                 <div className="flex items-start gap-4">
                                     <span className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-brand-900 text-on-dark shadow-soft">
@@ -166,24 +167,29 @@ export default function HomePage({
                                         </span>
                                     </div>
                                 </div>
+                                <div className="absolute right-[-40px] top-1/2 hidden h-[120%] w-[160px] -translate-y-1/2 rounded-full bg-gradient-to-b from-brand-200/30 via-accent-200/30 to-transparent blur-3xl sm:block" aria-hidden />
                             </Link>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section className="relative overflow-hidden bg-gradient-to-b from-brand-950 via-brand-900 to-brand-950 py-16 text-on-dark lg:py-24">
-                <div className="absolute inset-x-[-10%] top-[-30%] h-[28rem] rounded-full bg-accent-500/20 blur-3xl" aria-hidden />
-                <div className="container relative z-10 space-y-10">
+            <section className="relative overflow-hidden bg-gradient-to-b from-brand-970 via-brand-950 to-brand-980 py-20 text-on-dark lg:py-[6.5rem]">
+                <div className="absolute inset-x-[-20%] top-[-35%] h-[28rem] rounded-full bg-accent-400/25 blur-[150px]" aria-hidden />
+                <div className="absolute inset-x-[-10%] bottom-[-25%] h-[32rem] rounded-full bg-brand-800/30 blur-[180px]" aria-hidden />
+                <div className="container relative space-y-12">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                         <div className="max-w-2xl space-y-3">
                             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-accent-200/80">Sorotan destinasi</p>
-                            <h2 className="text-h2 text-white">Eksplorasi spot terbaik & UMKM unggulan</h2>
+                            <h2 className="text-h2 text-white">Eksplorasi spot terbaik &amp; UMKM unggulan</h2>
                             <p className="text-sm text-accent-100/90">
                                 Kurasi lokasi snorkeling, jalur konservasi, hingga kios kuliner hasil laut berkelanjutan yang bisa Anda dukung.
                             </p>
                         </div>
-                        <Link href={route('umkm.directory')} className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-semibold hover:border-white/40 hover:bg-white/10">
+                        <Link
+                            href={route('umkm.directory')}
+                            className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-semibold transition hover:border-white/40 hover:bg-white/10"
+                        >
                             Direktori lengkap
                         </Link>
                     </div>
@@ -197,25 +203,28 @@ export default function HomePage({
                             ))}
                         </div>
                     ) : (
-                        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 text-sm text-accent-100/90">
+                        <div className="rounded-[2.5rem] border border-white/20 bg-white/10 p-8 text-sm text-accent-100/90">
                             Sorotan destinasi akan tampil setelah konten dipublikasikan melalui panel admin.
                         </div>
                     )}
                 </div>
             </section>
 
-            <section className="relative overflow-hidden bg-surface-1 py-16 lg:py-24">
-                <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-brand-900/15 to-transparent" aria-hidden />
-                <div className="container relative z-10 space-y-10">
+            <section className="relative overflow-hidden bg-surface-1 py-20 lg:py-[6.5rem]">
+                <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-brand-900/10 to-transparent" aria-hidden />
+                <div className="container relative space-y-10">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                         <div className="space-y-3">
-                            <p className="eyebrow text-xs text-brand-600">Agenda konservasi & budaya</p>
+                            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-600">Agenda konservasi &amp; budaya</p>
                             <h2 className="text-h2 text-text-primary">Jadwal kegiatan terdekat</h2>
                             <p className="text-text-secondary">
                                 Ikuti workshop konservasi, susur waduk tematik, hingga festival budaya tahunan.
                             </p>
                         </div>
-                        <Link href={route('visit.plan')} className="focus-ring inline-flex items-center gap-2 rounded-full border border-brand-200 px-5 py-3 text-sm font-semibold text-brand-700 transition hover:border-brand-400 hover:text-brand-900">
+                        <Link
+                            href={route('visit.plan')}
+                            className="focus-ring inline-flex items-center gap-2 rounded-full border border-brand-200 px-5 py-3 text-sm font-semibold text-brand-700 transition hover:border-brand-400 hover:text-brand-900"
+                        >
                             Semua agenda →
                         </Link>
                     </div>
@@ -226,18 +235,18 @@ export default function HomePage({
                             ))}
                         </div>
                     ) : (
-                        <div className="rounded-3xl border border-dashed border-brand-200 bg-white/70 p-8 text-sm text-text-secondary">
+                        <div className="rounded-[2.5rem] border border-dashed border-brand-200 bg-white/70 p-8 text-sm text-text-secondary">
                             Belum ada agenda terjadwal. Tambahkan event melalui admin untuk menampilkannya di sini.
                         </div>
                     )}
                 </div>
             </section>
 
-            <section className="relative overflow-hidden bg-surface-0 py-16 lg:py-24">
-                <div className="container space-y-12">
-                    <div className="grid gap-10 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)] lg:items-center">
-                        <div className="space-y-5">
-                            <p className="eyebrow text-xs text-brand-600">Panduan berkunjung bertanggung jawab</p>
+            <section className="relative overflow-hidden bg-surface-0 py-20 lg:py-[6.5rem]">
+                <div className="container space-y-16">
+                    <div className="grid gap-12 lg:grid-cols-[minmax(0,0.58fr)_minmax(0,1fr)] lg:items-center">
+                        <div className="space-y-6">
+                            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-600">Panduan berkunjung bertanggung jawab</p>
                             <h2 className="text-h2 text-text-primary">Tiga langkah agar pengalaman Anda berdampak baik</h2>
                             <p className="text-text-secondary">
                                 Setiap aktivitas di Waduk Manduk memprioritaskan keselamatan, konservasi, dan keberlanjutan ekonomi lokal. Ikuti tahapan berikut sebelum berangkat.
@@ -247,7 +256,7 @@ export default function HomePage({
                                     <Link
                                         key={step.title}
                                         href={step.href}
-                                        className="focus-ring group flex gap-4 rounded-3xl border border-surface-3/80 bg-white p-5 shadow-soft transition hover:-translate-y-0.5 hover:border-brand-200"
+                                        className="focus-ring group flex gap-4 rounded-[2.3rem] border border-surface-3/80 bg-white p-6 shadow-soft transition hover:-translate-y-0.5 hover:border-brand-200"
                                     >
                                         <span className="mt-1 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-brand-100 text-brand-700">
                                             <LifeBuoy className="h-5 w-5" aria-hidden />
@@ -264,33 +273,39 @@ export default function HomePage({
                                 ))}
                             </div>
                         </div>
-                        <div className="rounded-[2.5rem] border border-brand-200/80 bg-gradient-to-br from-brand-50 via-white to-accent-50 p-8 shadow-soft">
-                            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-500">Status lokasi terbaru</p>
-                            <p className="mt-4 text-lg font-semibold text-text-primary">
-                                Pantau kondisi waduk sebelum berangkat agar aktivitas konservasi berjalan aman dan nyaman.
-                            </p>
-                            <div className="mt-6">
-                                <StatusBanner
-                                    tone="light"
-                                    crowd_level={status?.crowd_level}
-                                    weather_summary={status?.weather_summary}
-                                    temperature={status?.temperature}
-                                    advisory={status?.advisory}
-                                />
+                        <div className="relative">
+                            <div className="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-brand-100/60 via-accent-100/40 to-transparent blur-2xl" aria-hidden />
+                            <div className="rounded-[2.7rem] border border-brand-200/80 bg-gradient-to-br from-brand-50 via-white to-accent-50 p-8 shadow-soft">
+                                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-500">Status lokasi terbaru</p>
+                                <p className="mt-4 text-lg font-semibold text-text-primary">
+                                    Pantau kondisi waduk sebelum berangkat agar aktivitas konservasi berjalan aman dan nyaman.
+                                </p>
+                                <div className="mt-6">
+                                    <StatusBanner
+                                        tone="light"
+                                        crowd_level={status?.crowd_level}
+                                        weather_summary={status?.weather_summary}
+                                        temperature={status?.temperature}
+                                        advisory={status?.advisory}
+                                    />
+                                </div>
+                                <p className="mt-6 text-sm text-text-secondary">
+                                    Pusat kontrol akan memberi notifikasi ketika kondisi lapangan berubah melalui kanal media sosial resmi.
+                                </p>
                             </div>
-                            <p className="mt-6 text-sm text-text-secondary">
-                                Pusat kontrol akan memberi notifikasi ketika kondisi lapangan berubah melalui kanal media sosial resmi.
-                            </p>
                         </div>
                     </div>
 
-                    <div className="space-y-6">
+                    <div className="space-y-8">
                         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
                             <div>
-                                <p className="eyebrow text-xs text-brand-600">Cerita terbaru</p>
+                                <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-600">Cerita terbaru</p>
                                 <h2 className="text-h2 text-text-primary">Update dari lapangan</h2>
                             </div>
-                            <Link href={route('stories.index')} className="focus-ring inline-flex items-center gap-2 rounded-full border border-brand-200 px-5 py-3 text-sm font-semibold text-brand-700 transition hover:border-brand-400 hover:text-brand-900">
+                            <Link
+                                href={route('stories.index')}
+                                className="focus-ring inline-flex items-center gap-2 rounded-full border border-brand-200 px-5 py-3 text-sm font-semibold text-brand-700 transition hover:border-brand-400 hover:text-brand-900"
+                            >
                                 Semua berita →
                             </Link>
                         </div>
@@ -301,10 +316,41 @@ export default function HomePage({
                                 ))}
                             </div>
                         ) : (
-                            <div className="rounded-3xl border border-dashed border-brand-200 bg-white/70 p-8 text-sm text-text-secondary">
+                            <div className="rounded-[2.5rem] border border-dashed border-brand-200 bg-white/70 p-8 text-sm text-text-secondary">
                                 Belum ada artikel yang terbit. Cerita akan muncul otomatis setelah diterbitkan di admin.
                             </div>
                         )}
+                    </div>
+                </div>
+            </section>
+
+            <section className="relative overflow-hidden bg-brand-980 py-20 text-on-dark lg:py-[6rem]">
+                <div className="absolute inset-x-[-15%] top-[-25%] h-[26rem] rounded-full bg-accent-500/20 blur-[150px]" aria-hidden />
+                <div className="container relative">
+                    <div className="rounded-[3rem] border border-white/15 bg-gradient-to-r from-white/10 via-white/5 to-transparent p-10 shadow-soft backdrop-blur">
+                        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.65fr)_minmax(0,1fr)] lg:items-center">
+                            <div className="space-y-4">
+                                <p className="text-xs font-semibold uppercase tracking-[0.32em] text-accent-200/80">Ikuti kabar terbaru</p>
+                                <h2 className="text-h3 font-semibold text-white">Terhubung dengan pusat informasi Waduk Manduk</h2>
+                                <p className="text-sm text-accent-100/90">
+                                    Dapatkan pengumuman status kunjungan, cerita konservasi, dan agenda terbaru langsung dari tim pengelola.
+                                </p>
+                            </div>
+                            <div className="flex flex-wrap gap-3 lg:justify-end">
+                                <Link
+                                    href={route('community.index')}
+                                    className="focus-ring inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-on-media transition hover:border-white/40 hover:bg-white/15"
+                                >
+                                    Lihat galeri komunitas
+                                </Link>
+                                <Link
+                                    href={route('support.index')}
+                                    className="focus-ring inline-flex items-center gap-2 rounded-full bg-accent-400 px-6 py-3 text-sm font-semibold text-brand-950 shadow-soft transition hover:-translate-y-0.5 hover:bg-accent-300"
+                                >
+                                    Hubungi pusat informasi
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
