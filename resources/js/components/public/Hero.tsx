@@ -23,6 +23,7 @@ interface HeroProps {
     subtitle?: string;
     eyebrow?: string;
     actions?: HeroAction[];
+    media?: ReactNode;
     children?: ReactNode;
 }
 
@@ -36,6 +37,7 @@ export function Hero({
     subtitle,
     eyebrow,
     actions,
+    media,
     children,
 }: HeroProps) {
     return (
@@ -58,39 +60,49 @@ export function Hero({
             </picture>
             <div className="absolute inset-0 -z-10 bg-brand-900/40" aria-hidden />
             <div className="relative z-10">
-                <div className="container flex flex-col gap-10 py-16 lg:py-24">
-                    <div className="max-w-3xl space-y-6 on-media">
-                        {eyebrow && (
-                            <span className="inline-flex items-center rounded-full border border-white/40 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em]">
-                                {eyebrow}
-                            </span>
+                <div className="container flex flex-col gap-12 py-16 lg:gap-16 lg:py-24">
+                    <div
+                        className={cn(
+                            'grid gap-10',
+                            media
+                                ? 'lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start'
+                                : 'max-w-3xl',
                         )}
-                        <h1 className="font-semibold leading-tight">{title}</h1>
-                        {subtitle && (
-                            <p className="max-w-2xl text-lg text-[color:var(--text-on-media-muted)]">{subtitle}</p>
-                        )}
-                        {actions && actions.length > 0 && (
-                            <div className="flex flex-wrap gap-3">
-                                {actions.map(({ label, href, icon, variant = 'primary', target, rel, className }) => (
-                                    <a
-                                        key={label}
-                                        href={href}
-                                        target={target}
-                                        rel={rel}
-                                        className={cn(
-                                            'focus-ring inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition',
-                                            variant === 'primary'
-                                                ? 'bg-accent-500 text-on-dark shadow-soft hover:bg-accent-400'
-                                                : 'btn-ghost',
-                                            className,
-                                        )}
-                                    >
-                                        {icon}
-                                        <span>{label}</span>
-                                    </a>
-                                ))}
-                            </div>
-                        )}
+                    >
+                        <div className={cn('on-media space-y-6', media ? 'lg:max-w-2xl' : 'max-w-3xl')}>
+                            {eyebrow && (
+                                <span className="inline-flex items-center rounded-full border border-white/40 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.32em]">
+                                    {eyebrow}
+                                </span>
+                            )}
+                            <h1 className="font-semibold leading-tight">{title}</h1>
+                            {subtitle && (
+                                <p className="max-w-2xl text-lg text-[color:var(--text-on-media-muted)]">{subtitle}</p>
+                            )}
+                            {actions && actions.length > 0 && (
+                                <div className="flex flex-wrap gap-3">
+                                    {actions.map(({ label, href, icon, variant = 'primary', target, rel, className }) => (
+                                        <a
+                                            key={label}
+                                            href={href}
+                                            target={target}
+                                            rel={rel}
+                                            className={cn(
+                                                'focus-ring inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition',
+                                                variant === 'primary'
+                                                    ? 'bg-accent-500 text-on-dark shadow-soft hover:bg-accent-400'
+                                                    : 'btn-ghost',
+                                                className,
+                                            )}
+                                        >
+                                            {icon}
+                                            <span>{label}</span>
+                                        </a>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        {media && <div className="relative flex justify-end">{media}</div>}
                     </div>
                     {children}
                 </div>
@@ -99,11 +111,11 @@ export function Hero({
                 <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
                     <path
                         d="M0,192L60,202.7C120,213,240,235,360,224C480,213,600,171,720,154.7C840,139,960,149,1080,170.7C1200,192,1320,224,1380,240L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-                        fill="rgba(3,32,72,0.55)"
+                        fill="#052651"
                     />
                     <path
                         d="M0,256L60,245.3C120,235,240,213,360,208C480,203,600,213,720,213.3C840,213,960,203,1080,186.7C1200,171,1320,149,1380,138.7L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-                        fill="rgba(47,173,166,0.6)"
+                        fill="#f8be55"
                     />
                     <path
                         d="M0,288L60,288C120,288,240,288,360,272C480,256,600,224,720,224C840,224,960,256,1080,272C1200,288,1320,288,1380,288L1440,288L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
