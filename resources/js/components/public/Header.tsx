@@ -31,7 +31,7 @@ export function Header() {
 
     return (
         <header className="relative text-white">
-            <div className="relative border-b border-white/10 bg-navy-900/95 backdrop-blur">
+            <div className="relative border-b border-white/12 bg-navy-900/95 backdrop-blur">
                 <div
                     className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-gold-600 via-gold-500 to-sky-400"
                     aria-hidden
@@ -61,17 +61,17 @@ export function Header() {
                                 key={item.href}
                                 href={item.href}
                                 className={cn(
-                                    'focus-ring relative px-1 py-2 transition-colors focus-visible:text-gold-500',
+                                    'focus-ring group relative px-1 py-2 transition-colors focus-visible:text-gold-400',
                                     isActive(item.match)
-                                        ? 'text-gold-400'
-                                        : 'text-white/75 hover:text-white',
+                                        ? 'text-gold-300'
+                                        : 'text-white/80 hover:text-white',
                                 )}
                                 aria-current={isActive(item.match) ? 'page' : undefined}
                             >
                                 <span>{item.label}</span>
                                 <span
                                     className={cn(
-                                        'absolute left-0 right-0 -bottom-1 h-0.5 origin-left rounded-full bg-gold-500 transition-transform',
+                                        'pointer-events-none absolute inset-x-0 -bottom-1 h-0.5 origin-left rounded-full bg-gold-400 transition-transform',
                                         isActive(item.match) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
                                     )}
                                     aria-hidden
@@ -80,13 +80,20 @@ export function Header() {
                         ))}
                     </nav>
                     <div className="flex items-center gap-3">
-                        <Button
-                            asChild
-                            size="sm"
-                            className="focus-ring hidden rounded-full bg-gold-500 px-5 text-navy-900 transition hover:bg-gold-400 lg:inline-flex"
-                        >
-                            <Link href={route('visit.plan')}>Reservasi</Link>
-                        </Button>
+                        <div className="hidden items-center gap-3 lg:flex">
+                            <Link
+                                href={route('visit.plan')}
+                                className="focus-ring btn-primary text-xs uppercase tracking-[0.24em] text-navy-900"
+                            >
+                                Registrasi Online
+                            </Link>
+                            <a
+                                href="tel:112"
+                                className="focus-ring btn-ghost text-xs uppercase tracking-[0.24em] text-white hover:border-white/70 hover:text-white"
+                            >
+                                Emergency Call
+                            </a>
+                        </div>
                         <Sheet open={open} onOpenChange={setOpen}>
                             <SheetTrigger asChild>
                                 <Button
@@ -95,7 +102,7 @@ export function Header() {
                                     size="icon"
                                     className="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 text-white hover:bg-white/10 lg:hidden"
                                     aria-label={open ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
-                                    aria-expanded={open}
+                                    aria-expanded={open ? 'true' : 'false'}
                                     aria-controls="menu-mobile"
                                 >
                                     <Menu className="h-5 w-5" aria-hidden />
@@ -120,7 +127,7 @@ export function Header() {
                                                 'focus-ring rounded-xl px-3 py-3 text-base font-semibold transition-colors',
                                                 isActive(item.match)
                                                     ? 'bg-white/15 text-gold-300'
-                                                    : 'hover:bg-white/10',
+                                                    : 'text-white/90 hover:bg-white/10 hover:text-white',
                                             )}
                                             aria-current={isActive(item.match) ? 'page' : undefined}
                                             onClick={() => setOpen(false)}
@@ -129,6 +136,21 @@ export function Header() {
                                         </Link>
                                     ))}
                                 </nav>
+                                <div className="mt-4 flex flex-col gap-3">
+                                    <Link
+                                        href={route('visit.plan')}
+                                        className="focus-ring btn-primary text-center text-xs uppercase tracking-[0.24em] text-navy-900"
+                                        onClick={() => setOpen(false)}
+                                    >
+                                        Registrasi Online
+                                    </Link>
+                                    <a
+                                        href="tel:112"
+                                        className="focus-ring btn-ghost text-center text-xs uppercase tracking-[0.24em] text-white hover:border-white/70 hover:text-white"
+                                    >
+                                        Emergency Call
+                                    </a>
+                                </div>
                                 <Link
                                     href={route('login')}
                                     className="focus-ring rounded-full border border-white/20 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-white/10"
