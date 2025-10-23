@@ -26,6 +26,14 @@ const navigation = [
             { label: 'Pembayaran QRIS', href: route('qris.index') },
         ],
     },
+    {
+        heading: 'Layanan',
+        items: [
+            { label: 'Reservasi', href: route('visit.plan') },
+            { label: 'Masuk Admin', href: route('login') },
+            { label: 'FAQ Wisata', href: route('support.index') },
+        ],
+    },
 ];
 
 const contactInfo = [
@@ -53,7 +61,7 @@ export function Footer() {
             <WaveDivider variant="surface" flip className="text-brand-950" />
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(22,72,143,0.28)_0%,transparent_65%)]" aria-hidden />
             <div className="absolute inset-0 -z-10 bg-[linear-gradient(140deg,rgba(2,8,22,0.96),rgba(4,17,38,0.92))]" aria-hidden />
-            <div className="container grid gap-12 py-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+            <div className="container grid gap-12 py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
                 <div className="space-y-7">
                     <div className="space-y-3">
                         <span className="inline-flex w-max items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-accent-300">
@@ -85,25 +93,41 @@ export function Footer() {
                         ))}
                     </dl>
                 </div>
-                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                    {navigation.map((group) => (
-                        <div key={group.heading} className="space-y-4">
-                            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-accent-300/80">{group.heading}</p>
-                            <ul className="space-y-2 text-sm text-on-media-muted">
-                                {group.items.map((item) => (
-                                    <li key={item.href}>
-                                        <Link
-                                            href={item.href}
-                                            className="focus-ring inline-flex items-center gap-2 transition hover:text-accent-200"
-                                        >
-                                            {item.label}
-                                            <span aria-hidden className="text-xs">→</span>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+                <div className="flex flex-col gap-8 lg:justify-between">
+                    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                        {navigation.map((group) => (
+                            <div key={group.heading} className="space-y-4">
+                                <p className="text-xs font-semibold uppercase tracking-[0.32em] text-accent-300/80">{group.heading}</p>
+                                <ul className="space-y-2 text-sm text-on-media-muted">
+                                    {group.items.map((item) => (
+                                        <li key={item.href}>
+                                            <Link
+                                                href={item.href}
+                                                className="focus-ring inline-flex items-center gap-2 transition hover:text-accent-200"
+                                            >
+                                                {item.label}
+                                                <span aria-hidden className="text-xs">→</span>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="rounded-3xl border border-white/15 bg-white/10 p-6 text-sm text-on-dark shadow-soft lg:ml-auto lg:max-w-xs lg:self-end lg:rounded-[2rem]">
+                        <p className="text-xs font-semibold uppercase tracking-[0.32em] text-accent-300/85">Dukung gerakan</p>
+                        <h3 className="mt-3 text-lg font-semibold text-on-dark">Bergabung sebagai mitra SIPARI</h3>
+                        <p className="mt-2 text-sm text-on-media-muted">
+                            Akses toolkit promosi, pelatihan UMKM, dan update agenda konservasi langsung ke surel Anda.
+                        </p>
+                        <Link
+                            href={route('community.index')}
+                            className="focus-ring mt-5 inline-flex items-center justify-center rounded-full bg-gold-500 px-5 py-2 text-sm font-semibold text-navy-900 transition hover:bg-gold-400"
+                        >
+                            Gabung Komunitas
+                            <span aria-hidden className="ml-2 text-base">↗</span>
+                        </Link>
+                    </div>
                 </div>
             </div>
             <div className="border-t border-white/10 bg-black/20 py-6 text-center text-xs text-on-media-muted">

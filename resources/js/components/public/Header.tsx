@@ -30,10 +30,10 @@ export function Header() {
     const isActive = (match: string) => url === match || url.startsWith(`${match}/`);
 
     return (
-        <header className="sticky top-0 z-50 text-on-dark shadow-soft">
-            <div className="relative border-b border-white/10 bg-brand-950/90 backdrop-blur">
+        <header className="relative text-white">
+            <div className="relative border-b border-white/10 bg-navy-900/95 backdrop-blur">
                 <div
-                    className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-500 via-accent-400 to-accent-300"
+                    className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-gold-600 via-gold-500 to-sky-400"
                     aria-hidden
                 />
                 <div className="container flex items-center justify-between gap-4 py-4 lg:py-5">
@@ -42,14 +42,14 @@ export function Header() {
                         className="focus-ring group flex items-center gap-3"
                         aria-label="Beranda Waduk Manduk"
                     >
-                        <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-accent-400 to-accent-500 text-base font-semibold text-brand-950 shadow-soft transition group-hover:-translate-y-0.5">
+                        <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 text-base font-semibold text-navy-900 shadow-soft transition group-hover:-translate-y-0.5">
                             WM
                         </span>
                         <div className="hidden sm:block leading-tight">
                             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-accent-300/80">
                                 Waduk Manduk
                             </p>
-                            <p className="text-sm font-semibold text-on-dark">SIPARI Bahari</p>
+                            <p className="text-sm font-semibold text-white">SIPARI Bahari</p>
                         </div>
                     </Link>
                     <nav
@@ -61,17 +61,17 @@ export function Header() {
                                 key={item.href}
                                 href={item.href}
                                 className={cn(
-                                    'focus-ring relative px-1 py-2 transition-colors focus-visible:text-accent-300',
+                                    'focus-ring relative px-1 py-2 transition-colors focus-visible:text-gold-500',
                                     isActive(item.match)
-                                        ? 'text-accent-200'
-                                        : 'text-on-dark/75 hover:text-on-dark',
+                                        ? 'text-gold-400'
+                                        : 'text-white/75 hover:text-white',
                                 )}
                                 aria-current={isActive(item.match) ? 'page' : undefined}
                             >
                                 <span>{item.label}</span>
                                 <span
                                     className={cn(
-                                        'absolute left-0 right-0 -bottom-1 h-0.5 origin-left rounded-full bg-accent-300 transition-transform',
+                                        'absolute left-0 right-0 -bottom-1 h-0.5 origin-left rounded-full bg-gold-500 transition-transform',
                                         isActive(item.match) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
                                     )}
                                     aria-hidden
@@ -83,7 +83,7 @@ export function Header() {
                         <Button
                             asChild
                             size="sm"
-                            className="focus-ring hidden rounded-full bg-accent-300 px-5 text-brand-950 hover:bg-accent-200 lg:inline-flex"
+                            className="focus-ring hidden rounded-full bg-gold-500 px-5 text-navy-900 transition hover:bg-gold-400 lg:inline-flex"
                         >
                             <Link href={route('visit.plan')}>Reservasi</Link>
                         </Button>
@@ -93,7 +93,7 @@ export function Header() {
                                     type="button"
                                     variant="ghost"
                                     size="icon"
-                                    className="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/15 text-on-dark hover:bg-white/10 lg:hidden"
+                                    className="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 text-white hover:bg-white/10 lg:hidden"
                                     aria-label={open ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
                                     aria-expanded={open}
                                     aria-controls="menu-mobile"
@@ -103,11 +103,11 @@ export function Header() {
                             </SheetTrigger>
                             <SheetContent
                                 side="right"
-                                className="flex flex-col gap-6 bg-[linear-gradient(150deg,#04132d,#031a3a)] text-on-dark"
+                                className="flex flex-col gap-6 bg-[linear-gradient(150deg,#061a2c,#0b2741)] text-white"
                                 aria-labelledby="navigasi-mobile-title"
                             >
                                 <SheetHeader>
-                                    <SheetTitle id="navigasi-mobile-title" className="text-lg font-semibold text-on-dark">
+                                    <SheetTitle id="navigasi-mobile-title" className="text-lg font-semibold text-white">
                                         Navigasi Waduk Manduk
                                     </SheetTitle>
                                 </SheetHeader>
@@ -119,7 +119,7 @@ export function Header() {
                                             className={cn(
                                                 'focus-ring rounded-xl px-3 py-3 text-base font-semibold transition-colors',
                                                 isActive(item.match)
-                                                    ? 'bg-white/15 text-accent-200'
+                                                    ? 'bg-white/15 text-gold-300'
                                                     : 'hover:bg-white/10',
                                             )}
                                             aria-current={isActive(item.match) ? 'page' : undefined}
@@ -131,7 +131,7 @@ export function Header() {
                                 </nav>
                                 <Link
                                     href={route('login')}
-                                    className="focus-ring rounded-full border border-white/20 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.3em] text-on-dark transition hover:bg-white/10"
+                                    className="focus-ring rounded-full border border-white/20 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-white/10"
                                 >
                                     Masuk Admin
                                 </Link>
