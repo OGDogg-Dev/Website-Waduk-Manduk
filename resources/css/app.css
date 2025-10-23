@@ -38,7 +38,9 @@
             BlinkMacSystemFont,
             'Segoe UI',
             sans-serif;
-        @apply bg-surface-0 text-text-primary text-body antialiased;
+        background-color: var(--surface-0);
+        color: var(--text-primary);
+        @apply text-body antialiased;
     }
 
     h1 {
