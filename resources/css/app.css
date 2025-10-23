@@ -81,11 +81,13 @@
         left: 50%;
         transform: translateX(-50%);
         top: 1rem;
-        padding: 0.5rem 1rem;
-        border-radius: var(--radius-12);
-        background-color: var(--brand-800);
-        color: var(--text-on-dark);
+        padding: 0.65rem 1.25rem;
+        border-radius: var(--radius-16);
+        background: linear-gradient(135deg, var(--brand-800), var(--brand-700));
+        color: var(--accent-300);
         font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.2s ease, transform 0.2s ease;
@@ -96,6 +98,7 @@
         opacity: 1;
         pointer-events: auto;
         transform: translate(-50%, 0.25rem);
+        box-shadow: 0 0 0 2px var(--surface-0), 0 0 0 5px rgba(230, 173, 38, 0.55);
     }
 
     .eyebrow {
@@ -184,7 +187,9 @@
     }
 
     .focus-ring:focus-visible {
-        box-shadow: 0 0 0 3px var(--surface-0), 0 0 0 5px var(--focus-ring-color);
+        outline: 3px solid var(--focus-ring-color);
+        outline-offset: 3px;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.18);
     }
 
     .back-to-top {
