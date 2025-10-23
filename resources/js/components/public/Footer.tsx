@@ -134,7 +134,7 @@ export function Footer() {
                                 <p className="text-xs font-semibold uppercase tracking-[0.32em] text-accent-300/80">{group.heading}</p>
                                 <ul className="space-y-2 text-sm text-on-media-muted">
                                     {group.items.map((item) => (
-                                        <li key={item.href}>
+                                        <li key={`${group.heading}-${item.label}`}>
                                             <Link
                                                 href={item.href}
                                                 className="focus-ring inline-flex items-center gap-2 transition hover:text-accent-100"

@@ -58,7 +58,7 @@ export function Header() {
                     >
                         {navItems.map((item) => (
                             <Link
-                                key={item.href}
+                                key={item.match}
                                 href={item.href}
                                 className={cn(
                                     'focus-ring group relative px-1 py-2 transition-colors focus-visible:text-gold-400',
@@ -121,7 +121,7 @@ export function Header() {
                                 <nav id="menu-mobile" className="flex flex-col gap-2" aria-label="Navigasi utama mobile">
                                     {navItems.map((item) => (
                                         <Link
-                                            key={item.href}
+                                            key={item.match}
                                             href={item.href}
                                             className={cn(
                                                 'focus-ring rounded-xl px-3 py-3 text-base font-semibold transition-colors',
