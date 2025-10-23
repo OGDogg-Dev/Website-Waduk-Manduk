@@ -22,7 +22,7 @@
     }
 
     * {
-        @apply border-border;
+        border-color: var(--border);
     }
 
     html {
@@ -38,7 +38,9 @@
             BlinkMacSystemFont,
             'Segoe UI',
             sans-serif;
-        @apply bg-surface-0 text-text-primary text-body antialiased;
+        background-color: var(--surface-0);
+        color: var(--text-primary);
+        @apply text-body antialiased;
     }
 
     h1 {
@@ -81,11 +83,13 @@
         left: 50%;
         transform: translateX(-50%);
         top: 1rem;
-        padding: 0.5rem 1rem;
-        border-radius: var(--radius-12);
-        background-color: var(--brand-800);
-        color: var(--text-on-dark);
+        padding: 0.65rem 1.25rem;
+        border-radius: var(--radius-16);
+        background: linear-gradient(135deg, var(--color-navy-900), var(--color-navy-700));
+        color: var(--color-gold-500);
         font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.2s ease, transform 0.2s ease;
@@ -96,6 +100,7 @@
         opacity: 1;
         pointer-events: auto;
         transform: translate(-50%, 0.25rem);
+        box-shadow: var(--focus-ring-shadow), 0 0 0 var(--focus-ring-offset) var(--focus-ring-color);
     }
 
     .eyebrow {
@@ -110,14 +115,15 @@
         align-items: center;
         gap: 0.35rem;
         border-radius: 9999px;
-        background-color: var(--accent-500);
-        color: var(--text-on-dark);
+        border: 1px solid rgba(166, 217, 247, 0.6);
+        background: linear-gradient(135deg, rgba(166, 217, 247, 0.85), rgba(108, 198, 242, 0.85));
+        color: var(--color-navy-900);
         padding: 0.35rem 0.75rem;
         font-size: 0.75rem;
         font-weight: 600;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        box-shadow: 0 6px 18px rgba(11, 31, 51, 0.18);
+        box-shadow: 0 10px 20px -12px rgba(6, 26, 44, 0.45);
     }
 
     .link {
@@ -157,26 +163,55 @@
         color: var(--accent-500);
     }
 
+    .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border-radius: 9999px;
+        padding: 0.65rem 1.4rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        background: linear-gradient(135deg, var(--color-gold-500), var(--color-gold-600));
+        color: var(--color-navy-900);
+        border: 1px solid transparent;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, var(--color-navy-900), var(--color-navy-800));
+        color: var(--color-gold-500);
+        transform: translateY(-1px);
+        box-shadow: 0 12px 28px -12px rgba(6, 26, 44, 0.6);
+    }
+
+    .btn-primary:focus-visible {
+        outline: none;
+        box-shadow: var(--focus-ring-shadow), 0 0 0 var(--focus-ring-offset) var(--focus-ring-color);
+    }
+
     .btn-ghost {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
         border-radius: 9999px;
-        border: 1px solid rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.55);
         padding: 0.6rem 1.2rem;
         color: var(--text-on-media);
-        background-color: transparent;
+        background: rgba(255, 255, 255, 0.12);
         transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
     }
 
     .btn-ghost:hover {
-        background-color: rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.75);
         transform: translateY(-1px);
     }
 
     .btn-ghost:focus-visible {
         outline: none;
+        box-shadow: var(--focus-ring-shadow), 0 0 0 var(--focus-ring-offset) var(--focus-ring-color);
     }
 
     .focus-ring {
@@ -184,7 +219,8 @@
     }
 
     .focus-ring:focus-visible {
-        box-shadow: 0 0 0 3px var(--surface-0), 0 0 0 5px var(--focus-ring-color);
+        outline: none;
+        box-shadow: var(--focus-ring-shadow), 0 0 0 var(--focus-ring-offset) var(--focus-ring-color);
     }
 
     .back-to-top {
@@ -222,9 +258,9 @@
         inset: 0;
         background: linear-gradient(
             180deg,
-            var(--overlay-scrim-60) 0%,
-            var(--overlay-scrim-48) 45%,
-            var(--overlay-scrim-32) 72%,
+            rgba(6, 26, 44, 0.85) 0%,
+            rgba(6, 26, 44, 0.65) 45%,
+            rgba(6, 26, 44, 0.32) 72%,
             transparent 100%
         );
         pointer-events: none;

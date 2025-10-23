@@ -21,7 +21,7 @@ export function PublicLayout({ hero, children }: PublicLayoutProps) {
             </a>
             <Header />
             {hero}
-            <main id="konten-utama" className="flex-1">
+            <main id="konten-utama" className="flex-1" role="main">
                 {children}
             </main>
             <Footer />
