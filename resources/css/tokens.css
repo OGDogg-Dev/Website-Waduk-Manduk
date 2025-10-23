@@ -28,6 +28,50 @@
     --accent-500: var(--color-gold-500);
     --accent-400: #f5c362;
     --accent-300: #ffe2a4;
+    --accent-200: #fff1cb;
+    --accent-100: #fff8e5;
+    --accent-50: #fffdf5;
+
+    /* Admin & shared UI primitives */
+    --background: #f6f9fb;
+    --foreground: var(--color-navy-900);
+
+    --card: #ffffff;
+    --card-foreground: var(--color-navy-900);
+
+    --popover: #ffffff;
+    --popover-foreground: var(--color-navy-900);
+
+    --primary: var(--color-navy-800);
+    --primary-foreground: #f4f8fc;
+
+    --secondary: rgba(166, 217, 247, 0.35);
+    --secondary-foreground: var(--color-navy-900);
+
+    --muted: rgba(6, 26, 44, 0.08);
+    --muted-foreground: rgba(6, 26, 44, 0.62);
+
+    --accent: var(--color-gold-500);
+    --accent-foreground: var(--color-navy-900);
+
+    --destructive: #dc2626;
+    --destructive-foreground: #fef2f2;
+
+    --border: #d6dee8;
+    --input: #d6dee8;
+    --ring: rgba(242, 182, 64, 0.7);
+
+    --radius: 1rem;
+
+    /* Sidebar system */
+    --sidebar-background: rgba(6, 26, 44, 0.96);
+    --sidebar-foreground: rgba(245, 247, 251, 0.96);
+    --sidebar-primary: var(--color-gold-500);
+    --sidebar-primary-foreground: var(--color-navy-900);
+    --sidebar-accent: rgba(255, 255, 255, 0.14);
+    --sidebar-accent-foreground: var(--color-gold-500);
+    --sidebar-border: rgba(255, 255, 255, 0.18);
+    --sidebar-ring: rgba(242, 182, 64, 0.45);
 
     /* Surface scale */
     --surface-0: #ffffff;
