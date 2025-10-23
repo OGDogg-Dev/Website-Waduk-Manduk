@@ -1,39 +1,41 @@
 :root {
-    /* SIPARI palette */
-    --color-navy-900: #061a2c;
-    --color-navy-800: #0b2741;
-    --color-navy-700: #123653;
-    --color-navy-600: #1b4566;
-    --color-gold-600: #d99b1a;
-    --color-gold-500: #f2b640;
-    --color-sky-400: #6cc6f2;
-    --color-sky-300: #a6d9f7;
+    /* Waduk Manduk signature palette */
+    --color-navy-950: #001326;
+    --color-navy-900: #001b3b;
+    --color-navy-800: #00264f;
+    --color-navy-700: #073764;
+    --color-turquoise-600: #0f4c81;
+    --color-turquoise-500: #17639e;
+    --color-gold-600: #eab24f;
+    --color-gold-500: #f2c46d;
+    --color-gold-300: #f9e1ac;
+    --color-sky-200: #d1e6ff;
 
     /* Legacy aliases */
-    --brand-950: var(--color-navy-900);
+    --brand-950: var(--color-navy-950);
     --brand-900: var(--color-navy-900);
     --brand-800: var(--color-navy-800);
     --brand-700: var(--color-navy-700);
-    --brand-600: var(--color-navy-600);
-    --brand-500: var(--color-navy-600);
-    --brand-400: #1f527a;
-    --brand-300: var(--color-sky-400);
-    --brand-200: var(--color-sky-300);
-    --brand-100: #d9ecfb;
+    --brand-600: var(--color-turquoise-600);
+    --brand-500: var(--color-turquoise-500);
+    --brand-400: #1f6dab;
+    --brand-300: #4b8cc3;
+    --brand-200: #8dc0e2;
+    --brand-100: #d5ecff;
 
-    --accent-900: #332300;
-    --accent-800: #503502;
-    --accent-700: #6c4707;
+    --accent-900: #3a2500;
+    --accent-800: #5b3a02;
+    --accent-700: #7b4e05;
     --accent-600: var(--color-gold-600);
     --accent-500: var(--color-gold-500);
-    --accent-400: #f5c362;
-    --accent-300: #ffe2a4;
-    --accent-200: #fff1cb;
-    --accent-100: #fff8e5;
-    --accent-50: #fffdf5;
+    --accent-400: #f5d08a;
+    --accent-300: var(--color-gold-300);
+    --accent-200: #fdf1ce;
+    --accent-100: #fff7e3;
+    --accent-50: #fffcf3;
 
     /* Admin & shared UI primitives */
-    --background: #f6f9fb;
+    --background: #f4f8ff;
     --foreground: var(--color-navy-900);
 
     --card: #ffffff;
@@ -45,11 +47,11 @@
     --primary: var(--color-navy-800);
     --primary-foreground: #f4f8fc;
 
-    --secondary: rgba(166, 217, 247, 0.35);
+    --secondary: rgba(209, 230, 255, 0.45);
     --secondary-foreground: var(--color-navy-900);
 
-    --muted: rgba(6, 26, 44, 0.08);
-    --muted-foreground: rgba(6, 26, 44, 0.62);
+    --muted: rgba(0, 27, 59, 0.08);
+    --muted-foreground: rgba(0, 27, 59, 0.65);
 
     --accent: var(--color-gold-500);
     --accent-foreground: var(--color-navy-900);
@@ -57,9 +59,9 @@
     --destructive: #dc2626;
     --destructive-foreground: #fef2f2;
 
-    --border: #d6dee8;
-    --input: #d6dee8;
-    --ring: rgba(242, 182, 64, 0.7);
+    --border: #c4d4e8;
+    --input: #c4d4e8;
+    --ring: rgba(242, 196, 109, 0.7);
 
     --radius: 1rem;
 
@@ -75,22 +77,22 @@
 
     /* Surface scale */
     --surface-0: #ffffff;
-    --surface-1: #f6f9fb;
-    --surface-2: #e7edf4;
-    --surface-3: #d6dee8;
+    --surface-1: #f4f8ff;
+    --surface-2: #e5f0ff;
+    --surface-3: #cfe0f5;
 
     /* Text tokens */
     --text-primary: var(--color-navy-900);
-    --text-secondary: rgba(6, 26, 44, 0.78);
-    --text-muted: rgba(6, 26, 44, 0.64);
-    --text-on-dark: #f5f7fb;
+    --text-secondary: rgba(0, 27, 59, 0.78);
+    --text-muted: rgba(0, 27, 59, 0.6);
+    --text-on-dark: #f6f9ff;
     --text-on-media: #ffffff;
     --text-on-media-muted: rgba(255, 255, 255, 0.85);
 
     /* Overlay scrims */
-    --overlay-scrim-60: rgba(6, 26, 44, 0.6);
-    --overlay-scrim-48: rgba(6, 26, 44, 0.48);
-    --overlay-scrim-32: rgba(6, 26, 44, 0.32);
+    --overlay-scrim-60: rgba(0, 19, 38, 0.6);
+    --overlay-scrim-48: rgba(0, 27, 59, 0.48);
+    --overlay-scrim-32: rgba(0, 27, 59, 0.32);
 
     /* Focus ring tokens */
     --focus-ring-color: rgba(242, 182, 64, 0.75);
