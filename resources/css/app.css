@@ -40,40 +40,64 @@
             sans-serif;
         background-color: var(--surface-0);
         color: var(--text-primary);
-        @apply text-body antialiased;
+        font-size: var(--font-body);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     h1 {
-        @apply text-h1 text-text-primary;
+        font-size: var(--font-h1);
+        line-height: 1.08;
+        font-weight: 700;
+        color: var(--text-primary);
     }
 
     h2 {
-        @apply text-h2 text-text-primary;
+        font-size: var(--font-h2);
+        line-height: 1.12;
+        font-weight: 700;
+        color: var(--text-primary);
     }
 
     h3 {
-        @apply text-h3 text-text-primary;
+        font-size: var(--font-h3);
+        line-height: 1.15;
+        font-weight: 600;
+        color: var(--text-primary);
     }
 
     h4 {
-        @apply text-h4 text-text-primary;
+        font-size: var(--font-h4);
+        line-height: 1.2;
+        font-weight: 600;
+        color: var(--text-primary);
     }
 
     h5 {
-        @apply text-h5 text-text-primary;
+        font-size: var(--font-h5);
+        line-height: 1.3;
+        font-weight: 600;
+        color: var(--text-primary);
     }
 
     h6 {
-        @apply text-h6 text-text-primary;
+        font-size: var(--font-h6);
+        line-height: 1.4;
+        font-weight: 600;
+        color: var(--text-primary);
     }
 
     p {
         max-width: 65ch;
-        @apply text-body text-text-secondary;
+        font-size: var(--font-body);
+        line-height: 1.6;
+        color: var(--text-secondary);
     }
 
     a {
-        @apply text-body;
+        font-size: var(--font-body);
+        line-height: 1.6;
     }
 }
 
