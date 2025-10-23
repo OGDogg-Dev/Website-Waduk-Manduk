@@ -22,6 +22,19 @@ const config = {
         },
         extend: {
             colors: {
+                navy: {
+                    900: '#061A2C',
+                    800: '#0B2741',
+                    700: '#123653',
+                },
+                gold: {
+                    600: '#D99B1A',
+                    500: '#F2B640',
+                },
+                sky: {
+                    400: '#6CC6F2',
+                    300: '#A6D9F7',
+                },
                 brand: {
                     950: 'var(--brand-950)',
                     900: 'var(--brand-900)',
@@ -88,10 +101,14 @@ const config = {
                 12: 'var(--radius-12)',
                 16: 'var(--radius-16)',
                 20: 'var(--radius-20)',
+                xl: 'var(--radius-xl)',
             },
             boxShadow: {
-                soft: 'var(--shadow-soft)',
+                soft: '0 10px 30px rgba(0, 0, 0, 0.25)',
                 chip: '0 0 0 1px rgba(255, 255, 255, 0.12)',
+            },
+            maxWidth: {
+                '8xl': '88rem',
             },
         },
     },
