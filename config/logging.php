@@ -73,6 +73,15 @@ return [
             'replace_placeholders' => true,
         ],
 
+        'security' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/security/security.log'),
+            'level' => env('LOG_LEVEL', 'info'),
+            'days' => 31, // Keep active logs for one month, older ones archived automatically
+            'replace_placeholders' => true,
+            'permission' => 0644, // Readable by owner and group
+        ],
+
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),

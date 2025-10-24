@@ -21,12 +21,40 @@ export interface NavItem {
     icon?: LucideIcon | null;
     isActive?: boolean;
 }
+export interface MainNavItem {
+    title: string;
+    href?: string;
+    icon?: LucideIcon | null;
+    isActive?: boolean;
+    subitem?: SubItems[];
+}
 
+export interface SubItems {
+    title: string;
+    href: string;
+    icon?: LucideIcon | null;
+    isActive?: boolean;
+}
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
     sidebarOpen: boolean;
+    /**
+     * Global application settings from SettingApp model
+     */
+    setting?: {
+        nama_app?: string;
+        description?: string;
+        address?: string;
+        email?: string;
+        phone?: string;
+        facebook?: string;
+        instagram?: string;
+        tiktok?: string;
+        youtube?: string;
+        image?: string;
+    };
     [key: string]: unknown;
 }
 
@@ -41,16 +69,3 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
-
-declare global {
-    function route(
-        name: string,
-        params?:
-            | Record<string, string | number | boolean | null | undefined>
-            | Array<string | number>
-            | string | number,
-        absolute?: boolean,
-    ): string;
-}
-
-export {};

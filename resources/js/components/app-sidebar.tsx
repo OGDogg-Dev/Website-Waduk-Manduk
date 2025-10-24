@@ -1,39 +1,85 @@
-import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
-import { NavUser } from '@/components/nav-user';
 import {
     Sidebar,
     SidebarContent,
-    SidebarFooter,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { type NavItem } from '@/types';
+import { type MainNavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { Cog, Dot, LayoutGrid, Shield, Users, Wrench } from 'lucide-react';
 import AppLogo from './app-logo';
 
-const mainNavItems: NavItem[] = [
+const mainNavItems: MainNavItem[] = [
     {
         title: 'Dashboard',
-        href: dashboard(),
+        href: '/admin/dashboard',
         icon: LayoutGrid,
     },
-];
-
-const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        title: 'Users',
+        href: '/admin/users',
+        icon: Users,
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        title: 'App setting',
+        href: '/admin/settingsapp',
+        icon: Cog,
+    },
+    {
+        title: 'Config',
+        icon: Wrench,
+        subitem: [
+            {
+                title: 'Profile',
+                href: '/settings/profile',
+                icon: Dot,
+            },
+            {
+                title: 'Password',
+                href: '/settings/password',
+                icon: Dot,
+            },
+            {
+                title: 'Two Factor Authentication',
+                href: '/settings/two-factor',
+                icon: Dot,
+            },
+            {
+                title: 'Theme',
+                href: '/settings/appearance',
+                icon: Dot,
+            },
+        ],
+    },
+    {
+        title: 'Security Logs',
+        icon: Shield,
+        subitem: [
+            {
+                title: 'Audit Logs',
+                href: '/admin/audit-logs',
+                icon: Dot,
+            },
+            {
+                title: 'Security Logs',
+                href: '/admin/security-logs',
+                icon: Dot,
+            },
+            {
+                title: 'API Documentation',
+                href: '/admin/api-docs',
+                icon: Dot,
+            },
+            {
+                title: 'API Keys',
+                href: '/admin/api-tokens',
+                icon: Dot,
+            },
+        ],
     },
 ];
 
@@ -55,11 +101,6 @@ export function AppSidebar() {
             <SidebarContent>
                 <NavMain items={mainNavItems} />
             </SidebarContent>
-
-            <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
-                <NavUser />
-            </SidebarFooter>
         </Sidebar>
     );
 }

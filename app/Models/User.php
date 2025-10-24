@@ -3,34 +3,74 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Enums\RoleType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable;
+    use HasApiTokens, HasFactory, LogsActivity, Notifiable, TwoFactorAuthenticatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
+        'member_number',
+        'full_name',
+        'address',
+        'phone',
+        'join_date',
+        'note',
+        'image',
+        'is_active',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Get the user's image URL with fallback to default avatar.
      *
-     * @var list<string>
+     * If user has no image, return default user.svg from public folder.
+     * If user has image, return full storage URL.
+     *
+     * Note: Image is stored as 'users/avatar-xxx.webp' in database,
+     * so we prepend 'storage/' to get full public URL.
      */
+    public function getImageUrlAttribute(): string
+    {
+        if (empty($this->attributes['image'])) {
+            return asset('user.svg');
+        }
+
+        // Image is stored in the public disk under the 'users' folder and the
+        // database only contains the filename (e.g. "avatar-xxx.webp").
+        // Build the correct public URL: /storage/users/{filename}
+        $filename = ltrim($this->attributes['image'], '/');
+
+        return asset('storage/users/'.$filename);
+    }
+
+    /**
+     * Generate a unique member number for new users.
+     * Format: M + 4 digits (e.g. M0001). Falls back to a random string if collisions persist.
+     */
+    public static function generateMemberNumber(): string
+    {
+        for ($i = 0; $i < 10; $i++) {
+            $candidate = 'M'.str_pad((string) random_int(1, 9999), 4, '0', STR_PAD_LEFT);
+
+            if (! self::where('member_number', $candidate)->exists()) {
+                return $candidate;
+            }
+        }
+
+        // Fallback: unlikely collision case
+        return 'M'.strtoupper(bin2hex(random_bytes(3)));
+    }
+
     protected $hidden = [
         'password',
         'two_factor_secret',
@@ -39,41 +79,36 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Append image_url to JSON serialization
      */
+    protected $appends = ['image_url'];
+
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
+            'join_date' => 'datetime',
+            'is_active' => 'boolean',
         ];
     }
 
     /**
-     * Roles assigned to the user.
+     * Configure activity logging using Spatie
      */
-    public function roles(): BelongsToMany
+    public function getActivitylogOptions(): LogOptions
     {
-        return $this->belongsToMany(Role::class)
-            ->withPivot('assigned_at')
-            ->withTimestamps();
-    }
-
-    public function hasRole(RoleType $role): bool
-    {
-        return $this->roles()->where('name', $role->value)->exists();
-    }
-
-    public function assignRole(RoleType $role): void
-    {
-        if (! $this->roles()->where('name', $role->value)->exists()) {
-            $this->roles()->attach(
-                Role::query()->where('name', $role->value)->firstOrFail(),
-                ['assigned_at' => now()]
-            );
-        }
+        return LogOptions::defaults()
+            ->logOnly([
+                'name',
+                'email',
+                'role',
+                'full_name',
+                'is_active',
+                'member_number',
+            ])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }
